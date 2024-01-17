@@ -18,8 +18,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { ICategory } from "@/lib/database/models/category.model";
-import { startTransition, useState } from "react";
-import { Input } from "../ui/input";
+import { useState } from "react";
 
 type DropdownProps = {
   value?: string;
@@ -28,9 +27,6 @@ type DropdownProps = {
 
 const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [newCategory, setNewCategory] = useState("");
-
-  const handleAddCategory = () => {};
 
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
@@ -50,28 +46,20 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
           ))}
 
         <AlertDialog>
-          <AlertDialogTrigger className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500">
+          <AlertDialogTrigger className="p-medium-14 flex w-full rounded-sm py-3 pl-8">
             Open
           </AlertDialogTrigger>
-          <AlertDialogContent className="bg-white">
+          <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>New Sport</AlertDialogTitle>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                <Input
-                  type="text"
-                  placeholder="Sport name"
-                  className="input-field mt-3"
-                  onChange={(e) => setNewCategory(e.target.value)}
-                />
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={() => startTransition(handleAddCategory)}
-              >
-                Add
-              </AlertDialogAction>
+              <AlertDialogAction>Continue</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

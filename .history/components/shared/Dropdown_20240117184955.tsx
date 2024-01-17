@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { ICategory } from "@/lib/database/models/category.model";
-import { startTransition, useState } from "react";
+import { useState } from "react";
 import { Input } from "../ui/input";
 
 type DropdownProps = {
@@ -28,9 +28,7 @@ type DropdownProps = {
 
 const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [newCategory, setNewCategory] = useState("");
-
-  const handleAddCategory = () => {};
+  const [newCategory, setNewCategory] = useState(second);
 
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
@@ -67,11 +65,7 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={() => startTransition(handleAddCategory)}
-              >
-                Add
-              </AlertDialogAction>
+              <AlertDialogAction>Continue</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
