@@ -269,42 +269,9 @@ const EventForm = ({ userId, type }: EventFormProps) => {
               </FormItem>
             )}
           />
-
-          <FormField
-            control={form.control}
-            name="url"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                    <Image
-                      src="/assets/icons/link.svg"
-                      width={24}
-                      height={24}
-                      alt="link"
-                    />
-
-                    <Input
-                      placeholder="URL"
-                      {...field}
-                      className="input-field"
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
 
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitting}
-          className="button col-span-2 w-full"
-        >
-          {form.formState.isSubmitting ? "Submitting..." : `${type} Event `}
-        </Button>
+        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );
