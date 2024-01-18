@@ -19,7 +19,7 @@ import { eventFormSchema } from "@/lib/validator";
 import { eventDefaultValues } from "@/constants";
 import Dropdown from "./Dropdown";
 import { Textarea } from "@/components/ui/textarea";
-import { FileUploader } from "./FileUploader";
+import FileUploader from "./FileUploader";
 
 type EventFormProps = {
   userId: string;
