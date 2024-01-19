@@ -44,12 +44,10 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
 
   useEffect(() => {
     const getCategories = async () => {
-      const categoryList = await getAllCategories();
+      const categories = await getAllCategories();
 
-      categoryList && setCategories(categoryList as ICategory[]);
+      categories && setCategories(categories);
     };
-
-    getCategories();
   }, []);
 
   return (
@@ -71,7 +69,7 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
 
         <AlertDialog>
           <AlertDialogTrigger className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500">
-            Add new sport
+            Open
           </AlertDialogTrigger>
           <AlertDialogContent className="bg-white">
             <AlertDialogHeader>
