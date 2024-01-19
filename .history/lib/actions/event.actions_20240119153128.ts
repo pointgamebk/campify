@@ -49,7 +49,6 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
   }
 }
 
-// FIND ONE
 export const getEventById = async (eventId: string) => {
   try {
     await connectToDatabase();

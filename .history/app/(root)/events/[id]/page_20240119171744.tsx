@@ -50,7 +50,7 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
                 width={32}
                 height={32}
               />
-              <div className="p-medium-16 lg:p-regular-20 flex-wrap items-center">
+              <div className="p-medium-16 lg:p-regular-20 flex-wrap">
                 <p>
                   {formatDateTime(event.startDateTime).dateOnly} -{" "}
                   {formatDateTime(event.startDateTime).timeOnly}
@@ -71,14 +71,6 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
               />
               <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <p className="p-bold-20 text-grey-600">What To Expect:</p>
-            <p className="p-medium-16 lg:p-regular-18">{event.description}</p>
-            <p className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">
-              {event.url}
-            </p>
           </div>
         </div>
       </div>

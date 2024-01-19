@@ -15,20 +15,6 @@ import {
   GetRelatedEventsByCategoryParams,
 } from "@/types";
 
-const populateEvent = async (query: any) => {
-  return query
-    .populate({
-      path: "organizer",
-      model: User,
-      select: "_id firstName lastName",
-    })
-    .populate({
-      path: "category",
-      model: Category,
-      select: "_id name",
-    });
-};
-
 // CREATE
 export async function createEvent({ userId, event, path }: CreateEventParams) {
   try {
@@ -49,16 +35,11 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
   }
 }
 
-// FIND ONE
 export const getEventById = async (eventId: string) => {
   try {
     await connectToDatabase();
 
-    const event = await populateEvent(Event.findById(eventId));
-
-    if (!event) throw new Error("Event not found");
-
-    return JSON.parse(JSON.stringify(event));
+    const event = await Event.findById(eventId);
   } catch (error) {
     handleError(error);
   }

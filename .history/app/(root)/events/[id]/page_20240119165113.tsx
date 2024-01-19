@@ -50,35 +50,16 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
                 width={32}
                 height={32}
               />
-              <div className="p-medium-16 lg:p-regular-20 flex-wrap items-center">
-                <p>
-                  {formatDateTime(event.startDateTime).dateOnly} -{" "}
-                  {formatDateTime(event.startDateTime).timeOnly}
+              <div>
+                <p>{formatDateTime(event.startDateTime).dateOnly} /</p>
+                <p className="ml-`">
+                  {formatDateTime(event.startDateTime).timeOnly} -{" "}
                 </p>
-                <p>
-                  {formatDateTime(event.endDateTime).dateOnly} -{" "}
+                <p className="ml-1">
                   {formatDateTime(event.endDateTime).timeOnly}
                 </p>
               </div>
             </div>
-
-            <div className="p-regular-20 flex items-center gap-3">
-              <Image
-                src="/assets/icons/location.svg"
-                alt="location"
-                width={32}
-                height={32}
-              />
-              <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <p className="p-bold-20 text-grey-600">What To Expect:</p>
-            <p className="p-medium-16 lg:p-regular-18">{event.description}</p>
-            <p className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">
-              {event.url}
-            </p>
           </div>
         </div>
       </div>

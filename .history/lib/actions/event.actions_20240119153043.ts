@@ -49,12 +49,11 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
   }
 }
 
-// FIND ONE
 export const getEventById = async (eventId: string) => {
   try {
     await connectToDatabase();
 
-    const event = await populateEvent(Event.findById(eventId));
+    const event = await Event.findById(eventId);
 
     if (!event) throw new Error("Event not found");
 
