@@ -64,29 +64,15 @@ export const getEventById = async (eventId: string) => {
   }
 };
 
-export const getAllEvents = async ({
-  query,
-  limit = 6,
-  page,
-  category,
-}: GetAllEventsParams) => {
+export const getAllEvents = async ({ query, limit = 6, page, category }) => {
   try {
     await connectToDatabase();
 
-    const conditions = {};
+    const event = await populateEvent(Event.findById(eventId));
 
-    const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "desc" })
-      .skip(0)
-      .limit(limit);
+    if (!event) throw new Error("Event not found");
 
-    const events = await populateEvent(eventsQuery);
-    const eventsCount = await Event.countDocuments(conditions);
-
-    return {
-      data: JSON.parse(JSON.stringify(events)),
-      totalPages: Math.ceil(eventsCount / limit),
-    };
+    return JSON.parse(JSON.stringify(event));
   } catch (error) {
     handleError(error);
   }

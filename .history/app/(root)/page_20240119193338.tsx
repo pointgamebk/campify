@@ -54,7 +54,7 @@ export default async function Home() {
         </div>
 
         <Collection
-          data={events?.data}
+          data={[]}
           emptyTitle="No Events Found"
           emptyStateSubtext="Check again later"
           collectionType="All_Events"

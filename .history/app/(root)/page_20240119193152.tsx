@@ -5,14 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const events = await getAllEvents({
-    query: "",
-    category: "",
-    page: 1,
-    limit: 6,
-  });
-
-  console.log(events);
+  const events = await getAllEvents();
 
   return (
     <>
@@ -54,7 +47,7 @@ export default async function Home() {
         </div>
 
         <Collection
-          data={events?.data}
+          data={[]}
           emptyTitle="No Events Found"
           emptyStateSubtext="Check again later"
           collectionType="All_Events"

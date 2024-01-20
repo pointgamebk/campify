@@ -80,13 +80,7 @@ export const getAllEvents = async ({
       .skip(0)
       .limit(limit);
 
-    const events = await populateEvent(eventsQuery);
-    const eventsCount = await Event.countDocuments(conditions);
-
-    return {
-      data: JSON.parse(JSON.stringify(events)),
-      totalPages: Math.ceil(eventsCount / limit),
-    };
+    return JSON.parse(JSON.stringify(event));
   } catch (error) {
     handleError(error);
   }

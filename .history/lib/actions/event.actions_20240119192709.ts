@@ -77,16 +77,9 @@ export const getAllEvents = async ({
 
     const eventsQuery = Event.find(conditions)
       .sort({ createdAt: "desc" })
-      .skip(0)
-      .limit(limit);
+      .skip(0);
 
-    const events = await populateEvent(eventsQuery);
-    const eventsCount = await Event.countDocuments(conditions);
-
-    return {
-      data: JSON.parse(JSON.stringify(events)),
-      totalPages: Math.ceil(eventsCount / limit),
-    };
+    return JSON.parse(JSON.stringify(event));
   } catch (error) {
     handleError(error);
   }

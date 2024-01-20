@@ -12,8 +12,6 @@ export default async function Home() {
     limit: 6,
   });
 
-  console.log(events);
-
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
@@ -54,7 +52,7 @@ export default async function Home() {
         </div>
 
         <Collection
-          data={events?.data}
+          data={[]}
           emptyTitle="No Events Found"
           emptyStateSubtext="Check again later"
           collectionType="All_Events"
