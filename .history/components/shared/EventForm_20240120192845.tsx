@@ -97,9 +97,9 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
           event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
           path: `/events/${eventId}`,
         });
-        if (updatedEvent) {
+        if (newEvent) {
           form.reset();
-          router.push(`/events/${updatedEvent._id}`);
+          router.push(`/events/${newEvent._id}`);
         }
       } catch (error) {
         console.log(error);
