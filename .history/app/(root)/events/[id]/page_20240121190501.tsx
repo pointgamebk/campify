@@ -102,7 +102,7 @@ const EventDetails = async ({
         <h2 className="h2-bold">Related Events</h2>
 
         <Collection
-          data={relatedEvents?.data}
+          data={events?.data}
           emptyTitle="No Events Found"
           emptyStateSubtext="Check again later"
           collectionType="All_Events"
