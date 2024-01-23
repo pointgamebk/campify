@@ -2,7 +2,6 @@ import { IEvent } from "@/lib/database/models/event.model";
 import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { loadStripe } from "@stripe/stripe-js";
-import { checkoutOrder } from "@/lib/actions/order.actions";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -24,15 +23,7 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
   }, []);
 
   const onCheckout = async () => {
-    const order = {
-      eventTitle: event.title,
-      eventId: event._id,
-      price: event.price,
-      isFree: event.isFree,
-      buyerId: userId,
-    };
-
-    await checkoutOrder(order);
+    console.log("checkout");
   };
 
   return (
