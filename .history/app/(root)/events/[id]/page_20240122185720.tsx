@@ -56,7 +56,7 @@ const EventDetails = async ({
             </div>
 
             {/* checkout button  */}
-            <CheckoutButton event={event} />
+            <CheckoutButton />
 
             <div className="flex flex-col gap-5">
               <div className="flex gap-2 md:gap-3">
