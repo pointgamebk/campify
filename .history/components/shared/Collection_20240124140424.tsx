@@ -44,13 +44,7 @@ const Collection = ({
             })}
           </ul>
 
-          {totalPages > 1 && (
-            <Pagination
-              urlParamName={urlParamName}
-              page={page}
-              totalPages={totalPages}
-            />
-          )}
+          {totalPages > 1 && <Pagination />}
         </div>
       ) : (
         <div className="flex-center wrapper min-h-[200px] w-full flex-col rounded-[14px] bg-grey-50 py-28 text-center">
