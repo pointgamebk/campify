@@ -13,7 +13,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const category = (searchParams?.category as string) || "";
 
   const events = await getAllEvents({
-    query: searchText,
+    query: "",
     category,
     page,
     limit: 6,
