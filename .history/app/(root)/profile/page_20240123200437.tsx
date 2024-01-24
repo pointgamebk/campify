@@ -41,7 +41,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           limit={3}
           page={ordersPage}
           urlParamName="ordersPage"
-          totalPages={orders?.totalPages}
+          totalPages={2}
         />
       </section>
       {/* Events Organized */}
@@ -63,7 +63,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           limit={3}
           page={eventsPage}
           urlParamName="eventsPage"
-          totalPages={organizedEvents?.totalPages}
+          totalPages={2}
         />
       </section>
     </>
