@@ -10,9 +10,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "campify",
-  description:
-    "campify is a platform for finding and booking daily training camps.",
+  title: "point.game",
+  description: "Find a game. Post a game. Play.",
   icons: {
     icon: "/assets/images/logo.svg",
   },
