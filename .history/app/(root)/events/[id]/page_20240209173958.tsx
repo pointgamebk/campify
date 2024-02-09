@@ -24,24 +24,17 @@ const EventDetails = async ({
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
-          <Image
-            src={event.imageUrl}
-            alt="hero image"
-            width={1000}
-            height={1000}
-            className="h-full min-h-[200px] object-cover object-center sm:max-h-[400px]"
-          />
-          {/* <div className="hidden sm:grid">
+          <div className="hidden sm:grid">
             <Image
               src={event.imageUrl}
               alt="hero image"
               width={1000}
               height={1000}
-              className="h-full min-h-[200px] object-cover object-center"
+              className="h-full min-h-[200px] object-cover object-center "
             />
-          </div> */}
+          </div>
 
-          {/* <div className="sm:hidden">
+          <div className="sm:hidden">
             <Image
               src={event.imageUrl}
               alt="hero image"
@@ -49,7 +42,7 @@ const EventDetails = async ({
               height={400}
               className="h-full min-h-[200px] object-cover object-center "
             />
-          </div> */}
+          </div>
 
           <div className="flex w-full flex-col gap-8 p-5 md:p-10">
             <div className="flex flex-col gap-6">
