@@ -34,16 +34,6 @@ const EventDetails = async ({
             />
           </div>
 
-          <div className="sm:hidden">
-            <Image
-              src={event.imageUrl}
-              alt="hero image"
-              width={400}
-              height={400}
-              className="h-full min-h-[200px] object-cover object-center "
-            />
-          </div>
-
           <div className="flex w-full flex-col gap-8 p-5 md:p-10">
             <div className="flex flex-col gap-6">
               <h2 className="h2-bold text-tan">{event.title}</h2>

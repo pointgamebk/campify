@@ -38,8 +38,8 @@ const EventDetails = async ({
             <Image
               src={event.imageUrl}
               alt="hero image"
-              width={400}
-              height={400}
+              width={300}
+              height={300}
               className="h-full min-h-[200px] object-cover object-center "
             />
           </div>
