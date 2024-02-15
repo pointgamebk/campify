@@ -1,29 +1,15 @@
 "use client";
 
+import { headerLinks } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
 
 type NavItemsProps = {
   id: string;
 };
 
 const NavItems = ({ id }: NavItemsProps) => {
-  //console.log(id);
-  const headerLinks = [
-    {
-      label: "Home",
-      route: "/",
-    },
-    {
-      label: "Create Event",
-      route: "/events/create",
-    },
-    {
-      label: "My Profile",
-      route: `/profile/${id}`,
-    },
-  ];
-
   const pathname = usePathname();
 
   return (

@@ -10,8 +10,6 @@ const Header = () => {
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
 
-  console.log(userId);
-
   return (
     <header className="w-full border-b">
       <div className="wrapper flex items-center justify-between">
@@ -34,7 +32,7 @@ const Header = () => {
         <div className="flex w-32 justify-end gap-3">
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
-            <MobileNav id={userId} />
+            <MobileNav />
           </SignedIn>
           <SignedOut>
             <Button asChild className="rounded-full" size="lg">

@@ -138,7 +138,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
             control={form.control}
             name="categoryId"
             render={({ field }) => (
-              <FormItem className="w-full ">
+              <FormItem className="w-full bg-white">
                 <FormControl>
                   <Dropdown
                     onChangeHandler={field.onChange}
@@ -200,7 +200,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       width={24}
                       height={24}
                       alt="location"
-                      className="bg-white"
                     />
                     <SearchBox
                       defaultValue=""
@@ -230,9 +229,9 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       alt="calendar"
                       width={24}
                       height={24}
-                      className="filter-grey "
+                      className="filter-grey"
                     />
-                    <p className="ml-3 whitespace-nowrap text-grey-600 ">
+                    <p className="ml-3 whitespace-nowrap text-grey-600">
                       Start Date:
                     </p>
                     <DatePicker
@@ -349,7 +348,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       width={24}
                       height={24}
                       alt="link"
-                      className=""
                     />
 
                     <Input

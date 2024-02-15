@@ -8,15 +8,14 @@ type NavItemsProps = {
 };
 
 const NavItems = ({ id }: NavItemsProps) => {
-  //console.log(id);
   const headerLinks = [
     {
       label: "Home",
       route: "/",
     },
     {
-      label: "Create Event",
-      route: "/events/create",
+      label: "Create Game",
+      route: "/games/create",
     },
     {
       label: "My Profile",

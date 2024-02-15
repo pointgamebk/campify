@@ -14,7 +14,7 @@ type MobileNavProps = {
   id: string;
 };
 
-const MobileNav = ({ id }: MobileNavProps) => {
+const MobileNav = () => {
   return (
     <nav className="md:hidden">
       <Sheet>
@@ -36,7 +36,7 @@ const MobileNav = ({ id }: MobileNavProps) => {
           /> */}
           <h2 className="text-tan">campify</h2>
           <Separator className="border border-gray-50" />
-          <NavItems id={id} />
+          <NavItems />
         </SheetContent>
       </Sheet>
     </nav>

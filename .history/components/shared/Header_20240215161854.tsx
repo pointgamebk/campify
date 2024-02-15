@@ -1,16 +1,13 @@
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import NavItems from "./NavItems";
 import MobileNav from "./MobileNav";
 
-import { auth } from "@clerk/nextjs";
-
 const Header = () => {
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
-
-  console.log(userId);
 
   return (
     <header className="w-full border-b">
@@ -34,7 +31,7 @@ const Header = () => {
         <div className="flex w-32 justify-end gap-3">
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
-            <MobileNav id={userId} />
+            <MobileNav />
           </SignedIn>
           <SignedOut>
             <Button asChild className="rounded-full" size="lg">

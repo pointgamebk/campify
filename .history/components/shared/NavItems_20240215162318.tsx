@@ -8,7 +8,6 @@ type NavItemsProps = {
 };
 
 const NavItems = ({ id }: NavItemsProps) => {
-  //console.log(id);
   const headerLinks = [
     {
       label: "Home",
@@ -20,7 +19,7 @@ const NavItems = ({ id }: NavItemsProps) => {
     },
     {
       label: "My Profile",
-      route: `/profile/${id}`,
+      route: "/profile",
     },
   ];
 

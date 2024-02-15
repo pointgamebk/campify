@@ -84,7 +84,7 @@ function ReadySearchBox({ defaultValue, onSelectAddress }: ISearchBoxProps) {
   return (
     <div className="w-full p-2 bg-white">
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild className="bg-white">
+        <PopoverTrigger asChild>
           <Button
             variant="outline"
             role="combobox"
@@ -95,24 +95,20 @@ function ReadySearchBox({ defaultValue, onSelectAddress }: ISearchBoxProps) {
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          className="w-[200px] p-0 bg-white"
-          onChange={handleChange}
-        >
-          <Command className="bg-white">
+        <PopoverContent className="w-[200px] p-0" onChange={handleChange}>
+          <Command>
             <CommandInput
               placeholder="Search address..."
-              className="h-9 bg-white"
+              className="h-9"
               disabled={!ready}
             />
             <CommandEmpty>No address found.</CommandEmpty>
-            <CommandGroup className="bg-white">
+            <CommandGroup>
               {data.map((suggestion) => (
                 <CommandItem
                   key={suggestion.place_id}
                   value={suggestion.description}
                   onSelect={handleSelect}
-                  className="bg-white"
                 >
                   {suggestion.description}
                   <CheckIcon

@@ -89,16 +89,13 @@ function ReadySearchBox({ defaultValue, onSelectAddress }: ISearchBoxProps) {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between bg-white"
+            className="w-full justify-between "
           >
             {value === "" ? "Search address..." : value}
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          className="w-[200px] p-0 bg-white"
-          onChange={handleChange}
-        >
+        <PopoverContent className="w-[200px] p-0" onChange={handleChange}>
           <Command className="bg-white">
             <CommandInput
               placeholder="Search address..."

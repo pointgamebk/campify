@@ -349,7 +349,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       width={24}
                       height={24}
                       alt="link"
-                      className=""
+                      className="bg-white"
                     />
 
                     <Input

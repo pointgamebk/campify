@@ -230,7 +230,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       alt="calendar"
                       width={24}
                       height={24}
-                      className="filter-grey "
+                      className="filter-grey bg-white"
                     />
                     <p className="ml-3 whitespace-nowrap text-grey-600 ">
                       Start Date:
@@ -349,7 +349,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       width={24}
                       height={24}
                       alt="link"
-                      className=""
+                      className="bg-white"
                     />
 
                     <Input

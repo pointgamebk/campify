@@ -8,7 +8,6 @@ type NavItemsProps = {
 };
 
 const NavItems = ({ id }: NavItemsProps) => {
-  //console.log(id);
   const headerLinks = [
     {
       label: "Home",
