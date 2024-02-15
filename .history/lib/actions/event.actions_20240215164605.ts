@@ -115,15 +115,15 @@ export async function getAllEvents({
     const currentDate = new Date();
     const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
 
-    const locationCondition = query
-      ? { location: { $regex: query, $options: "i" } }
+    const titleCondition = query
+      ? { title: { $regex: query, $options: "i" } }
       : {};
     const categoryCondition = category
       ? await getCategoryByName(category)
       : null;
     const conditions = {
       $and: [
-        locationCondition,
+        titleCondition,
         categoryCondition ? { category: categoryCondition._id } : {},
         { startDateTime: { $gte: pastDay } },
       ],
