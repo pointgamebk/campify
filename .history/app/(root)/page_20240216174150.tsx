@@ -38,7 +38,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
           </div>
 
           <Image
-            src="/assets/images/cmpfy_hero_courts.png"
+            src="/assets/images/cmpfy_hero.png"
             alt="hero"
             width={1000}
             height={1000}
