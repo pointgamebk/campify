@@ -35,5 +35,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "OK", order: newOrder });
   }
 
+  if (eventType === "account.updated") {
+    const account = event.data.object;
+    console.log(event.data.object);
+    return NextResponse.json({ message: "OK" });
+  }
+
   return new Response("", { status: 200 });
 }

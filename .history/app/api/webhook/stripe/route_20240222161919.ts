@@ -1,7 +1,6 @@
 import stripe from "stripe";
 import { NextResponse } from "next/server";
 import { createOrder } from "@/lib/actions/order.actions";
-import User from "@/lib/database/models/user.model";
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -38,10 +37,8 @@ export async function POST(request: Request) {
 
   if (eventType === "account.updated") {
     const account = event.data.object;
-    const user = await User.findOne({ stripeAccountId: account.id });
-    user.chargesEnabled = account.charges_enabled;
-
-    return NextResponse.json({ message: "OK", user: user });
+    console.log(event.data.object);
+    return NextResponse.json({ message: "OK" });
   }
 
   return new Response("", { status: 200 });
