@@ -95,11 +95,13 @@ export async function createStripeAccount(
 ) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
+  console.log(email, firstName, lastName, userId);
+
   try {
     const account = await stripe.accounts.create({
       type: "express",
       country: "US",
-      email: "6xample@example.com",
+      email: "3xample@example.com",
       capabilities: {
         card_payments: { requested: true },
         transfers: { requested: true },
@@ -107,17 +109,17 @@ export async function createStripeAccount(
       },
       business_type: "individual",
       individual: {
-        first_name: "Johnny",
-        last_name: "Hopkins",
-        email: "6xample@example.com",
+        first_name: firstName,
+        last_name: lastName,
+        email: "3xample@example.com",
       },
     });
 
-    // const user = await User.findOneAndUpdate(
-    //   { _id: userId },
-    //   { stripeAccountId: account.id, chargesEnabled: true },
-    //   { new: true }
-    // );
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      { stripeAccountId: account.id, chargesEnabled: true },
+      { new: true }
+    );
 
     const link = await stripe.accountLinks.create({
       account: account.id,
@@ -126,7 +128,7 @@ export async function createStripeAccount(
       type: "account_onboarding",
     });
 
-    console.log(link);
+    console.log(link, user);
   } catch (error) {
     handleError(error);
   }

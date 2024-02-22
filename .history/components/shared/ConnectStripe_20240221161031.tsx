@@ -19,8 +19,9 @@ const ConnectStripe = ({
   lastName,
   email,
 }: ConnectStripeProps) => {
+  console.log(userId);
   const onLink = async () => {
-    const link = await createStripeAccount(userId, firstName, lastName, email);
+    const link = await createStripeAccount(userId);
 
     console.log(link);
   };

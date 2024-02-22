@@ -11,8 +11,6 @@ const ConnectButton = () => {
   const firstName = user?.firstName as string;
   const lastName = user?.lastName as string;
 
-  console.log(userId, userEmail, firstName, lastName);
-
   return (
     <div className="flex items-center gap-3">
       <SignedIn>

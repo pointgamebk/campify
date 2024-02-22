@@ -87,19 +87,16 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
-export async function createStripeAccount(
-  userId: string,
-  email: string,
-  firstName: string,
-  lastName: string
-) {
+export async function createStripeAccount(userId: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+  console.log("userId", userId);
 
   try {
     const account = await stripe.accounts.create({
       type: "express",
       country: "US",
-      email: "6xample@example.com",
+      email: "anotherexample@example.com",
       capabilities: {
         card_payments: { requested: true },
         transfers: { requested: true },
@@ -107,17 +104,13 @@ export async function createStripeAccount(
       },
       business_type: "individual",
       individual: {
-        first_name: "Johnny",
-        last_name: "Hopkins",
-        email: "6xample@example.com",
+        first_name: "John",
+        last_name: "Doe",
+        email: "anotherexample@example.com",
       },
     });
 
-    // const user = await User.findOneAndUpdate(
-    //   { _id: userId },
-    //   { stripeAccountId: account.id, chargesEnabled: true },
-    //   { new: true }
-    // );
+    // const updatedUser = await User.findOneAndUpdate({userId}
 
     const link = await stripe.accountLinks.create({
       account: account.id,
