@@ -39,13 +39,13 @@ export async function POST(request: Request) {
   if (eventType === "account.updated") {
     const account = event.data.object;
     const user = await User.findOne({ stripeAccountId: account.id });
-    const updatedUser = await user.chargesEnabled(account.charges_enabled);
+    await user.updateOne({ chargesEnabled: account.charges_enabled });
     // const user = await User.findOneAndUpdate({
     //   stripeAccountId: account.id,
     //   chargesEnabled: account.charges_enabled,
     // });
 
-    return NextResponse.json({ message: "OK", user: updatedUser });
+    return NextResponse.json({ message: "OK", user: user });
   }
 
   return new Response("", { status: 200 });

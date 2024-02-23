@@ -99,7 +99,7 @@ export async function createStripeAccount(
     const account = await stripe.accounts.create({
       type: "express",
       country: "US",
-      email: "9xample@example.com",
+      email: "8xample@example.com",
       capabilities: {
         card_payments: { requested: true },
         transfers: { requested: true },
@@ -109,7 +109,7 @@ export async function createStripeAccount(
       individual: {
         first_name: "Jimmy",
         last_name: "Poppins",
-        email: "9xample@example.com",
+        email: "7xample@example.com",
       },
     });
 
