@@ -1,18 +1,14 @@
 import stripe from "stripe";
-import type { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import { createOrder } from "@/lib/actions/order.actions";
 import User from "@/lib/database/models/user.model";
-import getRawBody from "raw-body";
 
-export async function POST(request: NextApiRequest) {
-  //const body = await request.text();
-  const body = await getRawBody(request);
+export async function POST(request: Request) {
+  const body = await request.text();
 
   console.log("body", body);
 
-  //const sig = request.headers.get("stripe-signature") as string;
-  const sig: any = request.headers["stripe-signature"];
+  const sig = request.headers.get("stripe-signature") as string;
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
   let event;
