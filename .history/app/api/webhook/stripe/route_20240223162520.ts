@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   // Get the ID and type
   const eventType = event.type;
 
-  console.log(eventType);
+  console.log(event.data.object);
   // CREATE
   // if (eventType === "checkout.session.completed") {
   //   const { id, amount_total, metadata } = event.data.object;
@@ -37,14 +37,13 @@ export async function POST(request: Request) {
   //   return NextResponse.json({ message: "OK", order: newOrder });
   // }
 
-  if (eventType === "account.updated") {
-    const account = event.data.object;
-    console.log(account);
-    const user = await User.findOne({ stripeAccountId: account.id });
-    user.chargesEnabled = account.charges_enabled;
+  // if (eventType === "account.updated") {
+  //   const account = event.data.object;
+  //   const user = await User.findOne({ stripeAccountId: account.id });
+  //   user.chargesEnabled = account.charges_enabled;
 
-    return NextResponse.json({ message: "OK", user: user });
-  }
+  //   return NextResponse.json({ message: "OK", user: user });
+  // }
 
   return new Response("", { status: 200 });
 }
