@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       stripeAccountId: account.id,
       chargesEnabled: account.charges_enabled,
     });
-    const updatedUser = await user;
+    const updatedUser = await user.save();
 
     return NextResponse.json({ message: "OK", user: updatedUser });
   }
