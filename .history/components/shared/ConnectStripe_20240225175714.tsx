@@ -1,7 +1,6 @@
 import { Button } from "../ui/button";
 import { loadStripe } from "@stripe/stripe-js";
 import { createStripeAccount } from "@/lib/actions/user.actions";
-import { useRouter } from "next/navigation";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -20,7 +19,6 @@ const ConnectStripe = ({
   lastName,
   email,
 }: ConnectStripeProps) => {
-  const router = useRouter();
   const onLink = async () => {
     try {
       const link = await createStripeAccount(
@@ -29,26 +27,17 @@ const ConnectStripe = ({
         lastName,
         email
       );
-
-      const url = link as string;
-      router.push(url);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div>
-      <Button
-        type="submit"
-        role="link"
-        size="lg"
-        className="button sm:w-fit"
-        onClick={onLink}
-      >
+    <form action={onLink} method="post">
+      <Button type="submit" role="link" size="lg" className="button sm:w-fit">
         Connect Stripe
       </Button>
-    </div>
+    </form>
   );
 };
 

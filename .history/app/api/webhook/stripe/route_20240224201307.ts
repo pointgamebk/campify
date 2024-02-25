@@ -21,33 +21,24 @@ export async function POST(request: Request) {
   const eventType = event.type;
 
   // CREATE
-  if (eventType === "checkout.session.completed") {
-    const { id, amount_total, metadata } = event.data.object;
+  // if (eventType === "checkout.session.completed") {
+  //   const { id, amount_total, metadata } = event.data.object;
 
-    const order = {
-      stripeId: id,
-      eventId: metadata?.eventId || "",
-      buyerId: metadata?.buyerId || "",
-      totalAmount: amount_total ? (amount_total / 100).toString() : "0",
-      createdAt: new Date(),
-    };
+  //   const order = {
+  //     stripeId: id,
+  //     eventId: metadata?.eventId || "",
+  //     buyerId: metadata?.buyerId || "",
+  //     totalAmount: amount_total ? (amount_total / 100).toString() : "0",
+  //     createdAt: new Date(),
+  //   };
 
-    const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", order: newOrder });
-  }
+  //   const newOrder = await createOrder(order);
+  //   return NextResponse.json({ message: "OK", order: newOrder });
+  // }
 
-  // UPDATE STRIPE ACCOUNT SETTINGS
   if (eventType === "account.updated") {
-    try {
-      const { id, charges_enabled } = event.data.object;
-      const updatedUser = await User.findOneAndUpdate(
-        { stripeAccountId: id },
-        { chargesEnabled: charges_enabled },
-        { new: true }
-      );
-    } catch (error) {
-      console.error("no user found");
-    }
+    const { id, charges_enabled } = event.data.object;
+    console.log("Account updated", id, charges_enabled);
 
     return NextResponse.json({ message: "OK" });
   }

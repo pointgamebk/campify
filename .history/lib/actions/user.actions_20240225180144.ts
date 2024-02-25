@@ -126,7 +126,8 @@ export async function createStripeAccount(
       type: "account_onboarding",
     });
 
-    return link.url;
+    console.log(link, user);
+    return link;
   } catch (error) {
     handleError(error);
   }

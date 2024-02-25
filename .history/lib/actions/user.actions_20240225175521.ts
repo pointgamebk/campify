@@ -87,6 +87,10 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
+interface StripeAccountResponse {
+  url: string;
+}
+
 export async function createStripeAccount(
   userId: string,
   email: string,
@@ -126,7 +130,8 @@ export async function createStripeAccount(
       type: "account_onboarding",
     });
 
-    return link.url;
+    console.log(link, user);
+    return { url: link.url };
   } catch (error) {
     handleError(error);
   }

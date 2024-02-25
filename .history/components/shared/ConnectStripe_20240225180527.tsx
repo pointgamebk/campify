@@ -30,7 +30,8 @@ const ConnectStripe = ({
         email
       );
 
-      const url = link as string;
+      const url = link?.url as string;
+      console.log(url);
       router.push(url);
     } catch (error) {
       console.error(error);
@@ -38,17 +39,11 @@ const ConnectStripe = ({
   };
 
   return (
-    <div>
-      <Button
-        type="submit"
-        role="link"
-        size="lg"
-        className="button sm:w-fit"
-        onClick={onLink}
-      >
+    <form action={onLink} method="post">
+      <Button type="submit" role="link" size="lg" className="button sm:w-fit">
         Connect Stripe
       </Button>
-    </div>
+    </form>
   );
 };
 

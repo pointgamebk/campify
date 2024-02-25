@@ -21,22 +21,21 @@ export async function POST(request: Request) {
   const eventType = event.type;
 
   // CREATE
-  if (eventType === "checkout.session.completed") {
-    const { id, amount_total, metadata } = event.data.object;
+  // if (eventType === "checkout.session.completed") {
+  //   const { id, amount_total, metadata } = event.data.object;
 
-    const order = {
-      stripeId: id,
-      eventId: metadata?.eventId || "",
-      buyerId: metadata?.buyerId || "",
-      totalAmount: amount_total ? (amount_total / 100).toString() : "0",
-      createdAt: new Date(),
-    };
+  //   const order = {
+  //     stripeId: id,
+  //     eventId: metadata?.eventId || "",
+  //     buyerId: metadata?.buyerId || "",
+  //     totalAmount: amount_total ? (amount_total / 100).toString() : "0",
+  //     createdAt: new Date(),
+  //   };
 
-    const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", order: newOrder });
-  }
+  //   const newOrder = await createOrder(order);
+  //   return NextResponse.json({ message: "OK", order: newOrder });
+  // }
 
-  // UPDATE STRIPE ACCOUNT SETTINGS
   if (eventType === "account.updated") {
     try {
       const { id, charges_enabled } = event.data.object;
@@ -45,8 +44,9 @@ export async function POST(request: Request) {
         { chargesEnabled: charges_enabled },
         { new: true }
       );
+      console.log(updatedUser);
     } catch (error) {
-      console.error("no user found");
+      console.log("no user found");
     }
 
     return NextResponse.json({ message: "OK" });

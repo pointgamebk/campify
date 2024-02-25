@@ -18,7 +18,7 @@ const InstructorSettings = async ({
       <p className="text-white">
         Transfers enabled: {user.chargesEnabled ? "Yes" : "No"}
       </p>
-      {user.chargesEnabled === false ? <ConnectButton /> : null}
+      <ConnectButton />
     </div>
   );
 };

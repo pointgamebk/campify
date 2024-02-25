@@ -12,6 +12,8 @@ import { handleError } from "@/lib/utils";
 
 import { CreateUserParams, UpdateUserParams } from "@/types";
 
+import { useRouter } from "next/navigation";
+
 export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
@@ -95,6 +97,8 @@ export async function createStripeAccount(
 ) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
+  const router = useRouter();
+
   try {
     const account = await stripe.accounts.create({
       type: "express",
@@ -126,7 +130,8 @@ export async function createStripeAccount(
       type: "account_onboarding",
     });
 
-    return link.url;
+    console.log(link, user);
+    router.push(link.url);
   } catch (error) {
     handleError(error);
   }

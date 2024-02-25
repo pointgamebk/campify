@@ -22,33 +22,19 @@ const ConnectStripe = ({
 }: ConnectStripeProps) => {
   const router = useRouter();
   const onLink = async () => {
-    try {
-      const link = await createStripeAccount(
-        userId,
-        firstName,
-        lastName,
-        email
-      );
+    const link = await createStripeAccount(userId, firstName, lastName, email);
 
-      const url = link as string;
-      router.push(url);
-    } catch (error) {
-      console.error(error);
-    }
+    //router.push(link);
+
+    console.log(link);
   };
 
   return (
-    <div>
-      <Button
-        type="submit"
-        role="link"
-        size="lg"
-        className="button sm:w-fit"
-        onClick={onLink}
-      >
+    <form action={onLink} method="post">
+      <Button type="submit" role="link" size="lg" className="button sm:w-fit">
         Connect Stripe
       </Button>
-    </div>
+    </form>
   );
 };
 

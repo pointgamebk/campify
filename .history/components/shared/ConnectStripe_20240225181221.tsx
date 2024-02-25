@@ -38,17 +38,11 @@ const ConnectStripe = ({
   };
 
   return (
-    <div>
-      <Button
-        type="submit"
-        role="link"
-        size="lg"
-        className="button sm:w-fit"
-        onClick={onLink}
-      >
+    <form action={onLink} method="post">
+      <Button type="submit" role="link" size="lg" className="button sm:w-fit">
         Connect Stripe
       </Button>
-    </div>
+    </form>
   );
 };
 
