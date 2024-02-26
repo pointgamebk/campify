@@ -2,7 +2,6 @@ import Collection from "@/components/shared/Collection";
 import { Button } from "@/components/ui/button";
 import { getEventsByUser } from "@/lib/actions/event.actions";
 import { getOrdersByUser } from "@/lib/actions/order.actions";
-import { getUserById } from "@/lib/actions/user.actions";
 import { IOrder } from "@/lib/database/models/order.model";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs";
@@ -21,7 +20,6 @@ const ProfilePage = async ({
 
   //Profile user id
   const userId = id;
-  const user = await getUserById(userId);
 
   const ordersPage = Number(searchParams?.ordersPage) || 1;
   const eventsPage = Number(searchParams?.eventsPage) || 1;
@@ -37,11 +35,9 @@ const ProfilePage = async ({
       {sessionUserId === userId && (
         <section className=" bg-dotted-pattern bg-cover bg-center py-5">
           <div className="wrapper flex items-center justify-center sm:justify-between">
-            <Button asChild size="lg" className="button hidden  sm:flex">
+            <Button asChild size="lg" className="button  sm:flex">
               <Link href={`/instructor_settings/${userId}`}>
-                {user.stripeAccountId
-                  ? "Instructor Settings"
-                  : "Become an Instructor"}
+                Instructor Settings
               </Link>
             </Button>
             <h3 className="h3-bold text-center sm:text-left text-white">
