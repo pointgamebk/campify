@@ -44,7 +44,7 @@ const ProfilePage = async ({
                   : "Become an Instructor"}
               </Link>
             </Button>
-            <h3 className="h3-bold text-center sm:text-left text-tan">
+            <h3 className="h3-bold text-center sm:text-left text-white">
               My Tickets
             </h3>
             <Button asChild size="lg" className="button hidden sm:flex">

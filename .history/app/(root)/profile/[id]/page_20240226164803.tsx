@@ -44,7 +44,7 @@ const ProfilePage = async ({
                   : "Become an Instructor"}
               </Link>
             </Button>
-            <h3 className="h3-bold text-center sm:text-left text-tan">
+            <h3 className="h3-bold text-center sm:text-left text-white">
               My Tickets
             </h3>
             <Button asChild size="lg" className="button hidden sm:flex">
@@ -58,7 +58,7 @@ const ProfilePage = async ({
         <section className="wrapper py-8 ">
           <Collection
             data={orderedEvents}
-            emptyTitle="No camps joined yet"
+            emptyTitle="No games joined yet"
             emptyStateSubtext="No worries - plenty of exciting games to check out!"
             collectionType="My_Tickets"
             limit={3}
@@ -70,33 +70,31 @@ const ProfilePage = async ({
       )}
 
       {/* Events Organized */}
-      {user.chargesEnabled && (
-        <section className="bg-slate bg-dotted-pattern bg-cover bg-center py-5">
-          <div className="wrapper flex items-center justify-center sm:justify-between">
-            <h3 className="h3-bold text-center sm:text-left text-tan">
-              Events Organized
-            </h3>
+      <section className="bg-slate bg-dotted-pattern bg-cover bg-center py-5">
+        <div className="wrapper flex items-center justify-center sm:justify-between">
+          <h3 className="h3-bold text-center sm:text-left text-tan">
+            Events Organized
+          </h3>
+          {user.chargesEnabled && (
             <Button asChild size="lg" className="button hidden sm:flex">
               <Link href="/events/create">Create New Event</Link>
             </Button>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
 
-      {user.chargesEnabled && (
-        <section className="wrapper py-8">
-          <Collection
-            data={organizedEvents?.data}
-            emptyTitle="No events created yet"
-            emptyStateSubtext="Go create some now!"
-            collectionType="Events_Organized"
-            limit={3}
-            page={eventsPage}
-            urlParamName="eventsPage"
-            totalPages={organizedEvents?.totalPages}
-          />
-        </section>
-      )}
+      <section className="wrapper py-8">
+        <Collection
+          data={organizedEvents?.data}
+          emptyTitle="No events created yet"
+          emptyStateSubtext="Go create some now!"
+          collectionType="Events_Organized"
+          limit={3}
+          page={eventsPage}
+          urlParamName="eventsPage"
+          totalPages={organizedEvents?.totalPages}
+        />
+      </section>
     </>
   );
 };
