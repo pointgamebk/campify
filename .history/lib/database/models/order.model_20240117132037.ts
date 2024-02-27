@@ -13,9 +13,6 @@ export interface IOrder extends Document {
     firstName: string;
     lastName: string;
   };
-  instructor: {
-    _id: string;
-  };
 }
 
 export type IOrderItem = {
@@ -25,7 +22,6 @@ export type IOrderItem = {
   eventTitle: string;
   eventId: string;
   buyer: string;
-  instructor: string;
 };
 
 const OrderSchema = new Schema({
@@ -46,10 +42,6 @@ const OrderSchema = new Schema({
     ref: "Event",
   },
   buyer: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  instructor: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },

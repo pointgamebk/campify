@@ -14,6 +14,7 @@ const ProfilePage = async ({
   searchParams,
 }: SearchParamProps) => {
   const { sessionClaims } = auth();
+  //const userId = sessionClaims?.userId as string;
 
   //Session user id
   const sessionUserId = sessionClaims?.userId as string;
