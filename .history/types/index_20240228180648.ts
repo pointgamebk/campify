@@ -4,8 +4,8 @@ export type CreateUserParams = {
   firstName: string;
   lastName: string;
   username: string;
-  // stripeAccountId: string | null;
-  // chargesEnabled: boolean;
+  stripeAccountId: string | null;
+  chargesEnabled: boolean;
   email: string;
   photo: string;
 };

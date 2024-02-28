@@ -9,11 +9,10 @@ const UserSchema = new Schema({
   stripeAccountId: { type: String, default: null },
   chargesEnabled: { type: Boolean, default: false },
   photo: { type: String, required: true },
-  profilePhoto: { type: String, required: false, default: null },
-  profileDescription: { type: String, required: false, default: null },
-  profileSchool: { type: String, required: false, default: null },
-  profileContact: { type: String, required: false, default: null },
-  profileCompleted: { type: Boolean, default: false },
+  profilePhoto: { type: String, required: false },
+  profileDescription: { type: String, required: false },
+  profileSchool: { type: String, required: false },
+  profileContact: { type: String, required: false },
 });
 
 const User = models.User || model("User", UserSchema);

@@ -4,8 +4,8 @@ export type CreateUserParams = {
   firstName: string;
   lastName: string;
   username: string;
-  // stripeAccountId: string | null;
-  // chargesEnabled: boolean;
+  stripeAccountId: string | null;
+  chargesEnabled: boolean;
   email: string;
   photo: string;
 };
@@ -20,8 +20,8 @@ export type UpdateUserParams = {
 export type UpdateProfileParams = {
   description: string;
   profilePhoto: string;
-  profileSchool: string;
-  profileContact: string;
+  username: string;
+  photo: string;
 };
 
 export type LinkStripeAccountParams = {

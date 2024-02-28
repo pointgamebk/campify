@@ -66,8 +66,8 @@ export async function POST(req: Request) {
       firstName: first_name,
       lastName: last_name,
       photo: image_url,
-      // stripeAccountId: null,
-      // chargesEnabled: false,
+      stripeAccountId: null,
+      chargesEnabled: false,
     };
 
     const newUser = await createUser(user);
