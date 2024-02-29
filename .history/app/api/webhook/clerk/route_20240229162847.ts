@@ -96,10 +96,6 @@ export async function POST(req: Request) {
       lastName: last_name,
       username: username!,
       photo: image_url,
-      profilePhoto: _user.profilePhoto,
-      profileSchool: _user.profileSchool,
-      profileContact: _user.profileContact,
-      profileDescription: _user.profileDescription,
     };
 
     const updatedUser = await updateUser(id, user);
