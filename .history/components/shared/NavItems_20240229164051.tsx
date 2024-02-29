@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const NavItems = () => {
+type NavItemsProps = {
+  id: string;
+};
+
+const NavItems = ({ id }: NavItemsProps) => {
   const headerLinks = [
     {
       label: "Home",

@@ -17,6 +17,8 @@ const InstructorDetails = async ({
     page: eventsPage,
   });
 
+  console.log(instructor);
+
   return (
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
