@@ -20,10 +20,9 @@ import Dropdown from "./Dropdown";
 import { Textarea } from "@/components/ui/textarea";
 import { FileUploader } from "./FileUploader";
 import Image from "next/image";
-import { updateUser } from "@/lib/actions/user.actions";
+import { updateProfile } from "@/lib/actions/user.actions";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
-import { getUserById } from "@/lib/actions/user.actions";
 
 type ProfileFormProps = {
   userId: string;
@@ -31,7 +30,6 @@ type ProfileFormProps = {
 
 const ProfileForm = ({ userId }: ProfileFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
-
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: profileDefaultValues,
@@ -41,23 +39,15 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
     console.log(values);
 
     try {
-      const user = await getUserById(userId);
-      console.log("user", user);
-      const _user = {
-        ...user,
-        profileSchool: values.school,
-        profileContact: values.contact,
-        profileDescription: values.description,
-        profilePhoto: "profile_photo",
-      };
-      console.log("_user", _user);
-      const updatedUser = await updateUser(user.clerkId, _user);
-
-      if (updatedUser) {
-        console.log(updatedUser);
-      }
+      const updatedUser = await updateProfile({
+        userId: userId,
+        school: values.school,
+        contact: values.contact,
+        description: values.description,
+        photo: files[0],
+      });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

@@ -51,7 +51,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         profilePhoto: "profile_photo",
       };
       console.log("_user", _user);
-      const updatedUser = await updateUser(user.clerkId, _user);
+      const updatedUser = await updateUser(userId, _user);
 
       if (updatedUser) {
         console.log(updatedUser);

@@ -45,17 +45,17 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
       console.log("user", user);
       const _user = {
         ...user,
-        profileSchool: values.school,
-        profileContact: values.contact,
-        profileDescription: values.description,
+        school: values.school,
+        contact: values.contact,
+        description: values.description,
         profilePhoto: "profile_photo",
       };
       console.log("_user", _user);
-      const updatedUser = await updateUser(user.clerkId, _user);
+      //   const updatedUser = await updateUser(userId, _user);
 
-      if (updatedUser) {
-        console.log(updatedUser);
-      }
+      //   if (updatedUser) {
+      //     console.log(updatedUser);
+      //   }
     } catch (error) {
       console.log(error);
     }

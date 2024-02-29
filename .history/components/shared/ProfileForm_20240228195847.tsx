@@ -23,7 +23,6 @@ import Image from "next/image";
 import { updateUser } from "@/lib/actions/user.actions";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
-import { getUserById } from "@/lib/actions/user.actions";
 
 type ProfileFormProps = {
   userId: string;
@@ -41,21 +40,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
     console.log(values);
 
     try {
-      const user = await getUserById(userId);
-      console.log("user", user);
-      const _user = {
-        ...user,
-        profileSchool: values.school,
-        profileContact: values.contact,
-        profileDescription: values.description,
-        profilePhoto: "profile_photo",
-      };
-      console.log("_user", _user);
-      const updatedUser = await updateUser(user.clerkId, _user);
-
-      if (updatedUser) {
-        console.log(updatedUser);
-      }
+      const updatedUser = await updateUser({});
     } catch (error) {
       console.log(error);
     }
