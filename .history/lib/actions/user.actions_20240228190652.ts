@@ -146,19 +146,7 @@ export async function updateProfile(
   try {
     await connectToDatabase();
 
-    const updatedProfile = await User.findOneAndUpdate(
-      { _id: userId },
-      {
-        profileSchool: school,
-        profileContact: contact,
-        profileDescription: description,
-        profilePhoto: photo,
-      },
-      { new: true }
-    );
-
-    if (!updatedProfile) throw new Error("User update failed");
-    return JSON.parse(JSON.stringify(updatedProfile));
+    const updatedProfile = await User.findOneAndUpdate({ _id: userId }, {});
   } catch (error) {
     handleError(error);
   }

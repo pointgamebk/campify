@@ -36,7 +36,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
   });
 
   async function onSubmit(values: z.infer<typeof profileFormSchema>) {
-    console.log(values);
+    console.log(userId);
   }
 
   return (
@@ -116,15 +116,6 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
             )}
           />
         </div>
-
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitting}
-          className="button col-span-2 w-full"
-        >
-          {form.formState.isSubmitting ? "Submitting..." : "Submit Update"}
-        </Button>
       </form>
     </Form>
   );

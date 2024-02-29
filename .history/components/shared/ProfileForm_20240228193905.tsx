@@ -29,14 +29,13 @@ type ProfileFormProps = {
 };
 
 const ProfileForm = ({ userId }: ProfileFormProps) => {
-  const [files, setFiles] = useState<File[]>([]);
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: profileDefaultValues,
   });
 
   async function onSubmit(values: z.infer<typeof profileFormSchema>) {
-    console.log(values);
+    console.log(userId);
   }
 
   return (
@@ -70,7 +69,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    placeholder="Website or Social Media Link"
+                    placeholder="Websitwe or Social Media Link"
                     {...field}
                     className="input-field"
                   />
@@ -80,51 +79,6 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
             )}
           />
         </div>
-
-        <div className="flex flex-col gap-5 md:flex-row">
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl className="h-72">
-                  <Textarea
-                    placeholder="Describe yourself and your work"
-                    {...field}
-                    className="textarea rounded-2xl"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="photo"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl className="h-72">
-                  <FileUploader
-                    onFieldChange={field.onChange}
-                    imageUrl={field.value}
-                    setFiles={setFiles}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitting}
-          className="button col-span-2 w-full"
-        >
-          {form.formState.isSubmitting ? "Submitting..." : "Submit Update"}
-        </Button>
       </form>
     </Form>
   );

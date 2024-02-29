@@ -156,9 +156,6 @@ export async function updateProfile(
       },
       { new: true }
     );
-
-    if (!updatedProfile) throw new Error("User update failed");
-    return JSON.parse(JSON.stringify(updatedProfile));
   } catch (error) {
     handleError(error);
   }

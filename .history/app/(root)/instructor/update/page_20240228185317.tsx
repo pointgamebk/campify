@@ -16,9 +16,15 @@ const UpdateProfile = async () => {
         </h3>
       </section>
 
+      {/* {user.stripeAccountId && (
+        <div className="wrapper my-8">
+          <ProfileForm />
+        </div>
+      )} */}
+
       {user.stripeAccountId ? (
         <div className="wrapper my-8">
-          <ProfileForm userId={userId} />
+          <ProfileForm />
         </div>
       ) : (
         <div className="wrapper my-8">

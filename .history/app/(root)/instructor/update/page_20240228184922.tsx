@@ -16,17 +16,9 @@ const UpdateProfile = async () => {
         </h3>
       </section>
 
-      {user.stripeAccountId ? (
-        <div className="wrapper my-8">
-          <ProfileForm userId={userId} />
-        </div>
-      ) : (
-        <div className="wrapper my-8">
-          <h3 className=" text-center sm:text-left text-tan">
-            You must connect a Stripe account to update your profile
-          </h3>
-        </div>
-      )}
+      <div className="wrapper my-8">
+        <ProfileForm />
+      </div>
     </>
   );
 };

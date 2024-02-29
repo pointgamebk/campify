@@ -36,7 +36,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
   });
 
   async function onSubmit(values: z.infer<typeof profileFormSchema>) {
-    console.log(values);
+    console.log(userId);
   }
 
   return (
