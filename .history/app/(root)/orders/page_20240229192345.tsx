@@ -14,7 +14,7 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
     <>
       <section className=" bg-slate bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <h3 className="wrapper h3-bold text-center text-tan sm:text-left ">
-          Order Details
+          Orders
         </h3>
       </section>
 
@@ -23,7 +23,7 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
       </section>
 
       <section className="wrapper overflow-x-auto text-tan">
-        <table className="w-full border-collapse border-t">
+        <table className="w-full border-collapse border-t text-tan">
           <thead>
             <tr className="p-medium-14 border-b text-grey-500">
               <th className="min-w-[250px] py-3 text-left text-tan">
@@ -33,8 +33,8 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
                 Event Title
               </th>
               <th className="min-w-[150px] py-3 text-left text-tan">Buyer</th>
-              <th className="min-w-[100px] py-3 text-left text-tan">Created</th>
-              <th className="min-w-[100px] py-3 text-right text-tan">Amount</th>
+              <th className="min-w-[100px] py-3 text-left">Created</th>
+              <th className="min-w-[100px] py-3 text-right">Amount</th>
             </tr>
           </thead>
           <tbody>

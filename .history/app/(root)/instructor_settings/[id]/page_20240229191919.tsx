@@ -18,7 +18,7 @@ const InstructorSettings = async ({
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
         <div className="wrapper grid grid-cols-1 gap-5">
-          <h3 className="h3-bold text-tan">Instructor Dashboard</h3>
+          <h3 className="h3-bold text-tan">Instructor Settings</h3>
           <p className="text-tan">
             Stripe Account: {user.stripeAccountId ? "Linked" : "Not Linked"}
           </p>
@@ -37,7 +37,7 @@ const InstructorSettings = async ({
               <div key={event._id}>
                 <Link
                   href={`/orders?eventId=${event._id}`}
-                  className="flex gap-2 text-tan underline"
+                  className="flex gap-2"
                 >
                   {event.title}
                 </Link>
