@@ -3,7 +3,6 @@ import { getUserById } from "@/lib/actions/user.actions";
 import { getEventsByUser } from "@/lib/actions/event.actions";
 import { IEvent } from "@/lib/database/models/event.model";
 import Link from "next/link";
-import { formatDateTime } from "@/lib/utils";
 
 type InstructorSettingsProps = {
   params: { id: string };
@@ -44,7 +43,6 @@ const InstructorSettings = async ({
               <th className="min-w-[200px] flex-1 py-3 pr-4 text-left text-tan">
                 Camp Title
               </th>
-              <th className="min-w-[150px] py-3 text-left text-tan">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -63,17 +61,19 @@ const InstructorSettings = async ({
                       className="p-regular-14 lg:p-regular-16 border-b "
                       style={{ boxSizing: "border-box" }}
                     >
-                      <td className="min-w-[250px] py-4 text-green">
-                        <Link href={`/orders?eventId=${row._id}`}>
-                          {row._id}
-                        </Link>
+                      <td className="min-w-[250px] py-4 text-primary-500">
+                        {row._id}
                       </td>
-                      <td className="min-w-[200px] flex-1 py-4 pr-4">
-                        {row.title}
+                      {/* <td className="min-w-[200px] flex-1 py-4 pr-4">
+                        {row.eventTitle}
                       </td>
+                      <td className="min-w-[150px] py-4">{row.buyer}</td>
                       <td className="min-w-[100px] py-4">
-                        {formatDateTime(row.startDateTime).dateTime}
+                        {formatDateTime(row.createdAt).dateTime}
                       </td>
+                      <td className="min-w-[100px] py-4 text-right">
+                        {formatPrice(row.totalAmount)}
+                      </td> */}
                     </tr>
                   ))}
               </>

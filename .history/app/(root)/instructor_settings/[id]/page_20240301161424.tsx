@@ -64,9 +64,7 @@ const InstructorSettings = async ({
                       style={{ boxSizing: "border-box" }}
                     >
                       <td className="min-w-[250px] py-4 text-green">
-                        <Link href={`/orders?eventId=${row._id}`}>
-                          {row._id}
-                        </Link>
+                        <Link href="/#events">{row._id}</Link>
                       </td>
                       <td className="min-w-[200px] flex-1 py-4 pr-4">
                         {row.title}

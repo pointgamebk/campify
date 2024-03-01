@@ -30,44 +30,38 @@ const InstructorDetails = async ({
               height={1000}
               className="h-full min-h-[200px] object-cover object-center"
             />
-          </div>
+            {/* <h2 className="h2-bold text-tan">
+              {instructor.firstName} {instructor.lastName}
+            </h2> */}
 
-          <div className="sm:hidden">
-            <Image
-              src={instructor.profilePhoto}
-              alt="hero image"
-              width={600}
-              height={600}
-              className="h-full min-h-[200px] object-cover object-center "
-            />
-          </div>
-
-          <div className="flex w-full flex-col gap-8 p-5 md:p-10">
-            <div className="flex flex-col gap-6">
-              <h2 className="h2-bold text-tan">
-                {instructor.firstName} {instructor.lastName}
-              </h2>
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <div className="flex gap-3">
-                  <p className="p-medium-16 rounded-full bg-white/10 px-4 py-2.5 text-tan">
-                    {instructor.profileSchool}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <p className="p-medium-18 ml-2 mt-2 sm:mt-0 text-tan">
-                  {instructor.profileDescription}
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <p className="p-medium-18 ml-2 mt-2 sm:mt-0 text-green">
-                  {instructor.profileContact}
-                </p>
-              </div>
+            <div className="sm:hidden">
+              <Image
+                src={instructor.profilePhoto}
+                alt="hero image"
+                width={600}
+                height={600}
+                className="h-full min-h-[200px] object-cover object-center "
+              />
             </div>
+
+            <div className="flex w-full flex-col gap-8 p-5 md:p-10"></div>
+
+            {/* <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="flex gap-3">
+                <p className="p-medium-16 rounded-full bg-white/10 px-4 py-2.5 text-tan">
+                  {instructor.profileSchool}
+                </p>
+              </div>
+            </div> */}
+
+            {/* <div className="flex flex-col gap-2">
+              <p className="text-tan p-medium-16 lg:p-regular-18">
+                {instructor.profileDescription}
+              </p>
+              <p className="p-medium-16 lg:p-regular-18 truncate text-green underline">
+                {instructor.profileContact}
+              </p>
+            </div> */}
           </div>
         </div>
       </section>

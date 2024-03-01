@@ -32,29 +32,17 @@ type ProfileFormProps = {
 const ProfileForm = ({ userId }: ProfileFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
-  const router = useRouter();
-
-  const { startUpload } = useUploadThing("imageUploader");
-
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: profileDefaultValues,
   });
 
+  const router = useRouter();
+
+  const { startUpload } = useUploadThing("imageUploader");
+
   async function onSubmit(values: z.infer<typeof profileFormSchema>) {
     console.log(values);
-
-    let uploadedImageUrl = values.photo;
-
-    if (files.length > 0) {
-      const uploadedImages = await startUpload(files);
-
-      if (!uploadedImages) {
-        return;
-      }
-
-      uploadedImageUrl = uploadedImages[0].url;
-    }
 
     try {
       const user = await getUserById(userId);
@@ -64,7 +52,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         profileSchool: values.school,
         profileContact: values.contact,
         profileDescription: values.description,
-        profilePhoto: uploadedImageUrl,
+        profilePhoto: "profile_photo",
       };
       console.log("_user", _user);
       const updatedUser = await updateUser(user.clerkId, _user);

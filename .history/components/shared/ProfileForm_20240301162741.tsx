@@ -64,7 +64,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         profileSchool: values.school,
         profileContact: values.contact,
         profileDescription: values.description,
-        profilePhoto: uploadedImageUrl,
+        profilePhoto: "profile_photo",
       };
       console.log("_user", _user);
       const updatedUser = await updateUser(user.clerkId, _user);

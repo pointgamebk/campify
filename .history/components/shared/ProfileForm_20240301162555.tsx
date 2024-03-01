@@ -44,18 +44,6 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
   async function onSubmit(values: z.infer<typeof profileFormSchema>) {
     console.log(values);
 
-    let uploadedImageUrl = values.photo;
-
-    if (files.length > 0) {
-      const uploadedImages = await startUpload(files);
-
-      if (!uploadedImages) {
-        return;
-      }
-
-      uploadedImageUrl = uploadedImages[0].url;
-    }
-
     try {
       const user = await getUserById(userId);
       console.log("user", user);
@@ -64,7 +52,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         profileSchool: values.school,
         profileContact: values.contact,
         profileDescription: values.description,
-        profilePhoto: uploadedImageUrl,
+        profilePhoto: "profile_photo",
       };
       console.log("_user", _user);
       const updatedUser = await updateUser(user.clerkId, _user);
