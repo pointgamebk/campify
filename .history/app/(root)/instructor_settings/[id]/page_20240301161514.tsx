@@ -4,7 +4,6 @@ import { getEventsByUser } from "@/lib/actions/event.actions";
 import { IEvent } from "@/lib/database/models/event.model";
 import Link from "next/link";
 import { formatDateTime } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 type InstructorSettingsProps = {
   params: { id: string };
@@ -35,12 +34,6 @@ const InstructorSettings = async ({
         <h3 className="wrapper h3-bold text-center text-tan sm:text-left ">
           Camp Details
         </h3>
-
-        <div className="wrapper flex items-center justify-center sm:justify-between">
-          <Button asChild size="lg" className="button hidden sm:flex">
-            <Link href="/events/create">Create New Event</Link>
-          </Button>
-        </div>
       </section>
 
       <section className="wrapper overflow-x-auto text-tan">

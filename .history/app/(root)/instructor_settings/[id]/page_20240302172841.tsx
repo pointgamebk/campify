@@ -36,7 +36,7 @@ const InstructorSettings = async ({
           Camp Details
         </h3>
 
-        <div className="wrapper flex items-center justify-center sm:justify-between">
+        <div>
           <Button asChild size="lg" className="button hidden sm:flex">
             <Link href="/events/create">Create New Event</Link>
           </Button>
