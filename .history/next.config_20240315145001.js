@@ -31,7 +31,7 @@ const nextConfig = {
 //           {
 //             key: "Content-Security-Policy",
 //             value:
-//               "default-src 'self'; img-src 'self' utfs.io; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self';",
+//               "connect-src https://connect-js.stripe.com https://js.stripe.com; frame-src https://connect-js.stripe.com https://js.stripe.com; img-src 'self' https://*.stripe.com; script-src https://connect-js.stripe.com https://js.stripe.com; style-src 'self' 'sha256-0hAheEzaMe6uXIKV4EehS9pu1am1lj/KnnzrOYqckXk='",
 //           },
 //         ],
 //       },

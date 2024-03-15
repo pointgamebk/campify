@@ -11,7 +11,6 @@ const nextConfig = {
     ],
   },
 };
-
 // const nextConfig = {
 //   images: {
 //     domains: ["utfs.io"],
@@ -23,20 +22,20 @@ const nextConfig = {
 //       },
 //     ],
 //   },
-//   async headers() {
-//     return [
-//       {
-//         source: "/(.*)",
-//         headers: [
-//           {
-//             key: "Content-Security-Policy",
-//             value:
-//               "default-src 'self'; img-src 'self' utfs.io; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self';",
-//           },
-//         ],
-//       },
-//     ];
-//   },
+// async headers() {
+//   return [
+//     {
+//       source: "/(.*)",
+//       headers: [
+//         {
+//           key: "Content-Security-Policy",
+//           value:
+//             "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';",
+//         },
+//       ],
+//     },
+//   ];
+// },
 // };
 
 module.exports = nextConfig;
