@@ -19,7 +19,7 @@ const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
     <>
       <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <h3 className="wrapper h3-bold text-center sm:text-left text-tan">
-          {isOrganizer ? "Update Event" : "Invalid Access"}
+          Update Event
         </h3>
       </section>
 
@@ -33,6 +33,15 @@ const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
           />
         </div>
       )}
+
+      {/* <div className="wrapper my-8">
+        <EventForm
+          type="Update"
+          event={event}
+          eventId={event._id}
+          userId={userId}
+        />
+      </div> */}
     </>
   );
 };
