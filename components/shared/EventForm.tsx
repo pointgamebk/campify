@@ -240,6 +240,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
+                      minDate={new Date()}
                     />
                   </div>
                 </FormControl>
@@ -272,6 +273,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
+                      minDate={new Date()}
                     />
                   </div>
                 </FormControl>

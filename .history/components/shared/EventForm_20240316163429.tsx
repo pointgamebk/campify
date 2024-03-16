@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -8,10 +8,8 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -29,33 +27,7 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { createEvent, updateEvent } from "@/lib/actions/event.actions";
 import { IEvent } from "@/lib/database/models/event.model";
-
-import { useGoogleMapsScript, Libraries } from "use-google-maps-script";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-
-import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
-
-import { cn } from "@/lib/utils";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-
-interface ISearchBoxProps {
-  onSelectAddress: (address: string) => void;
-  defaultValue: string;
-}
+import SearchBox from "./SearchBox";
 
 type EventFormProps = {
   userId: string;
@@ -64,30 +36,8 @@ type EventFormProps = {
   eventId?: string;
 };
 
-const libraries: Libraries = ["places"];
-
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
-  const { isLoaded, loadError } = useGoogleMapsScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
-    libraries,
-  });
   const [files, setFiles] = useState<File[]>([]);
-
-  //ReadySearchBox
-  const [open, setOpen] = useState(false);
-
-  const {
-    ready,
-    value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete({ debounce: 300, defaultValue: "" });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    console.log(e.target.value);
-  };
 
   const initialValues =
     event && type === "Update"
@@ -108,6 +58,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
+    console.log(values);
     let uploadedImageUrl = values.imageUrl;
 
     if (files.length > 0) {
@@ -125,7 +76,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
         const newEvent = await createEvent({
           event: { ...values, imageUrl: uploadedImageUrl },
           userId,
-          path: "/profile",
+          path: "/",
         });
         if (newEvent) {
           form.reset();
@@ -157,8 +108,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     }
   }
 
-  console.log({ status, data });
-
   return (
     <Form {...form}>
       <form
@@ -187,7 +136,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
             control={form.control}
             name="categoryId"
             render={({ field }) => (
-              <FormItem className="w-full">
+              <FormItem className="w-full ">
                 <FormControl>
                   <Dropdown
                     onChangeHandler={field.onChange}
@@ -249,12 +198,14 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       width={24}
                       height={24}
                       alt="location"
+                      className="bg-white"
                     />
-                    <Input
-                      placeholder="Search an address..."
-                      disabled={!isLoaded}
-                      onChange={handleChange}
-                      value={value}
+                    <SearchBox
+                      defaultValue=""
+                      onSelectAddress={(address) => {
+                        form.setValue("location", address);
+                        console.log(address);
+                      }}
                     />
                   </div>
                 </FormControl>
@@ -277,9 +228,9 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       alt="calendar"
                       width={24}
                       height={24}
-                      className="filter-grey"
+                      className="filter-grey "
                     />
-                    <p className="ml-3 whitespace-nowrap text-grey-600">
+                    <p className="ml-3 whitespace-nowrap text-grey-600 ">
                       Start Date:
                     </p>
                     <DatePicker
@@ -289,6 +240,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
+                      minDate={new Date()}
                     />
                   </div>
                 </FormControl>
@@ -321,6 +273,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
+                      minDate={new Date()}
                     />
                   </div>
                 </FormControl>
@@ -369,7 +322,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                                 onCheckedChange={field.onChange}
                                 checked={field.value}
                                 id="isFree"
-                                className="mr-2 h-5 w-5 border-2 border-primary-500"
+                                className="mr-2 h-5 w-5 border-2 border-green"
                               />
                             </div>
                           </FormControl>
@@ -396,6 +349,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       width={24}
                       height={24}
                       alt="link"
+                      className=""
                     />
 
                     <Input

@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { connectToDatabase } from "@/lib/database";
 import Event from "@/lib/database/models/event.model";
 import User from "@/lib/database/models/user.model";
@@ -42,6 +44,7 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
       category: event.categoryId,
       organizer: userId,
     });
+    revalidatePath(path);
 
     return JSON.parse(JSON.stringify(newEvent));
   } catch (error) {
@@ -109,22 +112,26 @@ export async function getAllEvents({
   try {
     await connectToDatabase();
 
-    const titleCondition = query
-      ? { title: { $regex: query, $options: "i" } }
+    const currentDate = new Date();
+    const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
+
+    const locationCondition = query
+      ? { location: { $regex: query, $options: "i" } }
       : {};
     const categoryCondition = category
       ? await getCategoryByName(category)
       : null;
     const conditions = {
       $and: [
-        titleCondition,
+        locationCondition,
         categoryCondition ? { category: categoryCondition._id } : {},
+        { startDateTime: { $gte: pastDay } },
       ],
     };
 
     const skipAmount = (Number(page) - 1) * limit;
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "desc" })
+      .sort({ createdAt: "asc" })
       .skip(skipAmount)
       .limit(limit);
 
