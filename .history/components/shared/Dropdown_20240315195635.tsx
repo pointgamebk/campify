@@ -31,6 +31,7 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
       if (categoryList) {
         const sortedCategoryList = categoryList.sort(
           (a: ICategory, b: ICategory) => {
+            // Assuming each category has a name property
             const nameA = a.name.toLowerCase();
             const nameB = b.name.toLowerCase();
             if (nameA < nameB) return -1;

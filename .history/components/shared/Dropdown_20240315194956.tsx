@@ -5,9 +5,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+// import {
+//   AlertDialog,
+//   AlertDialogAction,
+//   AlertDialogCancel,
+//   AlertDialogContent,
+//   AlertDialogDescription,
+//   AlertDialogFooter,
+//   AlertDialogHeader,
+//   AlertDialogTitle,
+//   AlertDialogTrigger,
+// } from "@/components/ui/alert-dialog";
 
 import { ICategory } from "@/lib/database/models/category.model";
 import { useEffect, useState } from "react";
+// import { Input } from "../ui/input";
 import { getAllCategories } from "@/lib/actions/category.actions";
 
 type DropdownProps = {
@@ -17,30 +29,21 @@ type DropdownProps = {
 
 const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
+  // const [newCategory, setNewCategory] = useState("");
+
+  // const handleAddCategory = () => {
+  //   createCategory({
+  //     categoryName: newCategory.trim(),
+  //   }).then((category) => {
+  //     setCategories((prevState) => [...prevState, category]);
+  //   });
+  // };
 
   useEffect(() => {
-    // const getCategories = async () => {
-    //   const categoryList = await getAllCategories();
-
-    //   categoryList && setCategories(categoryList as ICategory[]);
-    // };
-
     const getCategories = async () => {
       const categoryList = await getAllCategories();
 
-      if (categoryList) {
-        const sortedCategoryList = categoryList.sort(
-          (a: ICategory, b: ICategory) => {
-            const nameA = a.name.toLowerCase();
-            const nameB = b.name.toLowerCase();
-            if (nameA < nameB) return -1;
-            if (nameA > nameB) return 1;
-            return 0;
-          }
-        );
-
-        setCategories(sortedCategoryList as ICategory[]);
-      }
+      categoryList && setCategories(categoryList as ICategory[]);
     };
 
     getCategories();

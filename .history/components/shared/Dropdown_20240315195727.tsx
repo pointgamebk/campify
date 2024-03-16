@@ -5,8 +5,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { ICategory } from "@/lib/database/models/category.model";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAllCategories } from "@/lib/actions/category.actions";
 
 type DropdownProps = {
   value?: string;
@@ -16,9 +18,37 @@ type DropdownProps = {
 const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
 
+  useEffect(() => {
+    // const getCategories = async () => {
+    //   const categoryList = await getAllCategories();
+
+    //   categoryList && setCategories(categoryList as ICategory[]);
+    // };
+
+    const getCategories = async () => {
+      const categoryList = await getAllCategories();
+
+      if (categoryList) {
+        const sortedCategoryList = categoryList.sort(
+          (a: ICategory, b: ICategory) => {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+          }
+        );
+
+        setCategories(sortedCategoryList as ICategory[]);
+      }
+    };
+
+    getCategories();
+  }, []);
+
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
-      <SelectTrigger className="select-field]">
+      <SelectTrigger className="select-field bg-white">
         <SelectValue placeholder="Sport" />
       </SelectTrigger>
       <SelectContent>
