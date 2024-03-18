@@ -10,10 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  createCategory,
-  getAllCategories,
-} from "@/lib/actions/category.actions";
+import { getAllCategories } from "@/lib/actions/category.actions";
 import { ICategory } from "@/lib/database/models/category.model";
 
 const CategoryFilter = () => {
@@ -25,7 +22,21 @@ const CategoryFilter = () => {
     const getCategories = async () => {
       const categoryList = await getAllCategories();
 
-      categoryList && setCategories(categoryList as ICategory[]);
+      if (categoryList) {
+        const sortedCategoryList = categoryList.sort(
+          (a: ICategory, b: ICategory) => {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+          }
+        );
+
+        setCategories(sortedCategoryList as ICategory[]);
+      }
+
+      //categoryList && setCategories(categoryList as ICategory[]);
     };
 
     getCategories();
@@ -34,16 +45,16 @@ const CategoryFilter = () => {
   const onSelectCategory = (category: string) => {
     let newUrl = "";
 
-    if (categories) {
+    if (category && category !== "All") {
       newUrl = formUrlQuery({
         params: searchParams.toString(),
-        key: "query",
-        value: categories,
+        key: "category",
+        value: category,
       });
     } else {
       newUrl = removeKeysFromQuery({
         params: searchParams.toString(),
-        keysToRemove: ["query"],
+        keysToRemove: ["category"],
       });
     }
 
@@ -51,7 +62,7 @@ const CategoryFilter = () => {
   };
   return (
     <Select onValueChange={(value: string) => onSelectCategory(value)}>
-      <SelectTrigger className="select-field]">
+      <SelectTrigger className="select-field">
         <SelectValue placeholder="Category" />
       </SelectTrigger>
       <SelectContent>

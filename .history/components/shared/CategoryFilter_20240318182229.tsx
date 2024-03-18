@@ -10,10 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  createCategory,
-  getAllCategories,
-} from "@/lib/actions/category.actions";
+import { getAllCategories } from "@/lib/actions/category.actions";
 import { ICategory } from "@/lib/database/models/category.model";
 
 const CategoryFilter = () => {
@@ -37,13 +34,13 @@ const CategoryFilter = () => {
     if (category && category !== "All") {
       newUrl = formUrlQuery({
         params: searchParams.toString(),
-        key: "query",
+        key: "category",
         value: category,
       });
     } else {
       newUrl = removeKeysFromQuery({
         params: searchParams.toString(),
-        keysToRemove: ["query"],
+        keysToRemove: ["category"],
       });
     }
 
@@ -51,7 +48,7 @@ const CategoryFilter = () => {
   };
   return (
     <Select onValueChange={(value: string) => onSelectCategory(value)}>
-      <SelectTrigger className="select-field]">
+      <SelectTrigger className="select-field">
         <SelectValue placeholder="Category" />
       </SelectTrigger>
       <SelectContent>

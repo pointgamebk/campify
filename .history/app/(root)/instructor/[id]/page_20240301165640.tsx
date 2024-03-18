@@ -22,7 +22,7 @@ const InstructorDetails = async ({
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
-          {/* <div className="hidden sm:grid">
+          <div className="hidden sm:grid">
             <Image
               src={instructor.profilePhoto}
               alt="hero image"
@@ -30,9 +30,9 @@ const InstructorDetails = async ({
               height={1000}
               className="h-full min-h-[200px] object-cover object-center"
             />
-          </div> */}
+          </div>
 
-          {/* <div className="sm:hidden">
+          <div className="sm:hidden">
             <Image
               src={instructor.profilePhoto}
               alt="hero image"
@@ -40,7 +40,7 @@ const InstructorDetails = async ({
               height={600}
               className="h-full min-h-[200px] object-cover object-center "
             />
-          </div> */}
+          </div>
 
           <div className="flex w-full flex-col gap-8 p-5 md:p-10">
             <div className="flex flex-col gap-6">
