@@ -31,7 +31,7 @@ const InstructorSettings = async ({
           <div className="text-green">
             {user.chargesEnabled && (
               <Link href={`/instructor/${id}/update`}>
-                Complete/Update Profile
+                Complete or Update Profile
               </Link>
             )}
           </div>

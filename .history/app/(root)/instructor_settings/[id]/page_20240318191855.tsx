@@ -28,13 +28,11 @@ const InstructorSettings = async ({
             Transfers enabled: {user.chargesEnabled ? "Yes" : "No"}
           </p>
           {user.chargesEnabled === false ? <ConnectButton /> : null}
-          <div className="text-green">
-            {user.chargesEnabled && (
-              <Link href={`/instructor/${id}/update`}>
-                Complete/Update Profile
-              </Link>
-            )}
-          </div>
+          {user.chargesEnabled && (
+            <Link href={`/instructor/${id}/update`}>
+              Complete/Update Profile
+            </Link>
+          )}
         </div>
       </section>
 
