@@ -36,7 +36,7 @@ const EventDetails = async ({
               alt="hero image"
               width={1000}
               height={1000}
-              className="h-full min-h-[200px] object-cover object-center rounded-3xl mt-10 ml-10"
+              className="h-full min-h-[200px] object-cover object-center rounded-3xl mt-10"
             />
           </div>
 
@@ -50,7 +50,7 @@ const EventDetails = async ({
             />
           </div>
 
-          <div className="flex w-full flex-col gap-8 p-5 ml-5 md:p-10 sm: mt-10">
+          <div className="flex w-full flex-col gap-8 p-5 md:p-10 sm: mt-10">
             <div className="flex flex-col gap-6">
               <h2 className="h2-bold text-tan">{event.title}</h2>
 
