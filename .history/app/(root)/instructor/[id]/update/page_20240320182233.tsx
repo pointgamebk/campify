@@ -15,7 +15,9 @@ const UpdateProfile = async ({ params: { id } }: UpdateProfileProps) => {
   const user = await getUserById(userId);
   const isMyProfile = userId === id;
 
-  const formType = user.profileCompleted ? "Update" : "Create";
+  const profileStatus = user.profileCompleted ? "Update" : "Create";
+
+  console.log(profileStatus);
 
   return (
     <>
@@ -29,7 +31,7 @@ const UpdateProfile = async ({ params: { id } }: UpdateProfileProps) => {
         {isMyProfile &&
           (user.stripeAccountId ? (
             <div className="wrapper my-8">
-              <ProfileForm userId={userId} type={formType} user={user} />
+              <ProfileForm userId={userId} type={profileStatus} user={user} />
             </div>
           ) : (
             <div className="wrapper my-8">

@@ -15,8 +15,6 @@ const UpdateProfile = async ({ params: { id } }: UpdateProfileProps) => {
   const user = await getUserById(userId);
   const isMyProfile = userId === id;
 
-  const formType = user.profileCompleted ? "Update" : "Create";
-
   return (
     <>
       <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
@@ -29,7 +27,7 @@ const UpdateProfile = async ({ params: { id } }: UpdateProfileProps) => {
         {isMyProfile &&
           (user.stripeAccountId ? (
             <div className="wrapper my-8">
-              <ProfileForm userId={userId} type={formType} user={user} />
+              <ProfileForm userId={userId} />
             </div>
           ) : (
             <div className="wrapper my-8">
@@ -39,6 +37,18 @@ const UpdateProfile = async ({ params: { id } }: UpdateProfileProps) => {
             </div>
           ))}
       </section>
+
+      {/* {user.stripeAccountId ? (
+        <div className="wrapper my-8">
+          <ProfileForm userId={userId} />
+        </div>
+      ) : (
+        <div className="wrapper my-8">
+          <h3 className=" text-center sm:text-left text-tan">
+            You must connect a Stripe account to update your profile
+          </h3>
+        </div>
+      )} */}
     </>
   );
 };

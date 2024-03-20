@@ -31,8 +31,8 @@ export const placesDefaultValues = {
 };
 
 export const profileDefaultValues = {
-  description: "",
-  imageUrl: "",
-  school: "",
-  contact: "",
+  profileDescription: "",
+  profilePhoto: "",
+  profileSchool: "",
+  profileContact: "",
 };

@@ -1,11 +1,6 @@
 import { Document, Schema, model, models } from "mongoose";
 
-export interface IProfile extends Document {
-  profilePhoto: string;
-  profileDescription: string;
-  profileSchool: string;
-  profileContact: string;
-}
+export interface IProfile extends Document {}
 
 const UserSchema = new Schema({
   clerkId: { type: String, required: true, unique: true },

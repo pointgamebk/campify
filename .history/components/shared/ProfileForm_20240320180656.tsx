@@ -25,26 +25,13 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.actions";
 
-import { IProfile } from "@/lib/database/models/user.model";
-
 type ProfileFormProps = {
   userId: string;
   type: "Create" | "Update";
-  user: IProfile;
 };
 
-const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
+const ProfileForm = ({ userId, type }: ProfileFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
-
-  const initialValues =
-    user && type === "Update"
-      ? {
-          profileSchool: user.profileSchool,
-          profileContact: user.profileContact,
-          profileDescription: user.profileDescription,
-          profilePhoto: user.profilePhoto,
-        }
-      : profileDefaultValues;
 
   const router = useRouter();
 
@@ -52,11 +39,11 @@ const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
 
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues: initialValues,
+    defaultValues: profileDefaultValues,
   });
 
   async function onSubmit(values: z.infer<typeof profileFormSchema>) {
-    let uploadedImageUrl = values.profilePhoto;
+    let uploadedImageUrl = values.photo;
 
     if (files.length > 0) {
       const uploadedImages = await startUpload(files);
@@ -73,9 +60,9 @@ const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
 
       const _user = {
         ...user,
-        profileSchool: values.profileSchool,
-        profileContact: values.profileContact,
-        profileDescription: values.profileDescription,
+        profileSchool: values.school,
+        profileContact: values.contact,
+        profileDescription: values.description,
         profilePhoto: uploadedImageUrl,
         profileCompleted: true,
       };
@@ -101,7 +88,7 @@ const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
-            name="profileSchool"
+            name="school"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
@@ -118,7 +105,7 @@ const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
 
           <FormField
             control={form.control}
-            name="profileContact"
+            name="contact"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
@@ -138,7 +125,7 @@ const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
-            name="profileDescription"
+            name="description"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl className="h-72">
@@ -155,7 +142,7 @@ const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
 
           <FormField
             control={form.control}
-            name="profilePhoto"
+            name="photo"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl className="h-72">

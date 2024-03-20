@@ -29,3 +29,10 @@ export const eventDefaultValues = {
 export const placesDefaultValues = {
   location: "",
 };
+
+export const profileDefaultValues = {
+  profileDescription: "",
+  profilePhoto: "",
+  profileSchool: "",
+  profileContact: "",
+};
