@@ -65,12 +65,15 @@ const EventDetails = async ({
                 </div>
 
                 <p className="p-medium-18 ml-2 mt-2 sm:mt-0 text-tan">
-                  {/* by{" "} */}
+                  by{" "}
+                  {/* <span className="text-green p-medium-18">
+                    {event.organizer.firstName} {event.organizer.lastName}
+                  </span> */}
                   <Link
                     href={`/instructor/${event.organizer._id}`}
                     className="flex gap-2"
                   >
-                    <p className="text-green p-medium-18">
+                    <p className="p-medium-14 md:p-medium-16 text-grey-600 bg-white">
                       {event.organizer.firstName} {event.organizer.lastName}
                     </p>
                   </Link>

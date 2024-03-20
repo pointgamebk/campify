@@ -31,7 +31,7 @@ const InstructorSettings = async ({
           <div className="text-green">
             {user.chargesEnabled && (
               <Link href={`/instructor/${id}/update`}>
-                {user.profileCompleted
+                {user.profileComplete
                   ? "Update Profile"
                   : "Complete Profile to Host Camps"}
               </Link>
@@ -40,11 +40,19 @@ const InstructorSettings = async ({
         </div>
       </section>
 
-      {user.profileCompleted && (
+      {user.profileComplete && (
         <section className=" bg-slate bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
           <h3 className="wrapper h3-bold text-center text-tan sm:text-left ">
             Camp Details
           </h3>
+
+          {/* {user.profileComplete && (
+            <div className="wrapper flex items-center justify-center sm:justify-between">
+              <Button asChild size="lg" className="button hidden sm:flex">
+                <Link href="/events/create">Create New Event</Link>
+              </Button>
+            </div>
+          )} */}
 
           <div className="wrapper flex items-center justify-center sm:justify-between">
             <Button asChild size="lg" className="button hidden sm:flex">
@@ -54,7 +62,7 @@ const InstructorSettings = async ({
         </section>
       )}
 
-      {user.profileCompleted && (
+      {user.profileComplete && (
         <section className="wrapper overflow-x-auto text-tan">
           <table className="w-full border-collapse border-t">
             <thead>

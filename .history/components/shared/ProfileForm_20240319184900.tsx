@@ -63,7 +63,6 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         profileContact: values.contact,
         profileDescription: values.description,
         profilePhoto: uploadedImageUrl,
-        profileCompleted: true,
       };
 
       const updatedUser = await updateUser(user.clerkId, _user);
@@ -129,7 +128,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
-                    placeholder="Describe yourself and your areas of expertise"
+                    placeholder="Describe yourself and your areas of expertise."
                     {...field}
                     className="textarea rounded-2xl"
                   />

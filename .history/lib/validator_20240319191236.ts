@@ -16,7 +16,26 @@ export const eventFormSchema = z.object({
   categoryId: z.string(),
   price: z.string(),
   isFree: z.boolean(),
-  url: z.string().url(),
+  url: z.string(),
+});
+
+export const profileFormSchema = z.object({
+  description: z
+    .string()
+    .min(3, "Description must be at least 3 characters")
+    .max(400, "Description must be less than 400 characters"),
+  photo: z
+    .string()
+    .min(3, "Value must be at least 3 characters")
+    .max(400, "Value must be less than 400 characters"),
+  school: z
+    .string()
+    .min(50, "Value must be at least 10 characters")
+    .max(400, "Value must be less than 100 characters"),
+  contact: z
+    .string()
+    .min(3, "Contact must be at least 3 characters")
+    .max(400, "Contact must be less than 100 characters"),
 });
 
 export const placesFormSchema = z.object({

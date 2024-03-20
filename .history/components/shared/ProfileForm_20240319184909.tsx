@@ -63,7 +63,6 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         profileContact: values.contact,
         profileDescription: values.description,
         profilePhoto: uploadedImageUrl,
-        profileCompleted: true,
       };
 
       const updatedUser = await updateUser(user.clerkId, _user);

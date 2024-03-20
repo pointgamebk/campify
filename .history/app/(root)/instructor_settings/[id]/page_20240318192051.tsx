@@ -31,16 +31,14 @@ const InstructorSettings = async ({
           <div className="text-green">
             {user.chargesEnabled && (
               <Link href={`/instructor/${id}/update`}>
-                {user.profileCompleted
-                  ? "Update Profile"
-                  : "Complete Profile to Host Camps"}
+                Complete/Update Profile
               </Link>
             )}
           </div>
         </div>
       </section>
 
-      {user.profileCompleted && (
+      {user.chargesEnabled && (
         <section className=" bg-slate bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
           <h3 className="wrapper h3-bold text-center text-tan sm:text-left ">
             Camp Details
@@ -54,7 +52,7 @@ const InstructorSettings = async ({
         </section>
       )}
 
-      {user.profileCompleted && (
+      {user.chargesEnabled && (
         <section className="wrapper overflow-x-auto text-tan">
           <table className="w-full border-collapse border-t">
             <thead>

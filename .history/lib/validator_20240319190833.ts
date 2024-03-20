@@ -19,6 +19,22 @@ export const eventFormSchema = z.object({
   url: z.string(),
 });
 
+export const profileFormSchema = z.object({
+  description: z
+    .string()
+    .min(3, "Description must be at least 3 characters")
+    .max(400, "Description must be less than 400 characters"),
+  photo: z.string(),
+  school: z
+    .string()
+    .min(3, "Value must be at least 3 characters")
+    .max(400, "Value must be less than 100 characters"),
+  contact: z
+    .string()
+    .min(3, "Contact must be at least 3 characters")
+    .max(400, "Contact must be less than 100 characters"),
+});
+
 export const placesFormSchema = z.object({
   location: z
     .string()

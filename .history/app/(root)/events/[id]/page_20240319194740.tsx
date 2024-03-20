@@ -8,7 +8,6 @@ import { formatDateTime } from "@/lib/utils";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
-import Link from "next/link";
 
 const EventDetails = async ({
   params: { id },
@@ -65,15 +64,10 @@ const EventDetails = async ({
                 </div>
 
                 <p className="p-medium-18 ml-2 mt-2 sm:mt-0 text-tan">
-                  {/* by{" "} */}
-                  <Link
-                    href={`/instructor/${event.organizer._id}`}
-                    className="flex gap-2"
-                  >
-                    <p className="text-green p-medium-18">
-                      {event.organizer.firstName} {event.organizer.lastName}
-                    </p>
-                  </Link>
+                  by{" "}
+                  <span className="text-green p-medium-18">
+                    {event.organizer.firstName} {event.organizer.lastName}
+                  </span>
                 </p>
               </div>
             </div>
