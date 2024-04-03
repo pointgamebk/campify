@@ -1,4 +1,11 @@
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
+
+export interface IProfile extends Document {
+  profilePhoto: string;
+  profileDescription: string;
+  profileSchool: string;
+  profileContact: string;
+}
 
 const UserSchema = new Schema({
   clerkId: { type: String, required: true, unique: true },
@@ -9,10 +16,10 @@ const UserSchema = new Schema({
   stripeAccountId: { type: String, default: null },
   chargesEnabled: { type: Boolean, default: false },
   photo: { type: String, required: true },
-  profilePhoto: { type: String, required: false },
-  profileDescription: { type: String, required: false },
-  profileSchool: { type: String, required: false },
-  profileContact: { type: String, required: false },
+  profilePhoto: { type: String, required: false, default: null },
+  profileDescription: { type: String, required: false, default: null },
+  profileSchool: { type: String, required: false, default: null },
+  profileContact: { type: String, required: false, default: null },
   profileCompleted: { type: Boolean, default: false },
 });
 
