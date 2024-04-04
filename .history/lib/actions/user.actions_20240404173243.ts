@@ -10,7 +10,11 @@ import Order from "@/lib/database/models/order.model";
 import Event from "@/lib/database/models/event.model";
 import { handleError } from "@/lib/utils";
 
-import { CreateUserParams, UpdateUserParams } from "@/types";
+import {
+  CreateUserParams,
+  UpdateUserParams,
+  UpdateProfileParams,
+} from "@/types";
 
 export async function createUser(user: CreateUserParams) {
   try {
@@ -36,7 +40,11 @@ export async function getUserById(userId: string) {
   }
 }
 
-export async function updateUser(clerkId: string, user: UpdateUserParams) {
+export async function updateUser(
+  clerkId: string,
+  user: UpdateUserParams,
+  path: string
+) {
   try {
     await connectToDatabase();
 
@@ -49,6 +57,8 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
   } catch (error) {
     handleError(error);
   }
+
+  revalidatePath(path);
 }
 
 export async function deleteUser(clerkId: string) {
@@ -87,21 +97,18 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
-export async function createStripeAccount(
-  userId: string,
-  email: string,
-  firstName: string,
-  lastName: string
-) {
+export async function createStripeAccount(userId: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-  console.log(email, firstName, lastName, userId);
+  const user = await User.findById(userId);
+
+  if (!user) throw new Error("User not found");
 
   try {
     const account = await stripe.accounts.create({
       type: "express",
       country: "US",
-      email: "3xample@example.com",
+      email: user.email,
       capabilities: {
         card_payments: { requested: true },
         transfers: { requested: true },
@@ -109,15 +116,15 @@ export async function createStripeAccount(
       },
       business_type: "individual",
       individual: {
-        first_name: firstName,
-        last_name: lastName,
-        email: "3xample@example.com",
+        first_name: user.firstName,
+        last_name: user.lastName,
+        email: user.email,
       },
     });
 
-    const user = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { _id: userId },
-      { stripeAccountId: account.id, chargesEnabled: true },
+      { stripeAccountId: account.id },
       { new: true }
     );
 
@@ -128,7 +135,35 @@ export async function createStripeAccount(
       type: "account_onboarding",
     });
 
-    console.log(link, user);
+    return link.url;
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function updateProfile(
+  userId: string,
+  school: string,
+  contact: string,
+  description: string,
+  photo: string
+) {
+  try {
+    await connectToDatabase();
+
+    const updatedProfile = await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        profileSchool: school,
+        profileContact: contact,
+        profileDescription: description,
+        profilePhoto: photo,
+      },
+      { new: true }
+    );
+
+    if (!updatedProfile) throw new Error("User update failed");
+    return JSON.parse(JSON.stringify(updatedProfile));
   } catch (error) {
     handleError(error);
   }

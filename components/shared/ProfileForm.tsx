@@ -80,7 +80,9 @@ const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
         profileCompleted: true,
       };
 
-      const updatedUser = await updateUser(user.clerkId, _user);
+      const path = `/instructor_settings/${userId}`;
+
+      const updatedUser = await updateUser(user.clerkId, _user, path);
 
       if (updatedUser) {
         form.reset();

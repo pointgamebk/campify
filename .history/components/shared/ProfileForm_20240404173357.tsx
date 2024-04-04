@@ -13,52 +13,80 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+
 import { profileFormSchema } from "@/lib/validator";
 import { profileDefaultValues } from "@/constants";
-import Dropdown from "./Dropdown";
+
 import { Textarea } from "@/components/ui/textarea";
 import { FileUploader } from "./FileUploader";
-import Image from "next/image";
+
 import { updateUser } from "@/lib/actions/user.actions";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.actions";
 
+import { IProfile } from "@/lib/database/models/user.model";
+
 type ProfileFormProps = {
   userId: string;
+  type: "Create" | "Update";
+  user: IProfile;
 };
 
-const ProfileForm = ({ userId }: ProfileFormProps) => {
+const ProfileForm = ({ userId, type, user }: ProfileFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
-  const form = useForm<z.infer<typeof profileFormSchema>>({
-    resolver: zodResolver(profileFormSchema),
-    defaultValues: profileDefaultValues,
-  });
+  const initialValues =
+    user && type === "Update"
+      ? {
+          profileSchool: user.profileSchool,
+          profileContact: user.profileContact,
+          profileDescription: user.profileDescription,
+          profilePhoto: user.profilePhoto,
+        }
+      : profileDefaultValues;
 
   const router = useRouter();
 
   const { startUpload } = useUploadThing("imageUploader");
 
+  const form = useForm<z.infer<typeof profileFormSchema>>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: initialValues,
+  });
+
   async function onSubmit(values: z.infer<typeof profileFormSchema>) {
-    console.log(values);
+    let uploadedImageUrl = values.profilePhoto;
+
+    if (files.length > 0) {
+      const uploadedImages = await startUpload(files);
+
+      if (!uploadedImages) {
+        return;
+      }
+
+      uploadedImageUrl = uploadedImages[0].url;
+    }
 
     try {
       const user = await getUserById(userId);
-      console.log("user", user);
+
       const _user = {
         ...user,
-        profileSchool: values.school,
-        profileContact: values.contact,
-        profileDescription: values.description,
-        profilePhoto: "profile_photo",
+        profileSchool: values.profileSchool,
+        profileContact: values.profileContact,
+        profileDescription: values.profileDescription,
+        profilePhoto: uploadedImageUrl,
+        profileCompleted: true,
       };
-      console.log("_user", _user);
-      const updatedUser = await updateUser(user.clerkId, _user);
+
+      const path = `/instructor_settings/${userId}`;
+
+      const updatedUser = await updateUser(user.clerkId, _user, path);
 
       if (updatedUser) {
-        console.log(updatedUser);
+        form.reset();
+        router.push(`/instructor/${userId}`);
       }
     } catch (error) {
       console.log(error);
@@ -74,7 +102,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
-            name="school"
+            name="profileSchool"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
@@ -91,12 +119,13 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
 
           <FormField
             control={form.control}
-            name="contact"
+            name="profileContact"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    placeholder="Website or Social Media Link"
+                    placeholder="
+                    Email or preferred contact"
                     {...field}
                     className="input-field"
                   />
@@ -110,12 +139,12 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
-            name="description"
+            name="profileDescription"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
-                    placeholder="Describe yourself and your work"
+                    placeholder="Describe yourself and your areas of expertise"
                     {...field}
                     className="textarea rounded-2xl"
                   />
@@ -127,7 +156,7 @@ const ProfileForm = ({ userId }: ProfileFormProps) => {
 
           <FormField
             control={form.control}
-            name="photo"
+            name="profilePhoto"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl className="h-72">

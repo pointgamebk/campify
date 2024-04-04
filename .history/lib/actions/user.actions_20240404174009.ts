@@ -13,7 +13,7 @@ import { handleError } from "@/lib/utils";
 import {
   CreateUserParams,
   UpdateUserParams,
-  LinkStripeAccountParams,
+  UpdateProfileParams,
 } from "@/types";
 
 export async function createUser(user: CreateUserParams) {
@@ -40,15 +40,21 @@ export async function getUserById(userId: string) {
   }
 }
 
-export async function updateUser(clerkId: string, user: UpdateUserParams) {
+export async function updateUser(
+  clerkId: string,
+  user: UpdateUserParams,
+  path: string
+) {
   try {
     await connectToDatabase();
 
     const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
       new: true,
     });
-
     if (!updatedUser) throw new Error("User update failed");
+
+    revalidatePath(path);
+
     return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
     handleError(error);
@@ -91,6 +97,74 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
-export async function linkStripeAccount(link: LinkStripeAccountParams) {
+export async function createStripeAccount(userId: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+  const user = await User.findById(userId);
+
+  if (!user) throw new Error("User not found");
+
+  try {
+    const account = await stripe.accounts.create({
+      type: "express",
+      country: "US",
+      email: user.email,
+      capabilities: {
+        card_payments: { requested: true },
+        transfers: { requested: true },
+        tax_reporting_us_1099_k: { requested: true },
+      },
+      business_type: "individual",
+      individual: {
+        first_name: user.firstName,
+        last_name: user.lastName,
+        email: user.email,
+      },
+    });
+
+    await User.findOneAndUpdate(
+      { _id: userId },
+      { stripeAccountId: account.id },
+      { new: true }
+    );
+
+    const link = await stripe.accountLinks.create({
+      account: account.id,
+      refresh_url: "http://localhost:3000/",
+      return_url: "http://localhost:3000/",
+      type: "account_onboarding",
+    });
+
+    return link.url;
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function updateProfile(
+  userId: string,
+  school: string,
+  contact: string,
+  description: string,
+  photo: string
+) {
+  try {
+    await connectToDatabase();
+
+    const updatedProfile = await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        profileSchool: school,
+        profileContact: contact,
+        profileDescription: description,
+        profilePhoto: photo,
+      },
+      { new: true }
+    );
+
+    if (!updatedProfile) throw new Error("User update failed");
+    return JSON.parse(JSON.stringify(updatedProfile));
+  } catch (error) {
+    handleError(error);
+  }
 }
