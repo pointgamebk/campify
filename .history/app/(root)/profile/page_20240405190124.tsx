@@ -36,19 +36,19 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           <h3 className="h3-bold text-center sm:text-left text-tan">
             My Tickets
           </h3>
+          <div>
+            <Link href={`/instructor_settings/${userId}`}>
+              <p className="text-green p-medium-18">
+                {user.stripeAccountId
+                  ? "Instructor Dashboard"
+                  : "Become an Instructor"}
+              </p>
+            </Link>
+          </div>
 
           <Button asChild size="lg" className="button hidden sm:flex">
             <Link href="/#events">Explore More Camps</Link>
           </Button>
-        </div>
-        <div className="text-center sm:hidden">
-          <Link href="/#events">
-            <p className="text-green p-medium-18">
-              {user.stripeAccountId
-                ? "Instructor Dashboard"
-                : "Become an Instructor"}
-            </p>
-          </Link>
         </div>
       </section>
 

@@ -41,8 +41,8 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
             <Link href="/#events">Explore More Camps</Link>
           </Button>
         </div>
-        <div className="text-center sm:hidden">
-          <Link href="/#events">
+        <div className="text-center">
+          <Link href={`/instructor_settings/${userId}`}>
             <p className="text-green p-medium-18">
               {user.stripeAccountId
                 ? "Instructor Dashboard"

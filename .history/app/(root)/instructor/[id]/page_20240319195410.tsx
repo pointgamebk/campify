@@ -22,12 +22,22 @@ const InstructorDetails = async ({
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
-          <div className="grid mt-10">
+          <div className="hidden sm:grid mt-10">
             <Image
               src={instructor.profilePhoto}
               alt="hero image"
-              width={500}
-              height={500}
+              width={1000}
+              height={1000}
+              className="h-full min-h-[200px] object-cover object-center rounded-3xl"
+            />
+          </div>
+
+          <div className="sm:hidden mt-10">
+            <Image
+              src={instructor.profilePhoto}
+              alt="hero image"
+              width={600}
+              height={600}
               className="h-full min-h-[200px] object-cover object-center rounded-3xl"
             />
           </div>

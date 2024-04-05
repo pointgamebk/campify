@@ -36,6 +36,14 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           <h3 className="h3-bold text-center sm:text-left text-tan">
             My Tickets
           </h3>
+          <Link href={`/instructor_settings/${userId}`}>
+            <p className="text-green p-medium-18">
+              {user.stripeAccountId
+                ? "Instructor Dashboard"
+                : "Become an Instructor"}
+            </p>
+          </Link>
+
           <Button asChild size="lg" className="button hidden sm:flex">
             <Link href="/#events">Explore More Camps</Link>
           </Button>
@@ -54,35 +62,6 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           totalPages={orders?.totalPages}
         />
       </section>
-
-      {/* Events Organized */}
-      {/* {user.chargesEnabled && (
-        <section className="bg-slate bg-dotted-pattern bg-cover bg-center py-5">
-          <div className="wrapper flex items-center justify-center sm:justify-between">
-            <h3 className="h3-bold text-center sm:text-left text-tan">
-              Events Organized
-            </h3>
-            <Button asChild size="lg" className="button hidden sm:flex">
-              <Link href="/events/create">Create New Event</Link>
-            </Button>
-          </div>
-        </section>
-      )}
-
-      {user.chargesEnabled && (
-        <section className="wrapper py-8">
-          <Collection
-            data={organizedEvents?.data}
-            emptyTitle="No events created yet"
-            emptyStateSubtext="Go create some now!"
-            collectionType="Events_Organized"
-            limit={3}
-            page={eventsPage}
-            urlParamName="eventsPage"
-            totalPages={organizedEvents?.totalPages}
-          />
-        </section>
-      )} */}
     </>
   );
 };
