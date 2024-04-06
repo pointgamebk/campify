@@ -50,9 +50,9 @@ const InstructorSettings = async ({
             <Button asChild size="lg" className="button hidden sm:flex">
               <Link href="/events/create">Create New Camp</Link>
             </Button>
-            <Button asChild size="lg" className="button text-center sm:hidden">
+            {/* <Button asChild size="lg" className="button hidden sm:flex">
               <Link href="/events/create">Create New Camp</Link>
-            </Button>
+            </Button> */}
           </div>
         </section>
       )}

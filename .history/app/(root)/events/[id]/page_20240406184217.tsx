@@ -82,7 +82,6 @@ const EventDetails = async ({
                     {formatDateTime(event.startDateTime).dateOnly} -{" "}
                     {formatDateTime(event.startDateTime).timeOnly}
                   </p>
-                  <p className="mx-2">to</p>
                   <p>
                     {/* {formatDateTime(event.endDateTime).dateOnly} -{" "} */}
                     {formatDateTime(event.endDateTime).timeOnly}
