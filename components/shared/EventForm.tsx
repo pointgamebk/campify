@@ -204,7 +204,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       defaultValue=""
                       onSelectAddress={(address) => {
                         form.setValue("location", address);
-                        console.log(address);
                       }}
                     />
                   </div>

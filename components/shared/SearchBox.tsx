@@ -66,19 +66,17 @@ function ReadySearchBox({ defaultValue, onSelectAddress }: ISearchBoxProps) {
     clearSuggestions();
     setOpen(false);
 
-    try {
-      const results = await getGeocode({ address });
-      const { lat, lng } = await getLatLng(results[0]);
-    } catch (error) {
-      console.error("😱 Error: ", error);
-    }
+    // try {
+    //   const results = await getGeocode({ address });
+    //   const { lat, lng } = await getLatLng(results[0]);
+    // } catch (error) {
+    //   console.error("😱 Error: ", error);
+    // }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-
-  console.log({ status, data });
 
   return (
     <div className="w-full p-2 bg-white">

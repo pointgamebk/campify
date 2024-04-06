@@ -66,49 +66,50 @@ function ReadySearchBox({ defaultValue, onSelectAddress }: ISearchBoxProps) {
     clearSuggestions();
     setOpen(false);
 
-    try {
-      const results = await getGeocode({ address });
-      const { lat, lng } = await getLatLng(results[0]);
-      // console.log({ address, lat, lng });
-    } catch (error) {
-      console.error("😱 Error: ", error);
-    }
+    // try {
+    //   const results = await getGeocode({ address });
+    //   const { lat, lng } = await getLatLng(results[0]);
+    // } catch (error) {
+    //   console.error("😱 Error: ", error);
+    // }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  console.log({ status, data });
-
   return (
     <div className="w-full p-2 bg-white">
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild className="bg-white">
           <Button
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between "
+            className="w-full justify-between bg-white"
           >
             {value === "" ? "Search address..." : value}
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0" onChange={handleChange}>
-          <Command>
+        <PopoverContent
+          className="w-[200px] p-0 bg-white"
+          onChange={handleChange}
+        >
+          <Command className="bg-white">
             <CommandInput
               placeholder="Search address..."
               className="h-9 bg-white"
               disabled={!ready}
             />
             <CommandEmpty>No address found.</CommandEmpty>
-            <CommandGroup>
+            <CommandGroup className="bg-white">
               {data.map((suggestion) => (
                 <CommandItem
                   key={suggestion.place_id}
                   value={suggestion.description}
-                  onSelect={handleSelect}
+                  onSelect={() => handleSelect(suggestion.description)}
+                  className="bg-white"
                 >
                   {suggestion.description}
                   <CheckIcon
