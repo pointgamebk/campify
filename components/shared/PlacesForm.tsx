@@ -42,7 +42,7 @@ import { cn } from "@/lib/utils";
 import { placesFormSchema } from "@/lib/validator";
 import { placesDefaultValues } from "@/constants";
 
-import SearchBox from "./SearchBox";
+import SearchBox from "./PlaceSearchBox";
 
 const libraries: Libraries = ["places"];
 

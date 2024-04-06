@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,22 +42,11 @@ import { cn } from "@/lib/utils";
 import { placesFormSchema } from "@/lib/validator";
 import { placesDefaultValues } from "@/constants";
 
+import SearchBox from "./PlaceSearchBox";
+
 const libraries: Libraries = ["places"];
 
 const PlacesForm = () => {
-  const { isLoaded, loadError } = useGoogleMapsScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
-    libraries,
-  });
-  const [open, setOpen] = useState(false);
-
-  const {
-    ready,
-    value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete({ debounce: 300, defaultValue: "" });
   const initialValues = placesDefaultValues;
 
   const form = useForm<z.infer<typeof placesFormSchema>>({
@@ -69,24 +58,11 @@ const PlacesForm = () => {
     console.log(values);
   }
 
-  const handleSelect = async (address: string) => {
-    console.log({ address });
-    setValue(address, false);
-    clearSuggestions();
-    setOpen(false);
+  //   const onSelectAddress = (address: string) => {
+  //     console.log({ address });
+  //     setValue("location", address);
+  //   };
 
-    try {
-      const results = await getGeocode({ address });
-      const { lat, lng } = await getLatLng(results[0]);
-      console.log({ address, lat, lng });
-    } catch (error) {
-      console.error("😱 Error: ", error);
-    }
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
   return (
     <Form {...form}>
       <form
@@ -100,10 +76,12 @@ const PlacesForm = () => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input
-                    placeholder="Select the address..."
-                    {...field}
-                    className="input-field"
+                  <SearchBox
+                    defaultValue={initialValues.location}
+                    onSelectAddress={(address) => {
+                      form.setValue("location", address);
+                      console.log(address);
+                    }}
                   />
                 </FormControl>
                 <FormMessage />
