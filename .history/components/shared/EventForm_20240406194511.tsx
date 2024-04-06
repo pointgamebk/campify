@@ -27,7 +27,7 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { createEvent, updateEvent } from "@/lib/actions/event.actions";
 import { IEvent } from "@/lib/database/models/event.model";
-import SearchBox from "./SearchBox";
+import PlacesSearchBox from "./SearchBox";
 
 type EventFormProps = {
   userId: string;
@@ -37,7 +37,7 @@ type EventFormProps = {
 };
 
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
-  const [files, setFiles] = useState<File[]>([]);
+  //const [files, setFiles] = useState<File[]>([]);
 
   const initialValues =
     event && type === "Update"
@@ -59,22 +59,23 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
     console.log(values);
-    let uploadedImageUrl = values.imageUrl;
+    //let uploadedImageUrl = values.imageUrl;
 
-    if (files.length > 0) {
-      const uploadedImages = await startUpload(files);
+    // if (files.length > 0) {
+    //   const uploadedImages = await startUpload(files);
 
-      if (!uploadedImages) {
-        return;
-      }
+    //   if (!uploadedImages) {
+    //     return;
+    //   }
 
-      uploadedImageUrl = uploadedImages[0].url;
-    }
+    //   uploadedImageUrl = uploadedImages[0].url;
+    // }
 
     if (type === "Create") {
       try {
         const newEvent = await createEvent({
-          event: { ...values, imageUrl: uploadedImageUrl },
+          // event: { ...values, imageUrl: uploadedImageUrl },
+          event: { ...values },
           userId,
           path: "/",
         });
@@ -95,7 +96,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       try {
         const updatedEvent = await updateEvent({
           userId,
-          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          // event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          event: { ...values, _id: eventId },
           path: `/events/${eventId}`,
         });
         if (updatedEvent) {
@@ -167,7 +169,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="imageUrl"
             render={({ field }) => (
@@ -182,7 +184,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
         </div>
 
         <div className="flex flex-col gap-5 md:flex-row">
@@ -200,7 +202,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       alt="location"
                       className="bg-white"
                     />
-                    <SearchBox
+                    <PlacesSearchBox
                       defaultValue=""
                       onSelectAddress={(address) => {
                         form.setValue("location", address);
