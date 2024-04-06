@@ -4,8 +4,6 @@ export type CreateUserParams = {
   firstName: string;
   lastName: string;
   username: string;
-  stripeAccountId: string;
-  chargesEnabled: boolean;
   email: string;
   photo: string;
 };
@@ -15,6 +13,17 @@ export type UpdateUserParams = {
   lastName: string;
   username: string;
   photo: string;
+  profileSchool: string;
+  profileContact: string;
+  profileDescription: string;
+  profilePhoto: string;
+};
+
+export type UpdateProfileParams = {
+  description: string;
+  profilePhoto: string;
+  profileSchool: string;
+  profileContact: string;
 };
 
 export type LinkStripeAccountParams = {
@@ -31,7 +40,7 @@ export type CreateEventParams = {
     title: string;
     description: string;
     location: string;
-    imageUrl: string;
+    //imageUrl: string;
     startDateTime: Date;
     endDateTime: Date;
     categoryId: string;
@@ -47,7 +56,7 @@ export type UpdateEventParams = {
   event: {
     _id: string;
     title: string;
-    imageUrl: string;
+    //imageUrl: string;
     description: string;
     location: string;
     startDateTime: Date;
@@ -119,12 +128,14 @@ export type CheckoutOrderParams = {
   price: string;
   isFree: boolean;
   buyerId: string;
+  instructorId: string;
 };
 
 export type CreateOrderParams = {
   stripeId: string;
   eventId: string;
   buyerId: string;
+  instructorId: string;
   totalAmount: string;
   createdAt: Date;
 };

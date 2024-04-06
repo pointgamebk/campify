@@ -10,7 +10,7 @@ export const eventFormSchema = z.object({
     .string()
     .min(3, "Location must be at least 3 characters")
     .max(400, "Location must be less than 400 characters"),
-  imageUrl: z.string(),
+  //imageUrl: z.string(),
   startDateTime: z.date(),
   endDateTime: z.date(),
   categoryId: z.string(),
@@ -20,13 +20,22 @@ export const eventFormSchema = z.object({
 });
 
 export const profileFormSchema = z.object({
-  description: z
+  profileDescription: z
     .string()
     .min(3, "Description must be at least 3 characters")
     .max(400, "Description must be less than 400 characters"),
-  photo: z.string(),
-  school: z.string(),
-  contact: z.string(),
+  profilePhoto: z
+    .string()
+    .min(3, "Value must be at least 3 characters")
+    .max(400, "Value must be less than 400 characters"),
+  profileSchool: z
+    .string()
+    .min(10, "Value must be at least 10 characters")
+    .max(400, "Value must be less than 100 characters"),
+  profileContact: z
+    .string()
+    .min(3, "Contact must be at least 3 characters")
+    .max(400, "Contact must be less than 100 characters"),
 });
 
 export const placesFormSchema = z.object({
