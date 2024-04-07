@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { Separator } from "../ui/separator";
+import DateTimeConverter from "./DateTimeConverter";
 
 type CardProps = {
   event: IEvent;
@@ -17,6 +18,8 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
   const userId = sessionClaims?.userId as string;
 
   const isEventCreator = userId === event.organizer._id.toString();
+
+  //console.log(DateTimeConverter(event.startDateTime));
 
   return (
     <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
@@ -47,7 +50,7 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
             <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60 ">
               {event.isFree ? "FREE" : `$${event.price}`}
             </span>
-            <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1 ">
+            <p className="p-semibold-14  rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
               {event.category.name}
             </p>
           </div>
@@ -55,6 +58,10 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
 
         <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
           {formatDateTime(event.startDateTime).dateTime}
+        </p>
+
+        <p className="p-medium-16 p-medium-18 text-grey-500">
+          {event.location}
         </p>
 
         <Separator className="border border-black" />
@@ -66,7 +73,10 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
         </Link>
 
         <div className="flex-between w-full bg-white">
-          <Link href={`/profile/${event.organizer._id}`} className="flex gap-2">
+          <Link
+            href={`/instructor/${event.organizer._id}`}
+            className="flex gap-2"
+          >
             <p className="p-medium-14 md:p-medium-16 text-grey-600 bg-white">
               {event.organizer.firstName} {event.organizer.lastName}
             </p>

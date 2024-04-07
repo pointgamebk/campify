@@ -79,16 +79,13 @@ const EventDetails = async ({
                 />
                 <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center text-tan">
                   <p>
-                    {/* {formatDateTime(event.startDateTime).dateOnly} -{" "}
-                    {formatDateTime(event.startDateTime).timeOnly} */}
-                    {formatDateTime(event.startDateTime)} -{" "}
-                    {formatDateTime(event.startDateTime)}
+                    {formatDateTime(event.startDateTime).dateOnly} -{" "}
+                    {formatDateTime(event.startDateTime).timeOnly}
                   </p>
                   <p className="mx-2">to</p>
                   <p>
                     {/* {formatDateTime(event.endDateTime).dateOnly} -{" "} */}
-                    {/* {formatDateTime(event.endDateTime).timeOnly} */}
-                    {formatDateTime(event.endDateTime)}
+                    {formatDateTime(event.endDateTime).timeOnly}
                   </p>
                 </div>
               </div>
