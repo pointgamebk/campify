@@ -15,9 +15,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const searchText = (searchParams?.query as string) || "";
   const category = (searchParams?.category as string) || "";
 
-  const { sessionClaims } = auth();
-  const userId = sessionClaims?.userId as string;
-
   const events = await getAllEvents({
     query: searchText,
     category,
@@ -73,7 +70,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
           limit={6}
           page={page}
           totalPages={events?.totalPages}
-          userId={userId}
         />
       </section>
     </>

@@ -18,6 +18,8 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
 
+  console.log(userId);
+
   const events = await getAllEvents({
     query: searchText,
     category,
@@ -73,7 +75,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
           limit={6}
           page={page}
           totalPages={events?.totalPages}
-          userId={userId}
         />
       </section>
     </>

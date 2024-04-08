@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { Separator } from "../ui/separator";
+//import DateTimeConverter from "./DateTimeConverter";
 
 type CardProps = {
   event: IEvent;
@@ -17,6 +18,8 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
   const userId = sessionClaims?.userId as string;
 
   const isEventCreator = userId === event.organizer._id.toString();
+
+  console.log(event.startDateTime);
 
   return (
     <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
@@ -53,8 +56,12 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
           </div>
         )}
 
-        <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
+        {/* <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
           {formatDateTime(event.startDateTime).dateTime}
+        </p> */}
+
+        <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
+          {formatDateTime(event.startDateTime)}
         </p>
 
         <p className="p-medium-16 p-medium-18 text-grey-500">

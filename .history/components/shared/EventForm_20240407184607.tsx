@@ -42,11 +42,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (date: Date) => {
-    // Set the time to 00:00:00 UTC
-    const utcDate = new Date(date);
-    utcDate.setUTCHours(0);
-    utcDate.setUTCMinutes(0);
-    utcDate.setUTCSeconds(0);
+    // Set the selected date as UTC time
+    const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
     setSelectedDate(utcDate);
   };
 
@@ -243,18 +240,9 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                     <p className="ml-3 whitespace-nowrap text-grey-600 ">
                       Start Date:
                     </p>
-                    {/* <DatePicker
+                    <DatePicker
                       selected={field.value}
                       onChange={(date: Date) => field.onChange(date)}
-                      showTimeSelect
-                      timeInputLabel="Time:"
-                      dateFormat="MM/dd/yyyy h:mm aa"
-                      wrapperClassName="datePicker"
-                      minDate={new Date()}
-                    /> */}
-                    <DatePicker
-                      selected={selectedDate}
-                      onChange={handleDateChange}
                       showTimeSelect
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"

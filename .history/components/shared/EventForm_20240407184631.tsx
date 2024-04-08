@@ -42,11 +42,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (date: Date) => {
-    // Set the time to 00:00:00 UTC
-    const utcDate = new Date(date);
-    utcDate.setUTCHours(0);
-    utcDate.setUTCMinutes(0);
-    utcDate.setUTCSeconds(0);
+    // Set the selected date as UTC time
+    const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
     setSelectedDate(utcDate);
   };
 

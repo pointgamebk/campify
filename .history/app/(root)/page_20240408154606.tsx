@@ -18,6 +18,8 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
 
+  console.log(userId);
+
   const events = await getAllEvents({
     query: searchText,
     category,

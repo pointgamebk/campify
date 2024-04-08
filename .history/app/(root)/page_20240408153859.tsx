@@ -8,15 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 // ClientCard changes
-import { auth } from "@clerk/nextjs";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || "";
   const category = (searchParams?.category as string) || "";
-
-  const { sessionClaims } = auth();
-  const userId = sessionClaims?.userId as string;
 
   const events = await getAllEvents({
     query: searchText,
@@ -73,7 +69,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
           limit={6}
           page={page}
           totalPages={events?.totalPages}
-          userId={userId}
         />
       </section>
     </>
