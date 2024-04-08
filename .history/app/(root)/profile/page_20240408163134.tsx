@@ -42,6 +42,13 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           </Button>
         </div>
         <div className="text-center sm:hidden">
+          {/* <Link href={`/instructor_settings/${userId}`}>
+            <p className="text-green p-medium-18">
+              {user.stripeAccountId
+                ? "Instructor Dashboard"
+                : "Become an Instructor"}
+            </p>
+          </Link> */}
           <Button asChild size="lg" className="button text-center  sm:hidden">
             <Link href={`/instructor_settings/${userId}`}>
               {user.stripeAccountId

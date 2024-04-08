@@ -89,9 +89,9 @@ const InstructorSettings = async ({
                             {row.title}
                           </Link>
                         </td>
-                        <td className="min-w-[100px] py-4">
-                          {formatDateTime(row.startDateTime).dateOnly}
-                        </td>
+                        {/* <td className="min-w-[100px] py-4">
+                          {formatDateTime(row.startDateTime)}
+                        </td> */}
                       </tr>
                     ))}
                 </>

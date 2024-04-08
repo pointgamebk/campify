@@ -65,7 +65,7 @@ const InstructorDetails = async ({
       <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
         <h2 className="h2-bold text-tan">Upcoming Camps</h2>
 
-        <Collection
+        {/* <Collection
           data={organizedEvents?.data}
           emptyTitle="No events created yet"
           emptyStateSubtext="Go create some now!"
@@ -74,8 +74,7 @@ const InstructorDetails = async ({
           page={eventsPage}
           urlParamName="eventsPage"
           totalPages={organizedEvents?.totalPages}
-          userId={instructorId}
-        />
+        /> */}
       </section>
     </>
   );

@@ -80,6 +80,15 @@ const EventDetails = async ({
                   height={32}
                 />
                 <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center text-tan">
+                  {/* <p>
+                    {formatDateTime(event.startDateTime).dateOnly} -{" "}
+                    {formatDateTime(event.startDateTime).timeOnly}
+                  </p>
+                  <p className="mx-2">to</p>
+                  <p>
+                    {formatDateTime(event.endDateTime).dateOnly} -{" "}
+                    {formatDateTime(event.endDateTime).timeOnly}
+                  </p> */}
                   <EventPageLocale event={event} />
                 </div>
               </div>
@@ -112,7 +121,7 @@ const EventDetails = async ({
       <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
         <h2 className="h2-bold text-tan">Related Events</h2>
 
-        <Collection
+        {/* <Collection
           data={relatedEvents?.data}
           emptyTitle="No Events Found"
           emptyStateSubtext="Come back later"
@@ -120,8 +129,7 @@ const EventDetails = async ({
           limit={3}
           page={searchParams.page as string}
           totalPages={relatedEvents?.totalPages}
-          userId={userId}
-        />
+        /> */}
       </section>
     </>
   );

@@ -23,7 +23,7 @@ const ClientCard = ({ event, userId }: CardProps) => {
         className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500"
       />
 
-      {isEventCreator && (
+      {/* {isEventCreator && !hidePrice && (
         <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl  p-3 shadow-sm transition-all">
           <Link href={`/events/${event._id}/update`}>
             <Image
@@ -36,7 +36,7 @@ const ClientCard = ({ event, userId }: CardProps) => {
 
           <DeleteConfirmation eventId={event._id} />
         </div>
-      )}
+      )} */}
 
       <div className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4 bg-white">
         <div className="flex gap-2 bg-white">
@@ -69,6 +69,18 @@ const ClientCard = ({ event, userId }: CardProps) => {
               {event.organizer.firstName} {event.organizer.lastName}
             </p>
           </Link>
+
+          {/* {hasOrderLink && (
+            <Link href={`/orders?eventId=${event._id}`} className="flex gap-2">
+              <p className="text-primary-500">Order Details</p>
+              <Image
+                src="/assets/icons/arrow.svg"
+                alt="search"
+                width={10}
+                height={10}
+              />
+            </Link>
+          )} */}
         </div>
       </div>
     </div>
