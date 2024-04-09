@@ -4,6 +4,7 @@ import {
   getEventById,
   getRelatedEventsByCategory,
 } from "@/lib/actions/event.actions";
+import { formatDateTime } from "@/lib/utils";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
@@ -122,6 +123,7 @@ const EventDetails = async ({
           limit={3}
           page={searchParams.page as string}
           totalPages={relatedEvents?.totalPages}
+          userId={userId}
         />
       </section>
     </>

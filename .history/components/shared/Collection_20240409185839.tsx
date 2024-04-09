@@ -1,5 +1,6 @@
 import { IEvent } from "@/lib/database/models/event.model";
 import Card from "./Card";
+import ClientCard from "./ClientCard";
 import Pagination from "./Pagination";
 
 type CollectionProps = {
@@ -41,6 +42,7 @@ CollectionProps) => {
                     hasOrderLink={hasOrderLink}
                     hidePrice={hidePrice}
                   />
+                  {/* <ClientCard event={event} userId={userId} /> */}
                 </li>
               );
             })}

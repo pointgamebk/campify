@@ -1,18 +1,22 @@
-"use client";
-
 import { IEvent } from "@/lib/database/models/event.model";
 import { formatDateTime } from "@/lib/utils";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { Separator } from "../ui/separator";
+import CardLocaleConverter from "./CardLocaleConverter";
 
 type CardProps = {
   event: IEvent;
-  userId: string;
+  hasOrderLink?: boolean;
+  hidePrice?: boolean;
 };
 
-const ClientCard = ({ event, userId }: CardProps) => {
+const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
+  const { sessionClaims } = auth();
+  const userId = sessionClaims?.userId as string;
+
   const isEventCreator = userId === event.organizer._id.toString();
 
   return (
@@ -23,7 +27,7 @@ const ClientCard = ({ event, userId }: CardProps) => {
         className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500"
       />
 
-      {isEventCreator && (
+      {isEventCreator && !hidePrice && (
         <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl  p-3 shadow-sm transition-all">
           <Link href={`/events/${event._id}/update`}>
             <Image
@@ -39,27 +43,34 @@ const ClientCard = ({ event, userId }: CardProps) => {
       )}
 
       <div className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4 bg-white">
-        <div className="flex gap-2 bg-white">
-          <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60 ">
-            {event.isFree ? "FREE" : `$${event.price}`}
-          </span>
-          <p className="p-semibold-14  rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
-            {event.category.name}
-          </p>
-        </div>
+        {!hidePrice && (
+          <div className="flex gap-2 bg-white">
+            <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60 ">
+              {event.isFree ? "FREE" : `$${event.price}`}
+            </span>
+            <p className="p-semibold-14  rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
+              {event.category.name}
+            </p>
+          </div>
+        )}
 
-        <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
+        {/* <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
           {formatDateTime(event.startDateTime).dateTime}
-        </p>
+        </p> */}
+        <CardLocaleConverter event={event} />
+
         <p className="p-medium-16 p-medium-18 text-grey-500">
           {event.location}
         </p>
+
         <Separator className="border border-black" />
+
         <Link href={`/events/${event._id}`}>
           <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black bg-white">
             {event.title}
           </p>
         </Link>
+
         <div className="flex-between w-full bg-white">
           <Link
             href={`/instructor/${event.organizer._id}`}
@@ -69,10 +80,22 @@ const ClientCard = ({ event, userId }: CardProps) => {
               {event.organizer.firstName} {event.organizer.lastName}
             </p>
           </Link>
+
+          {hasOrderLink && (
+            <Link href={`/orders?eventId=${event._id}`} className="flex gap-2">
+              <p className="text-primary-500">Order Details</p>
+              <Image
+                src="/assets/icons/arrow.svg"
+                alt="search"
+                width={10}
+                height={10}
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default ClientCard;
+export default Card;

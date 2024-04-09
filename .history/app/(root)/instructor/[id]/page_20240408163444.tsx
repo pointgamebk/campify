@@ -74,6 +74,7 @@ const InstructorDetails = async ({
           page={eventsPage}
           urlParamName="eventsPage"
           totalPages={organizedEvents?.totalPages}
+          userId={instructorId}
         />
       </section>
     </>

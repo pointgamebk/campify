@@ -10,11 +10,19 @@ type EventPageLocaleProps = {
 const EventPageLocale = ({ event }: EventPageLocaleProps) => {
   return (
     <>
-      <p>
+      {/* <p>
         {formatDateTime(event.startDateTime).dateOnly} -{" "}
         {formatDateTime(event.startDateTime).timeOnly}
       </p>
       <p>
+        {formatDateTime(event.endDateTime).dateOnly} -{" "}
+        {formatDateTime(event.endDateTime).timeOnly}
+      </p> */}
+      <p className="whitespace-normal break-words">
+        {formatDateTime(event.startDateTime).dateOnly} -{" "}
+        {formatDateTime(event.startDateTime).timeOnly}
+      </p>
+      <p className="whitespace-normal break-words">
         {formatDateTime(event.endDateTime).dateOnly} -{" "}
         {formatDateTime(event.endDateTime).timeOnly}
       </p>

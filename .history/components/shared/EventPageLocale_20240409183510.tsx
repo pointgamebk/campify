@@ -13,7 +13,7 @@ const EventPageLocale = ({ event }: EventPageLocaleProps) => {
       <p>
         {formatDateTime(event.startDateTime).dateOnly} -{" "}
         {formatDateTime(event.startDateTime).timeOnly}
-      </p>
+      </p>{" "}
       <p>
         {formatDateTime(event.endDateTime).dateOnly} -{" "}
         {formatDateTime(event.endDateTime).timeOnly}

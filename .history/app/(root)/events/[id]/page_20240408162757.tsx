@@ -4,6 +4,7 @@ import {
   getEventById,
   getRelatedEventsByCategory,
 } from "@/lib/actions/event.actions";
+import { formatDateTime } from "@/lib/utils";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
@@ -78,10 +79,7 @@ const EventDetails = async ({
                   width={32}
                   height={32}
                 />
-                <div
-                  className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center text-tan"
-                  style={{ width: "50%" }}
-                >
+                <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center text-tan">
                   <EventPageLocale event={event} />
                 </div>
               </div>
@@ -122,6 +120,7 @@ const EventDetails = async ({
           limit={3}
           page={searchParams.page as string}
           totalPages={relatedEvents?.totalPages}
+          userId={userId}
         />
       </section>
     </>
