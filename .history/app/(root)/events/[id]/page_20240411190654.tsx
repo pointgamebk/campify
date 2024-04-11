@@ -23,6 +23,8 @@ const EventDetails = async ({
 
   const attending = event.attendees.some((a: string) => a === userId);
 
+  console.log(attending, "attending");
+
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,

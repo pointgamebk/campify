@@ -23,6 +23,8 @@ const EventDetails = async ({
 
   const attending = event.attendees.some((a: string) => a === userId);
 
+  console.log(attending, "attending");
+
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,
@@ -70,9 +72,7 @@ const EventDetails = async ({
             </div>
 
             {/* checkout button  */}
-            {userId !== event.organizer._id && !attending && (
-              <CheckoutButton event={event} />
-            )}
+            {userId !== event.organizer._id && <CheckoutButton event={event} />}
 
             <div className="flex flex-col gap-5">
               <div className="flex gap-2 md:gap-3">

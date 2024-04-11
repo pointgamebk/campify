@@ -235,11 +235,20 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                     <p className="ml-3 whitespace-nowrap text-grey-600 ">
                       Start Date:
                     </p>
+                    {/* <DatePicker
+                      selected={field.value}
+                      onChange={(date: Date) => field.onChange(date)}
+                      showTimeSelect
+                      timeInputLabel="Time:"
+                      dateFormat="MM/dd/yyyy h:mm aa"
+                      wrapperClassName="datePicker"
+                      minDate={new Date()}
+                    /> */}
                     <DatePicker
                       selected={startDateTime}
                       onChange={(date: Date) => {
                         setStartDateTime(date);
-                        field.onChange(date);
+                        field.onChange(date); // You may need this if you want to track the startDateTime in your form data
                       }}
                       showTimeSelect
                       timeInputLabel="Time:"
@@ -271,6 +280,15 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                     <p className="ml-3 whitespace-nowrap text-grey-600">
                       End Date:
                     </p>
+                    {/* <DatePicker
+                      selected={field.value}
+                      onChange={(date: Date) => field.onChange(date)}
+                      showTimeSelect
+                      timeInputLabel="Time:"
+                      dateFormat="MM/dd/yyyy h:mm aa"
+                      wrapperClassName="datePicker"
+                      minDate={new Date()}
+                    /> */}
                     <DatePicker
                       selected={field.value}
                       onChange={(date: Date) => field.onChange(date)}
@@ -278,7 +296,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={startDateTime} // Set minDate to the selected startDateTime
+                      minDate={new Date(startDateTime.getTime() + 60000)} // Set minDate to startDateTime + 1 minute
                     />
                   </div>
                 </FormControl>

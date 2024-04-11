@@ -40,7 +40,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
   //testing
-  const [startDateTime, setStartDateTime] = useState(new Date());
 
   const initialValues =
     event && type === "Update"
@@ -236,16 +235,13 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       Start Date:
                     </p>
                     <DatePicker
-                      selected={startDateTime}
-                      onChange={(date: Date) => {
-                        setStartDateTime(date);
-                        field.onChange(date);
-                      }}
+                      selected={field.value}
+                      onChange={(date: Date) => field.onChange(date)}
                       showTimeSelect
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={new Date()} // Optionally, you can set a minDate for the startDateTime
+                      minDate={new Date()}
                     />
                   </div>
                 </FormControl>
@@ -278,7 +274,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={startDateTime} // Set minDate to the selected startDateTime
+                      minDate={new Date()}
                     />
                   </div>
                 </FormControl>

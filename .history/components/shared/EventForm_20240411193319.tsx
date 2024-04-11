@@ -40,7 +40,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
   //testing
-  const [startDateTime, setStartDateTime] = useState(new Date());
+  const [startDateTime, setStartDateTime] = useState(null); // Initially, startDateTime is null
+  const [endDateTimeEnabled, setEndDateTimeEnabled] = useState(false); // Initially, endDateTime is disabled
 
   const initialValues =
     event && type === "Update"
@@ -236,16 +237,13 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       Start Date:
                     </p>
                     <DatePicker
-                      selected={startDateTime}
-                      onChange={(date: Date) => {
-                        setStartDateTime(date);
-                        field.onChange(date);
-                      }}
+                      selected={field.value}
+                      onChange={(date: Date) => field.onChange(date)}
                       showTimeSelect
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={new Date()} // Optionally, you can set a minDate for the startDateTime
+                      minDate={new Date()}
                     />
                   </div>
                 </FormControl>
@@ -271,6 +269,15 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                     <p className="ml-3 whitespace-nowrap text-grey-600">
                       End Date:
                     </p>
+                    {/* <DatePicker
+                      selected={field.value}
+                      onChange={(date: Date) => field.onChange(date)}
+                      showTimeSelect
+                      timeInputLabel="Time:"
+                      dateFormat="MM/dd/yyyy h:mm aa"
+                      wrapperClassName="datePicker"
+                      minDate={new Date()}
+                    /> */}
                     <DatePicker
                       selected={field.value}
                       onChange={(date: Date) => field.onChange(date)}
