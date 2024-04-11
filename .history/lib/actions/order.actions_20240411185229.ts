@@ -20,6 +20,10 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
 
   const price = order.isFree ? 0 : Number(order.price) * 100;
 
+  const instructor = await User.findById(order.instructorId);
+
+  const event = await Event.findById(order.eventId);
+
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -34,6 +38,12 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
           quantity: 1,
         },
       ],
+      payment_intent_data: {
+        application_fee_amount: price * 0.05,
+        transfer_data: {
+          destination: instructor.stripeAccountId,
+        },
+      },
       metadata: {
         eventId: order.eventId,
         buyerId: order.buyerId,
@@ -43,6 +53,9 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
       cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
     });
+
+    event.attendees.push(order.buyerId);
+    await event.save();
 
     redirect(session.url!);
   } catch (error) {
