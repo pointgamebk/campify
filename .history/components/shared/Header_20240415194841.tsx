@@ -14,7 +14,7 @@ const Header = () => {
     <header className="w-full border-b">
       <div className="wrapper flex items-center justify-between">
         <Link href="/" className="w-36">
-          <h5 className="text-tan h5-bold">campify</h5>
+          <h2 className="text-tan">campify</h2>
         </Link>
 
         <SignedIn>

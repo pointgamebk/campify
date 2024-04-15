@@ -8,10 +8,6 @@ const Footer = () => {
           <p className="text-tan p-semibold-18">campify</p>
         </Link>
 
-        <Link href="/how_to">
-          <p className="text-tan p-semibold-18">How to Campify</p>
-        </Link>
-
         <p className="text-tan">2024 campify. All Rights reserved.</p>
       </div>
     </footer>
