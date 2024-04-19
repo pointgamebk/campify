@@ -191,44 +191,13 @@ const Legal = async () => {
           <p className="text-white">
             To become a trainee, simply purchase or freely obtain a ticket on
             Campify. Subject to these terms and full payment of all applicable
-            charges, to the extent a ticket includes access to one or more of an
-            instructor's camps or events, you receive a non-exclusive,
-            non-transferable, non-sublicensable, revocable, limited license to
-            access and attend those camps or events for your own private,
-            personal, non-promotional, non-commercial use. Camps or events you
-            gain access to in this manner will generally continue to be
-            available to you, but may become unavailable at any time as
-            described below.
-          </p>
-
-          <p className="text-white">
-            If you are located in a jurisdiction in which Campify is required to
-            charge and collect tax, for example VAT or sales tax, then this tax
-            is added to the total charge. Except in limited circumstances, this
-            tax is shown to you when purchasing a ticket. Campify remits all tax
-            collected to the applicable taxing authority. As tax is largely
-            dependent on your location, you agree to keep your location complete
-            and up to date in order to enable accurate collection of taxes.
-          </p>
-
-          <p className="text-white">
-            We are constantly experimenting with product features to make
-            Campify better and may add, remove, or test features with a subset
-            of trainees. Access to these features is not guaranteed and may not
-            be subject to your control. Instead, we may enable and disable these
-            early-access, beta, or test features at our sole discretion. These
-            features may also be subject to additional restrictions and
-            limitations, including some that we describe in our Help Center.
-          </p>
-
-          <p className="text-white">
-            <span className="p-bold-16">Refunds.</span> Our policy is not to
-            provide refunds, including if you lose access to camps and/or events
-            as described above, though we may allow for some exceptions where
-            refunds are granted at our sole discretion. If you made a purchase
-            on certain platforms (like the App Store), then Campify may not be
-            able to address any associated refund requests, and you may need to
-            contact those platforms directly. You can learn more here.
+            charges, to the extent a ticket includes access to one or more of a
+            creator’s creations, you receive a non-exclusive, non-transferable,
+            non-sublicensable, revocable, limited license to access and view
+            those creations for your own private, personal, non-promotional,
+            non-commercial use. Creations you gain access to in this manner will
+            generally continue to be available to you, but may become
+            unavailable at any time as described below.
           </p>
         </div>
       </div>

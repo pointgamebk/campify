@@ -222,13 +222,13 @@ const Legal = async () => {
           </p>
 
           <p className="text-white">
-            <span className="p-bold-16">Refunds.</span> Our policy is not to
-            provide refunds, including if you lose access to camps and/or events
-            as described above, though we may allow for some exceptions where
-            refunds are granted at our sole discretion. If you made a purchase
-            on certain platforms (like the App Store), then Campify may not be
-            able to address any associated refund requests, and you may need to
-            contact those platforms directly. You can learn more here.
+            <span>Refunds.</span> Our policy is not to provide refunds,
+            including if you lose access to camps and/or events as described
+            above, though we may allow for some exceptions where refunds are
+            granted at our sole discretion. If you made a purchase on certain
+            platforms (like the App Store), then Campify may not be able to
+            address any associated refund requests, and you may need to contact
+            those platforms directly. You can learn more here.
           </p>
         </div>
       </div>

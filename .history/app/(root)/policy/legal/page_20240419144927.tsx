@@ -210,26 +210,6 @@ const Legal = async () => {
             dependent on your location, you agree to keep your location complete
             and up to date in order to enable accurate collection of taxes.
           </p>
-
-          <p className="text-white">
-            We are constantly experimenting with product features to make
-            Campify better and may add, remove, or test features with a subset
-            of trainees. Access to these features is not guaranteed and may not
-            be subject to your control. Instead, we may enable and disable these
-            early-access, beta, or test features at our sole discretion. These
-            features may also be subject to additional restrictions and
-            limitations, including some that we describe in our Help Center.
-          </p>
-
-          <p className="text-white">
-            <span className="p-bold-16">Refunds.</span> Our policy is not to
-            provide refunds, including if you lose access to camps and/or events
-            as described above, though we may allow for some exceptions where
-            refunds are granted at our sole discretion. If you made a purchase
-            on certain platforms (like the App Store), then Campify may not be
-            able to address any associated refund requests, and you may need to
-            contact those platforms directly. You can learn more here.
-          </p>
         </div>
       </div>
     </section>

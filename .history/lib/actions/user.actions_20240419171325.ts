@@ -130,8 +130,8 @@ export async function createStripeAccount(userId: string) {
 
     const link = await stripe.accountLinks.create({
       account: account.id,
-      refresh_url: "https://webhooktesting.vercel.app/",
-      return_url: "https://webhooktesting.vercel.app/",
+      refresh_url: "http://localhost:3000/",
+      return_url: "http://localhost:3000/",
       type: "account_onboarding",
     });
 
@@ -148,9 +148,7 @@ export async function deleteStripeAccount(accountId: string) {
   try {
     const deleted = await stripe.accounts.del(accountId);
 
-    console.log("Deleted account: ", deleted);
-
-    return deleted.deleted;
+    return deleted;
   } catch (error) {
     handleError(error);
   }

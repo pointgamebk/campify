@@ -130,8 +130,8 @@ export async function createStripeAccount(userId: string) {
 
     const link = await stripe.accountLinks.create({
       account: account.id,
-      refresh_url: "https://webhooktesting.vercel.app/",
-      return_url: "https://webhooktesting.vercel.app/",
+      refresh_url: "http://localhost:3000/",
+      return_url: "http://localhost:3000/",
       type: "account_onboarding",
     });
 
@@ -141,19 +141,9 @@ export async function createStripeAccount(userId: string) {
   }
 }
 
-//Delete Connect accounts added with TEST KEYS
+//Delete Connect accounts addded with test keys
 export async function deleteStripeAccount(accountId: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
-  try {
-    const deleted = await stripe.accounts.del(accountId);
-
-    console.log("Deleted account: ", deleted);
-
-    return deleted.deleted;
-  } catch (error) {
-    handleError(error);
-  }
 }
 
 export async function updateProfile(

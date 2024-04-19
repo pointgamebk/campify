@@ -65,11 +65,9 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
         />
       </section>
 
-      <div className="max-w-[200px]">
-        <Button asChild size="lg" className="button hidden sm:flex">
-          <Link href={`admin/${userId}`}>Admin</Link>
-        </Button>
-      </div>
+      <Button asChild size="lg" className="button hidden sm:flex">
+        <Link href={`admin/${userId}`}>Admin</Link>
+      </Button>
     </>
   );
 };
