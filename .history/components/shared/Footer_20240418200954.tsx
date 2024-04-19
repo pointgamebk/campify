@@ -12,7 +12,7 @@ const Footer = () => {
           <p className="text-tan ">How to Campify</p>
         </Link>
 
-        <Link href="/policy/legal">
+        <Link href="/legal/policy">
           <p className="text-tan">Terms of Use & Policies</p>
         </Link>
 

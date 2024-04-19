@@ -9,11 +9,11 @@ const Footer = () => {
         </Link>
 
         <Link href="/how_to">
-          <p className="text-tan ">How to Campify</p>
+          <p className="text-tan p-semibold-14">How to Campify</p>
         </Link>
 
-        <Link href="/policy/legal">
-          <p className="text-tan">Terms of Use & Policies</p>
+        <Link href="/how_to">
+          <p className="text-tan p-semibold-14">Terms of Use & Policies</p>
         </Link>
 
         <p className="text-tan">2024 campify. All Rights reserved.</p>
