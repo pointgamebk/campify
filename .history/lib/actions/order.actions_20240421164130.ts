@@ -38,17 +38,26 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
           quantity: 1,
         },
       ],
+      // payment_intent_data: {
+      //   application_fee_amount: price * 0.05,
+      //   transfer_data: {
+      //     destination: instructor.stripeAccountId,
+      //   },
+      // },
       payment_intent_data: {
         capture_method: "automatic_async",
-        metadata: {
-          account: instructor.stripeAccountId,
-        },
       },
+      // metadata: {
+      //   eventId: order.event,
+      //   buyerId: order.buyer,
+      //   instructorId: order.instructor,
+      //   accoundId: instructor.stripeAccountId,
+      // },
       metadata: {
         event: order.event,
         buyer: order.buyer,
         instructor: order.instructor,
-        account: instructor.stripeAccountId,
+        accound: instructor.stripeAccountId,
       },
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
