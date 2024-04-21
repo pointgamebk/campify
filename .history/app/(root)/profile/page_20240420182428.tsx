@@ -64,12 +64,16 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           totalPages={orders?.totalPages}
         />
 
-        <div className="max-w-[200px] mt-5">
-          <Button asChild size="lg" className="button hidden sm:flex">
-            <Link href={`admin/${userId}`}>Admin</Link>
-          </Button>
-        </div>
+        <Button asChild size="lg" className="button hidden sm:flex">
+          <Link href={`admin/${userId}`}>Admin</Link>
+        </Button>
       </section>
+
+      {/* <div className="max-w-[200px]">
+        <Button asChild size="lg" className="button hidden sm:flex">
+          <Link href={`admin/${userId}`}>Admin</Link>
+        </Button>
+      </div> */}
     </>
   );
 };

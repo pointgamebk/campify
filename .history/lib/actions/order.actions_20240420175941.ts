@@ -60,7 +60,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
         eventId: order.eventId,
         buyerId: order.buyerId,
         instructorId: order.instructorId,
-        accoundId: instructor.stripeAccountId,
       },
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
