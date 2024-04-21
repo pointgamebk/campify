@@ -20,9 +20,9 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
 
   const price = order.isFree ? 0 : Number(order.price) * 100;
 
-  const instructor = await User.findById(order.instructor);
+  const instructor = await User.findById(order.instructorId);
 
-  const event = await Event.findById(order.event);
+  const event = await Event.findById(order.eventId);
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -48,9 +48,9 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
         capture_method: "automatic_async",
       },
       metadata: {
-        eventId: order.event,
-        buyerId: order.buyer,
-        instructorId: order.instructor,
+        eventId: order.eventId,
+        buyerId: order.buyerId,
+        instructorId: order.instructorId,
         accoundId: instructor.stripeAccountId,
       },
       mode: "payment",
@@ -58,7 +58,7 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
     });
 
-    event.attendees.push(order.buyer);
+    event.attendees.push(order.buyerId);
     await event.save();
 
     redirect(session.url!);

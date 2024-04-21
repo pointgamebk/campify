@@ -122,21 +122,13 @@ export type CreateCategoryParams = {
 };
 
 // ====== ORDER PARAMS
-// export type CheckoutOrderParams = {
-//   eventTitle: string;
-//   eventId: string;
-//   price: string;
-//   isFree: boolean;
-//   buyerId: string;
-//   instructorId: string;
-// };
 export type CheckoutOrderParams = {
   eventTitle: string;
-  event: string;
+  eventId: string;
   price: string;
   isFree: boolean;
-  buyer: string;
-  instructor: string;
+  buyerId: string;
+  instructorId: string;
 };
 
 // export type CreateOrderParams = {
@@ -152,7 +144,7 @@ export type CreateOrderParams = {
   stripeId: string;
   event: string;
   buyer: string;
-  instructor: string;
+  instructorId: string;
   totalAmount: string;
   createdAt: Date;
 };

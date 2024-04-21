@@ -24,11 +24,22 @@ export async function POST(request: Request) {
   if (eventType === "checkout.session.completed") {
     const { id, amount_total, metadata } = event.data.object;
 
+    console.log("metadata", metadata);
+
+    // const order = {
+    //   stripeId: id,
+    //   eventId: metadata?.eventId || "",
+    //   buyerId: metadata?.buyerId || "",
+    //   instructorId: metadata?.instructorId || "",
+    //   totalAmount: amount_total ? (amount_total / 100).toString() : "0",
+    //   createdAt: new Date(),
+    // };
+
     const order = {
       stripeId: id,
-      eventId: metadata?.eventId || "",
-      buyerId: metadata?.buyerId || "",
-      instructorId: metadata?.instructorId || "",
+      event: metadata?.event || "",
+      buyer: metadata?.buyer || "",
+      instructor: metadata?.instructor || "",
       totalAmount: amount_total ? (amount_total / 100).toString() : "0",
       createdAt: new Date(),
     };

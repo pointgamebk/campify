@@ -24,13 +24,22 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
   }, []);
 
   const onCheckout = async () => {
+    // const order = {
+    //   eventTitle: event.title,
+    //   eventId: event._id,
+    //   price: event.price,
+    //   isFree: event.isFree,
+    //   buyerId: userId,
+    //   instructorId: event.organizer._id,
+    // };
+
     const order = {
       eventTitle: event.title,
-      eventId: event._id,
+      event: event._id,
       price: event.price,
       isFree: event.isFree,
-      buyerId: userId,
-      instructorId: event.organizer._id,
+      buyer: userId,
+      instructor: event.organizer._id,
     };
 
     await checkoutOrder(order);

@@ -1,6 +1,7 @@
 import stripe from "stripe";
 import { NextResponse } from "next/server";
 import { createOrder } from "@/lib/actions/order.actions";
+import User from "@/lib/database/models/user.model";
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -19,14 +20,26 @@ export async function POST(request: Request) {
   // Get the ID and type
   const eventType = event.type;
 
-  // CREATE
+  // CREATE ORDER
   if (eventType === "checkout.session.completed") {
     const { id, amount_total, metadata } = event.data.object;
 
+    console.log("metadata", metadata);
+
+    // const order = {
+    //   stripeId: id,
+    //   eventId: metadata?.eventId || "",
+    //   buyerId: metadata?.buyerId || "",
+    //   instructorId: metadata?.instructorId || "",
+    //   totalAmount: amount_total ? (amount_total / 100).toString() : "0",
+    //   createdAt: new Date(),
+    // };
+
     const order = {
       stripeId: id,
-      eventId: metadata?.eventId || "",
-      buyerId: metadata?.buyerId || "",
+      event: metadata?.event || "",
+      buyer: metadata?.buyer || "",
+      instructor: metadata?.instructor || "",
       totalAmount: amount_total ? (amount_total / 100).toString() : "0",
       createdAt: new Date(),
     };
@@ -35,9 +48,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "OK", order: newOrder });
   }
 
+  // UPDATE STRIPE ACCOUNT SETTINGS
   if (eventType === "account.updated") {
-    const account = event.data.object;
-    console.log(event.data.object);
+    try {
+      const { id, charges_enabled } = event.data.object;
+
+      await User.findOneAndUpdate(
+        { stripeAccountId: id },
+        { chargesEnabled: charges_enabled },
+        { new: true }
+      );
+    } catch (error) {
+      console.error("no user found");
+    }
+
     return NextResponse.json({ message: "OK" });
   }
 
