@@ -216,8 +216,6 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
       transfer_group: transfer.transfer_group,
     });
 
-    console.log("Transfer created: ", newTransfer);
-
     return JSON.parse(JSON.stringify(newTransfer));
   } catch (error) {
     handleError(error);

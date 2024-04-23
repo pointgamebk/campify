@@ -1,9 +1,7 @@
 import DeleteStripeAccountForm from "@/components/shared/DeleteStripeAccountForm";
-import { getOrders, createTransfer } from "@/lib/actions/order.actions";
+import { getOrders } from "@/lib/actions/order.actions";
 import { IOrderItem } from "@/lib/database/models/order.model";
 import { formatPrice } from "@/lib/utils";
-
-import { TransferConfirmation } from "@/components/shared/TransferConfirmation";
 
 type AdminPageProps = {
   params: { id: string };
@@ -11,6 +9,8 @@ type AdminPageProps = {
 
 const AdminPage = async ({ params: { id } }: AdminPageProps) => {
   const orders = await getOrders();
+
+  console.log(orders);
 
   return (
     <>
@@ -41,9 +41,6 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
               <th className="min-w-[75px] flex-1 py-3 pr-4 text-left text-grey-400">
                 Account ID
               </th>
-              <th className="min-w-[75px] flex-1 py-3 pr-4 text-left text-grey-400">
-                Complete Transfer
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -65,18 +62,11 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
                       <td className="min-w-[250px] py-4 text-green">
                         {row._id}
                       </td>
-                      <td className="min-w-[250px] py-4 text-green">
+                      <td className="min-w-[100px] py-4 text-right">
                         {row.totalAmount}
                       </td>
-                      <td className="min-w-[250px] py-4 text-green">
+                      <td className="min-w-[150px] py-4">
                         {row.instructor.stripeAccountId}
-                      </td>
-                      <td className="min-w-[250px] py-4 text-green">
-                        <TransferConfirmation
-                          amount={parseFloat(row.totalAmount)}
-                          destination={row.instructor.stripeAccountId}
-                          transfer_group={row._id}
-                        />
                       </td>
                     </tr>
                   ))}

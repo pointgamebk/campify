@@ -12,6 +12,8 @@ type AdminPageProps = {
 const AdminPage = async ({ params: { id } }: AdminPageProps) => {
   const orders = await getOrders();
 
+  console.log(orders);
+
   return (
     <>
       <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
@@ -73,7 +75,7 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
                       </td>
                       <td className="min-w-[250px] py-4 text-green">
                         <TransferConfirmation
-                          amount={parseFloat(row.totalAmount)}
+                          amount={row.totalAmount}
                           destination={row.instructor.stripeAccountId}
                           transfer_group={row._id}
                         />

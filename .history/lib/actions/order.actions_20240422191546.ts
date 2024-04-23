@@ -17,11 +17,13 @@ import { ObjectId } from "mongodb";
 import User from "../database/models/user.model";
 
 const populateOrder = (query: any) => {
-  return query.populate({
-    path: "instructor",
-    model: User,
-    select: "_id stripeAccountId",
-  });
+  return query
+    .populate({
+      path: "instructor",
+      model: User,
+      select: "_id firstName lastName",
+    })
+    .populate({ path: "category", model: Category, select: "_id name" });
 };
 
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
@@ -194,9 +196,7 @@ export async function getOrdersByUser({
 // GET ORDERS
 export const getOrders = async () => {
   try {
-    const orders = await populateOrder(
-      Order.find().sort({ createdAt: "desc" })
-    );
+    const orders = await Order.find();
 
     return JSON.parse(JSON.stringify(orders));
   } catch (error) {
@@ -215,8 +215,6 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
       destination: transfer.destination,
       transfer_group: transfer.transfer_group,
     });
-
-    console.log("Transfer created: ", newTransfer);
 
     return JSON.parse(JSON.stringify(newTransfer));
   } catch (error) {

@@ -16,14 +16,6 @@ import Event from "../database/models/event.model";
 import { ObjectId } from "mongodb";
 import User from "../database/models/user.model";
 
-const populateOrder = (query: any) => {
-  return query.populate({
-    path: "instructor",
-    model: User,
-    select: "_id stripeAccountId",
-  });
-};
-
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -194,15 +186,11 @@ export async function getOrdersByUser({
 // GET ORDERS
 export const getOrders = async () => {
   try {
-    const orders = await populateOrder(
-      Order.find().sort({ createdAt: "desc" })
-    );
-
-    return JSON.parse(JSON.stringify(orders));
+    const orders = await ;
   } catch (error) {
     handleError(error);
   }
-};
+}
 
 // CREATE TRANSFER OF FUNDS TO INSTRUCTOR STRIPE ACCOUNT
 export const createTransfer = async (transfer: CreateTransferParams) => {
@@ -215,8 +203,6 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
       destination: transfer.destination,
       transfer_group: transfer.transfer_group,
     });
-
-    console.log("Transfer created: ", newTransfer);
 
     return JSON.parse(JSON.stringify(newTransfer));
   } catch (error) {

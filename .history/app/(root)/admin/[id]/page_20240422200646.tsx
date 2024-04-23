@@ -3,14 +3,14 @@ import { getOrders, createTransfer } from "@/lib/actions/order.actions";
 import { IOrderItem } from "@/lib/database/models/order.model";
 import { formatPrice } from "@/lib/utils";
 
-import { TransferConfirmation } from "@/components/shared/TransferConfirmation";
-
 type AdminPageProps = {
   params: { id: string };
 };
 
 const AdminPage = async ({ params: { id } }: AdminPageProps) => {
   const orders = await getOrders();
+
+  console.log(orders);
 
   return (
     <>
@@ -72,11 +72,7 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
                         {row.instructor.stripeAccountId}
                       </td>
                       <td className="min-w-[250px] py-4 text-green">
-                        <TransferConfirmation
-                          amount={parseFloat(row.totalAmount)}
-                          destination={row.instructor.stripeAccountId}
-                          transfer_group={row._id}
-                        />
+                        Transfer
                       </td>
                     </tr>
                   ))}
