@@ -15,6 +15,7 @@ export interface IOrder extends Document {
   };
   instructor: {
     _id: string;
+    stripeAccountId: string;
   };
 }
 
@@ -25,7 +26,10 @@ export type IOrderItem = {
   eventTitle: string;
   eventId: string;
   buyer: string;
-  instructor: string;
+  instructor: {
+    _id: string;
+    stripeAccountId: string;
+  };
 };
 
 const OrderSchema = new Schema({
