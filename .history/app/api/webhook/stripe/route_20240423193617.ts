@@ -29,9 +29,8 @@ export async function POST(request: Request) {
       event: metadata?.event || "",
       buyer: metadata?.buyer || "",
       instructor: metadata?.instructor || "",
-      totalAmount: amount_total ? (amount_total / 100).toString() : "0",
-      //totalAmount: amount_total ? parseFloat(amount_total) : 0,
-      createdAt: new Date(),
+      // totalAmount: amount_total ? (amount_total / 100).toString() : "0",
+      totalAmount: amount_total ? createdAt : new Date(),
     };
 
     const newOrder = await createOrder(order);

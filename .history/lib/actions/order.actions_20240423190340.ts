@@ -221,10 +221,11 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
 
     const order = await Order.findOneAndUpdate(
       { _id: transfer.transfer_group },
-      { status: "transferred" }
+      { status: "completed" }
     );
 
     console.log("Transfer created: ", newTransfer);
+    console.log("Order updated: ", order);
 
     revalidatePath(transfer.path);
 

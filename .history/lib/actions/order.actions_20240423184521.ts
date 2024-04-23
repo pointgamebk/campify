@@ -15,7 +15,6 @@ import Order from "../database/models/order.model";
 import Event from "../database/models/event.model";
 import { ObjectId } from "mongodb";
 import User from "../database/models/user.model";
-import { revalidatePath } from "next/cache";
 
 const populateOrder = (query: any) => {
   return query.populate({
@@ -196,7 +195,7 @@ export async function getOrdersByUser({
 export const getOrders = async () => {
   try {
     const orders = await populateOrder(
-      Order.find({ status: "pending" }).sort({ createdAt: "desc" })
+      Order.find().sort({ createdAt: "desc" })
     );
 
     return JSON.parse(JSON.stringify(orders));
@@ -221,12 +220,11 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
 
     const order = await Order.findOneAndUpdate(
       { _id: transfer.transfer_group },
-      { status: "transferred" }
+      { status: "completed" }
     );
 
     console.log("Transfer created: ", newTransfer);
-
-    revalidatePath(transfer.path);
+    console.log("Order updated: ", order);
 
     return JSON.parse(JSON.stringify(newTransfer));
   } catch (error) {

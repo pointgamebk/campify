@@ -225,6 +225,7 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
     );
 
     console.log("Transfer created: ", newTransfer);
+    console.log("Order updated: ", order);
 
     revalidatePath(transfer.path);
 
