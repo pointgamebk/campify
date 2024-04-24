@@ -14,7 +14,7 @@ export const eventFormSchema = z.object({
   startDateTime: z.date(),
   endDateTime: z.date(),
   categoryId: z.string(),
-  price: z.string(),
+  price: z.number(),
   isFree: z.boolean(),
   url: z.string(),
 });
@@ -43,4 +43,11 @@ export const placesFormSchema = z.object({
     .string()
     .min(3, "Location must be at least 3 characters")
     .max(400, "Location must be less than 400 characters"),
+});
+
+export const deleteStripeAccountFormSchema = z.object({
+  accountId: z
+    .string()
+    .min(3, "Account ID must be at least 3 characters")
+    .max(400, "Account ID must be less than 400 characters"),
 });

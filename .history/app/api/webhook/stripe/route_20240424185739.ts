@@ -24,13 +24,16 @@ export async function POST(request: Request) {
   if (eventType === "checkout.session.completed") {
     const { id, amount_total, metadata } = event.data.object;
 
+    const floatAmount = amount_total ? amount_total / 100 : 0;
+
     const order = {
       stripeId: id,
       event: metadata?.event || "",
       buyer: metadata?.buyer || "",
       instructor: metadata?.instructor || "",
       //totalAmount: amount_total ? (amount_total / 100).toString() : "0",
-      totalAmount: amount_total ? amount_total / 100 : 0,
+      // totalAmount: amount_total ? amount_total / 100 : 0,
+      totalAmount: floatAmount,
       createdAt: new Date(),
     };
 

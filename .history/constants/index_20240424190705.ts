@@ -21,7 +21,7 @@ export const eventDefaultValues = {
   startDateTime: new Date(),
   endDateTime: new Date(),
   categoryId: "",
-  price: "",
+  price: 0,
   isFree: false,
   url: "",
 };
@@ -35,4 +35,8 @@ export const profileDefaultValues = {
   profilePhoto: "",
   profileSchool: "",
   profileContact: "",
+};
+
+export const deleteStripeAccountDefaultValues = {
+  accountId: "",
 };
