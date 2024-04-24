@@ -29,7 +29,8 @@ export async function POST(request: Request) {
       event: metadata?.event || "",
       buyer: metadata?.buyer || "",
       instructor: metadata?.instructor || "",
-      totalAmount: amount_total ? amount_total / 100 : 0,
+      //totalAmount: amount_total ? (amount_total / 100).toString() : "0",
+      totalAmount: amount_total ? amount_total : 0,
       createdAt: new Date(),
     };
 

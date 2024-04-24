@@ -1,4 +1,3 @@
-import { Decimal128 } from "mongodb";
 import { Schema, model, models, Document } from "mongoose";
 
 export interface IOrder extends Document {
@@ -44,7 +43,7 @@ const OrderSchema = new Schema({
     unique: true,
   },
   totalAmount: {
-    type: Decimal128,
+    type: Number,
   },
   event: {
     type: Schema.Types.ObjectId,

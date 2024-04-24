@@ -73,7 +73,10 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
                       </td>
                       <td className="min-w-[250px] py-4 text-green">
                         <TransferConfirmation
-                          amount={row.totalAmount - row.totalAmount * 0.09}
+                          amount={
+                            row.totalAmount.toFixed(2) -
+                            row.totalAmount.toFixed(2) * 0.1
+                          }
                           destination={row.instructor.stripeAccountId}
                           transfer_group={row._id}
                         />

@@ -1,5 +1,5 @@
-import { Decimal128 } from "mongodb";
 import { Schema, model, models, Document } from "mongoose";
+import { number } from "zod";
 
 export interface IOrder extends Document {
   createdAt: Date;
@@ -44,7 +44,7 @@ const OrderSchema = new Schema({
     unique: true,
   },
   totalAmount: {
-    type: Decimal128,
+    type: Number,
   },
   event: {
     type: Schema.Types.ObjectId,
