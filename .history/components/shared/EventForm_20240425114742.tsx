@@ -56,10 +56,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
-    defaultValues: {
-      ...initialValues,
-      price: initialValues.price.toString(),
-    },
+    defaultValues: initialValues,
   });
 
   // 2. Define a submit handler.
@@ -82,7 +79,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
         const newEvent = await createEvent({
           event: {
             ...values,
-            price: Number(values.price),
+            price: values.price,
             imageUrl: uploadedImageUrl,
           },
           userId,
@@ -107,7 +104,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
           userId,
           event: {
             ...values,
-            price: Number(values.price),
+            price: values.price,
             imageUrl: uploadedImageUrl,
             _id: eventId,
           },

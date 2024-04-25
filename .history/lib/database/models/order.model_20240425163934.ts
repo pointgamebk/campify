@@ -1,3 +1,4 @@
+import { Decimal128 } from "mongodb";
 import { Schema, model, models, Document } from "mongoose";
 
 export interface IOrder extends Document {

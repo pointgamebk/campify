@@ -39,6 +39,9 @@ type EventFormProps = {
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
+  //testing
+  const [startDateTime, setStartDateTime] = useState(new Date());
+
   const initialValues =
     event && type === "Update"
       ? {
@@ -122,7 +125,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    placeholder="Event title"
+                    placeholder="Camp title"
                     {...field}
                     className="input-field"
                   />
@@ -157,7 +160,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
-                    placeholder="Description"
+                    placeholder="Camp Description"
                     {...field}
                     className="textarea rounded-2xl"
                   />
@@ -204,7 +207,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       defaultValue=""
                       onSelectAddress={(address) => {
                         form.setValue("location", address);
-                        console.log(address);
                       }}
                     />
                   </div>
@@ -234,13 +236,16 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       Start Date:
                     </p>
                     <DatePicker
-                      selected={field.value}
-                      onChange={(date: Date) => field.onChange(date)}
+                      selected={startDateTime}
+                      onChange={(date: Date) => {
+                        setStartDateTime(date);
+                        field.onChange(date);
+                      }}
                       showTimeSelect
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={new Date()}
+                      minDate={new Date()} // Optionally, you can set a minDate for the startDateTime
                     />
                   </div>
                 </FormControl>
@@ -273,7 +278,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={new Date()}
+                      minDate={startDateTime} // Set minDate to the selected startDateTime
                     />
                   </div>
                 </FormControl>

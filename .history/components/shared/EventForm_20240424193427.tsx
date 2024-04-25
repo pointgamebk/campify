@@ -56,10 +56,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
-    defaultValues: {
-      ...initialValues,
-      price: initialValues.price.toString(),
-    },
+    defaultValues: initialValues,
   });
 
   // 2. Define a submit handler.
@@ -80,11 +77,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     if (type === "Create") {
       try {
         const newEvent = await createEvent({
-          event: {
-            ...values,
-            price: Number(values.price),
-            imageUrl: uploadedImageUrl,
-          },
+          event: { ...values, imageUrl: uploadedImageUrl },
           userId,
           path: "/",
         });
@@ -105,12 +98,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       try {
         const updatedEvent = await updateEvent({
           userId,
-          event: {
-            ...values,
-            price: Number(values.price),
-            imageUrl: uploadedImageUrl,
-            _id: eventId,
-          },
+          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
           path: `/events/${eventId}`,
         });
         if (updatedEvent) {
@@ -320,6 +308,9 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       placeholder="Price"
                       type="number"
                       {...field}
+                      onChange={(event) =>
+                        field.onChange(Number(event.target.value))
+                      }
                       className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                     />
                     <FormField

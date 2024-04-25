@@ -39,6 +39,9 @@ type EventFormProps = {
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
+  //testing
+  const [startDateTime, setStartDateTime] = useState(new Date());
+
   const initialValues =
     event && type === "Update"
       ? {
@@ -53,7 +56,10 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
-    defaultValues: initialValues,
+    defaultValues: {
+      ...initialValues,
+      price: initialValues.price.toString(),
+    },
   });
 
   // 2. Define a submit handler.
@@ -74,7 +80,11 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     if (type === "Create") {
       try {
         const newEvent = await createEvent({
-          event: { ...values, imageUrl: uploadedImageUrl },
+          event: {
+            ...values,
+            price: values.price,
+            imageUrl: uploadedImageUrl,
+          },
           userId,
           path: "/",
         });
@@ -95,7 +105,12 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       try {
         const updatedEvent = await updateEvent({
           userId,
-          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          event: {
+            ...values,
+            price: values.price,
+            imageUrl: uploadedImageUrl,
+            _id: eventId,
+          },
           path: `/events/${eventId}`,
         });
         if (updatedEvent) {
@@ -122,7 +137,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    placeholder="Event title"
+                    placeholder="Camp title"
                     {...field}
                     className="input-field"
                   />
@@ -157,7 +172,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
-                    placeholder="Description"
+                    placeholder="Camp Description"
                     {...field}
                     className="textarea rounded-2xl"
                   />
@@ -204,7 +219,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       defaultValue=""
                       onSelectAddress={(address) => {
                         form.setValue("location", address);
-                        console.log(address);
                       }}
                     />
                   </div>
@@ -234,12 +248,16 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       Start Date:
                     </p>
                     <DatePicker
-                      selected={field.value}
-                      onChange={(date: Date) => field.onChange(date)}
+                      selected={startDateTime}
+                      onChange={(date: Date) => {
+                        setStartDateTime(date);
+                        field.onChange(date);
+                      }}
                       showTimeSelect
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
+                      minDate={new Date()} // Optionally, you can set a minDate for the startDateTime
                     />
                   </div>
                 </FormControl>
@@ -272,7 +290,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={new Date()}
+                      minDate={startDateTime} // Set minDate to the selected startDateTime
                     />
                   </div>
                 </FormControl>
