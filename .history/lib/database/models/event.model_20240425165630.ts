@@ -25,13 +25,7 @@ const EventSchema = new Schema({
   imageUrl: { type: String, required: true },
   startDateTime: { type: Date, default: Date.now },
   endDateTime: { type: Date, default: Date.now },
-  price: {
-    type: Number,
-    get: function (price: number) {
-      // Format the price with 2 decimal places
-      return (price / 100).toFixed(2);
-    },
-  },
+  price: { type: Schema.Types.Decimal128 },
   isFree: { type: Boolean, default: false },
   url: { type: String },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
