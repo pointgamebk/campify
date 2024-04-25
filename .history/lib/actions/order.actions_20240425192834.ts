@@ -46,12 +46,12 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
           quantity: 1,
         },
       ],
-      // payment_intent_data: {
-      //   capture_method: "automatic_async",
-      //   metadata: {
-      //     account: instructor.stripeAccountId,
-      //   },
-      // },
+      payment_intent_data: {
+        capture_method: "automatic_async",
+        metadata: {
+          account: instructor.stripeAccountId,
+        },
+      },
       metadata: {
         event: order.event,
         buyer: order.buyer,
@@ -240,7 +240,6 @@ export const createTopUp = async () => {
       description: "Testing top-up",
       statement_descriptor: "Top-up",
     });
-
     console.log("Topup created: ", topup);
 
     return JSON.parse(JSON.stringify(topup));

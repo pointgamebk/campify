@@ -2,6 +2,7 @@
 
 import { useTransition } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 import {
   AlertDialog,
@@ -11,10 +12,12 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 import { createTransfer } from "@/lib/actions/order.actions";
+import { CreateTransferParams } from "@/types";
 
 type TransferConfirmationProps = {
   amount: number;
@@ -29,6 +32,8 @@ export const TransferConfirmation = ({
 }: TransferConfirmationProps) => {
   const pathname = usePathname();
   let [isPending, startTransition] = useTransition();
+
+  console.log("amount", amount * 100);
 
   const transfer = {
     amount: amount * 100,

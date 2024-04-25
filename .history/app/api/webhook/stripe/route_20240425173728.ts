@@ -2,7 +2,6 @@ import stripe from "stripe";
 import { NextResponse } from "next/server";
 import { createOrder } from "@/lib/actions/order.actions";
 import User from "@/lib/database/models/user.model";
-import Event from "@/lib/database/models/event.model";
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -35,11 +34,6 @@ export async function POST(request: Request) {
     };
 
     const newOrder = await createOrder(order);
-
-    const camp = await Event.findById(order.event);
-    camp.attendees.push(order.buyer);
-    await camp.save();
-
     return NextResponse.json({ message: "OK", order: newOrder });
   }
 

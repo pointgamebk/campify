@@ -2,6 +2,7 @@
 
 import { useTransition } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 import {
   AlertDialog,
@@ -11,10 +12,12 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 import { createTransfer } from "@/lib/actions/order.actions";
+import { CreateTransferParams } from "@/types";
 
 type TransferConfirmationProps = {
   amount: number;
@@ -31,7 +34,7 @@ export const TransferConfirmation = ({
   let [isPending, startTransition] = useTransition();
 
   const transfer = {
-    amount: amount * 100,
+    amount: amount,
     destination,
     transfer_group,
     path: pathname,
@@ -44,9 +47,7 @@ export const TransferConfirmation = ({
       <AlertDialogContent className="bg-white">
         <AlertDialogHeader>
           <AlertDialogDescription className="p-regular-16 text-grey-600">
-            {`Are you sure you want to transfer $${amount.toFixed(
-              2
-            )} to ${destination}?`}
+            {`Are you sure you want to transfer $${amount} to ${destination}?`}
           </AlertDialogDescription>
         </AlertDialogHeader>
 

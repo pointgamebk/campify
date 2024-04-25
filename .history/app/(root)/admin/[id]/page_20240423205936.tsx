@@ -1,6 +1,7 @@
 import DeleteStripeAccountForm from "@/components/shared/DeleteStripeAccountForm";
 import { getOrders, createTransfer } from "@/lib/actions/order.actions";
-import { TopUpButton } from "@/components/shared/TopUpButton";
+import { IOrderItem } from "@/lib/database/models/order.model";
+import { formatPrice } from "@/lib/utils";
 
 import { TransferConfirmation } from "@/components/shared/TransferConfirmation";
 
@@ -65,14 +66,14 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
                         {row._id}
                       </td>
                       <td className="min-w-[250px] py-4 text-green">
-                        {row.totalAmount.toFixed(2)}
+                        {row.totalAmount}
                       </td>
                       <td className="min-w-[250px] py-4 text-green">
                         {row.instructor.stripeAccountId}
                       </td>
                       <td className="min-w-[250px] py-4 text-green">
                         <TransferConfirmation
-                          amount={row.totalAmount - row.totalAmount * 0.3}
+                          amount={row.totalAmount - row.totalAmount * 0.09}
                           destination={row.instructor.stripeAccountId}
                           transfer_group={row._id}
                         />

@@ -34,12 +34,9 @@ export async function POST(request: Request) {
       createdAt: new Date(),
     };
 
+    const _event = await Event.findById(order.event);
+
     const newOrder = await createOrder(order);
-
-    const camp = await Event.findById(order.event);
-    camp.attendees.push(order.buyer);
-    await camp.save();
-
     return NextResponse.json({ message: "OK", order: newOrder });
   }
 

@@ -34,12 +34,10 @@ export async function POST(request: Request) {
       createdAt: new Date(),
     };
 
-    const newOrder = await createOrder(order);
-
     const camp = await Event.findById(order.event);
     camp.attendees.push(order.buyer);
-    await camp.save();
 
+    const newOrder = await createOrder(order);
     return NextResponse.json({ message: "OK", order: newOrder });
   }
 

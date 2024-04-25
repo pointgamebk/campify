@@ -14,39 +14,20 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-import { createTransfer } from "@/lib/actions/order.actions";
+import { createTopUp } from "@/lib/actions/order.actions";
 
-type TransferConfirmationProps = {
-  amount: number;
-  destination: string;
-  transfer_group: string;
-};
-
-export const TransferConfirmation = ({
-  amount,
-  destination,
-  transfer_group,
-}: TransferConfirmationProps) => {
+export const TopUpButton = () => {
   const pathname = usePathname();
   let [isPending, startTransition] = useTransition();
 
-  const transfer = {
-    amount: amount * 100,
-    destination,
-    transfer_group,
-    path: pathname,
-  };
-
   return (
     <AlertDialog>
-      <AlertDialogTrigger>Transfer</AlertDialogTrigger>
+      <AlertDialogTrigger>Topup</AlertDialogTrigger>
 
       <AlertDialogContent className="bg-white">
         <AlertDialogHeader>
           <AlertDialogDescription className="p-regular-16 text-grey-600">
-            {`Are you sure you want to transfer $${amount.toFixed(
-              2
-            )} to ${destination}?`}
+            Top up?
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -56,11 +37,11 @@ export const TransferConfirmation = ({
           <AlertDialogAction
             onClick={() =>
               startTransition(async () => {
-                await createTransfer(transfer);
+                await createTopUp();
               })
             }
           >
-            {isPending ? "Transferring..." : "Transfer"}
+            {isPending ? "Topping Up..." : "Top Up"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

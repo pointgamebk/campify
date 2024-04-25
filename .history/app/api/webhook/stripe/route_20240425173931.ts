@@ -35,11 +35,6 @@ export async function POST(request: Request) {
     };
 
     const newOrder = await createOrder(order);
-
-    const camp = await Event.findById(order.event);
-    camp.attendees.push(order.buyer);
-    await camp.save();
-
     return NextResponse.json({ message: "OK", order: newOrder });
   }
 

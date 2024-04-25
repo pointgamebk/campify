@@ -46,12 +46,12 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
           quantity: 1,
         },
       ],
-      // payment_intent_data: {
-      //   capture_method: "automatic_async",
-      //   metadata: {
-      //     account: instructor.stripeAccountId,
-      //   },
-      // },
+      payment_intent_data: {
+        capture_method: "automatic_async",
+        metadata: {
+          account: instructor.stripeAccountId,
+        },
+      },
       metadata: {
         event: order.event,
         buyer: order.buyer,
@@ -206,7 +206,7 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
 
   try {
     const newTransfer = await stripe.transfers.create({
-      amount: transfer.amount,
+      amount: transfer.amount * 100,
       currency: "usd",
       destination: transfer.destination,
       transfer_group: transfer.transfer_group,
@@ -224,26 +224,6 @@ export const createTransfer = async (transfer: CreateTransferParams) => {
     revalidatePath(transfer.path);
 
     return JSON.parse(JSON.stringify(newTransfer));
-  } catch (error) {
-    handleError(error);
-  }
-};
-
-// CREATE TOPUP OF STRIPE ACCOUNT
-export const createTopUp = async () => {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
-  try {
-    const topup = await stripe.topups.create({
-      amount: 5000,
-      currency: "usd",
-      description: "Testing top-up",
-      statement_descriptor: "Top-up",
-    });
-
-    console.log("Topup created: ", topup);
-
-    return JSON.parse(JSON.stringify(topup));
   } catch (error) {
     handleError(error);
   }

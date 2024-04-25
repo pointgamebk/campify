@@ -1,6 +1,7 @@
 import DeleteStripeAccountForm from "@/components/shared/DeleteStripeAccountForm";
 import { getOrders, createTransfer } from "@/lib/actions/order.actions";
-import { TopUpButton } from "@/components/shared/TopUpButton";
+import { IOrderItem } from "@/lib/database/models/order.model";
+import { formatPrice } from "@/lib/utils";
 
 import { TransferConfirmation } from "@/components/shared/TransferConfirmation";
 
