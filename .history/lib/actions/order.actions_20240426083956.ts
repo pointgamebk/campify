@@ -32,30 +32,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
 
   const instructor = await User.findById(order.instructor);
 
-  // try {
-  //   const session = await stripe.checkout.sessions.create({
-  //     line_items: [
-  //       {
-  //         price_data: {
-  //           currency: "usd",
-  //           unit_amount: price,
-  //           product_data: {
-  //             name: order.eventTitle,
-  //           },
-  //         },
-  //         quantity: 1,
-  //       },
-  //     ],
-  //     metadata: {
-  //       event: order.event,
-  //       buyer: order.buyer,
-  //       instructor: order.instructor,
-  //       account: instructor.stripeAccountId,
-  //     },
-  //     mode: "payment",
-  //     success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
-  //     cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
-  //   });
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -71,8 +47,10 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
         },
       ],
       metadata: {
-        eventId: order.event,
-        buyerId: order.buyer,
+        event: order.event,
+        buyer: order.buyer,
+        instructor: order.instructor,
+        account: instructor.stripeAccountId,
       },
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
@@ -84,6 +62,13 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
     throw error;
   }
 };
+
+// payment_intent_data: {
+//   capture_method: "automatic_async",
+//   metadata: {
+//     account: instructor.stripeAccountId,
+//   },
+// },
 
 export const createOrder = async (order: CreateOrderParams) => {
   try {

@@ -85,6 +85,13 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
   }
 };
 
+// payment_intent_data: {
+//   capture_method: "automatic_async",
+//   metadata: {
+//     account: instructor.stripeAccountId,
+//   },
+// },
+
 export const createOrder = async (order: CreateOrderParams) => {
   try {
     await connectToDatabase();
