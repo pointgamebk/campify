@@ -199,7 +199,7 @@ export async function checkIsAdmin() {
 
     if (!admin) throw new Error("Admin not found");
 
-    return JSON.parse(JSON.stringify(admin._id));
+    return admin._id;
   } catch (error) {
     handleError(error);
   }

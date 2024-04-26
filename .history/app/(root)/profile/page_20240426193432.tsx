@@ -22,7 +22,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
 
   const orderedEvents = orders?.data?.map((order: IOrder) => order.event) || [];
 
-  const isAdmin = (await checkIsAdmin()) === userId;
+  const isAdmin = (await checkIsAdmin()) === user._id;
 
   return (
     <>
@@ -67,13 +67,11 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           totalPages={orders?.totalPages}
         />
 
-        {isAdmin && (
-          <div className="max-w-[200px] mt-5">
-            <Button asChild size="lg" className="button hidden sm:flex">
-              <Link href={`admin/${userId}`}>Admin</Link>
-            </Button>
-          </div>
-        )}
+        <div className="max-w-[200px] mt-5">
+          <Button asChild size="lg" className="button hidden sm:flex">
+            <Link href={`admin/${userId}`}>Admin</Link>
+          </Button>
+        </div>
       </section>
     </>
   );

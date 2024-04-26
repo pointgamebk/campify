@@ -22,7 +22,10 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
 
   const orderedEvents = orders?.data?.map((order: IOrder) => order.event) || [];
 
-  const isAdmin = (await checkIsAdmin()) === userId;
+  const isAdmin = await checkIsAdmin();
+
+  console.log(isAdmin);
+  console.log(userId);
 
   return (
     <>

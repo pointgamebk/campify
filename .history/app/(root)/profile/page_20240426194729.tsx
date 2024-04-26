@@ -24,6 +24,9 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
 
   const isAdmin = (await checkIsAdmin()) === userId;
 
+  console.log(isAdmin);
+  console.log(userId);
+
   return (
     <>
       {/* My Tickets */}

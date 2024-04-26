@@ -191,16 +191,10 @@ export async function updateProfile(
   }
 }
 
-export async function checkIsAdmin() {
+export async function checkIsAdmin(id: string) {
   try {
     await connectToDatabase();
 
-    const admin = await User.findOne({ username: "bigdog" });
-
-    if (!admin) throw new Error("Admin not found");
-
-    return JSON.parse(JSON.stringify(admin._id));
-  } catch (error) {
-    handleError(error);
-  }
+    const admin = await User.findOne({ _id: id, role: "admin" });
+  } catch (error) {}
 }
