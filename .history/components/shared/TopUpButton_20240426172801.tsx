@@ -23,7 +23,7 @@ export const TopUpButton = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="text-green h4-semibold">
-        <h4>Top Up Button</h4>
+        <h4>Top Up</h4>
       </AlertDialogTrigger>
 
       <AlertDialogContent className="bg-white">

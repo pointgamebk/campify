@@ -1,7 +1,7 @@
+import DeleteStripeAccountForm from "@/components/shared/DeleteStripeAccountForm";
 import { getPendingOrders } from "@/lib/actions/order.actions";
 
 import { TransferConfirmation } from "@/components/shared/TransferConfirmation";
-import { TopUpButton } from "@/components/shared/TopUpButton";
 
 type AdminPageProps = {
   params: { id: string };
@@ -16,21 +16,15 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
         <h3 className="wrapper h3-bold text-center sm:text-left text-tan">
           Admin Dashboard
         </h3>
-      </section>
 
-      <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-        <h3 className="wrapper h3-bold text-center sm:text-left text-tan">
-          Top Up
-        </h3>
-
-        <div className="wrapper">
-          <TopUpButton />
+        <div className="wrapper my-8">
+          <DeleteStripeAccountForm />
         </div>
       </section>
 
       <section className=" bg-dotted-pattern bg-cover bg-center py-5 px-10 md:py-10">
         <h3 className="wrapper h3-bold text-center sm:text-left text-tan">
-          Pending Orders
+          Pending Transfers
         </h3>
 
         <table className="w-full border-collapse border-t">
@@ -54,7 +48,7 @@ const AdminPage = async ({ params: { id } }: AdminPageProps) => {
             {orders && orders.length === 0 ? (
               <tr className="border-b">
                 <td colSpan={5} className="py-4 text-center text-gray-500">
-                  No pending orders found.
+                  No orders found.
                 </td>
               </tr>
             ) : (

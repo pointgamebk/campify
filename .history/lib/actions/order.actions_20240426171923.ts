@@ -187,7 +187,7 @@ export async function getOrdersByUser({
   }
 }
 
-// GET PENDING ORDERS
+// GET ORDERS
 export const getPendingOrders = async () => {
   try {
     const orders = await populateOrder(
@@ -241,7 +241,7 @@ export const createTopUp = async () => {
       statement_descriptor: "Top-up",
     });
 
-    if (!topup) throw new Error("Top-up failed");
+    console.log("Topup created: ", topup);
 
     return JSON.parse(JSON.stringify(topup));
   } catch (error) {
