@@ -86,7 +86,7 @@ export type GetAllEventsParams = {
 export type GetEventsByOrganizerParams = {
   organizerId: string;
   limit?: number;
-  page: number | string;
+  page: number;
 };
 
 export type GetRelatedEventsByCategoryParams = {

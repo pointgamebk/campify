@@ -156,8 +156,8 @@ export async function getEventsByOrganizer({
   try {
     await connectToDatabase();
 
-    const conditions = { organizer: organizerId };
-    const skipAmount = ((page as number) - 1) * limit;
+    const conditions = { organizer: userId };
+    const skipAmount = (page - 1) * limit;
 
     const eventsQuery = Event.find(conditions)
       .sort({ createdAt: "desc" })

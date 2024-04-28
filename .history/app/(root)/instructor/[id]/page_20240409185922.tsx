@@ -1,6 +1,6 @@
 import Collection from "@/components/shared/Collection";
 import { getUserById } from "@/lib/actions/user.actions";
-import { getEventsByOrganizer } from "@/lib/actions/event.actions";
+import { getEventsByUser } from "@/lib/actions/event.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
 
@@ -13,8 +13,8 @@ const InstructorDetails = async ({
 
   const eventsPage = Number(searchParams?.eventsPage) || 1;
 
-  const organizedEvents = await getEventsByOrganizer({
-    organizerId: instructorId,
+  const organizedEvents = await getEventsByUser({
+    userId: instructorId,
     page: eventsPage,
   });
 

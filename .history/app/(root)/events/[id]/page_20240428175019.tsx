@@ -28,6 +28,8 @@ const EventDetails = async ({
 
   const soldOut = event.noLimit ? false : (orders ?? 0) >= event.limit;
 
+  console.log(soldOut);
+
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,

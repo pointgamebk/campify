@@ -3,6 +3,7 @@ import Collection from "@/components/shared/Collection";
 import {
   getEventById,
   getRelatedEventsByCategory,
+  getEventsByOrganizer,
 } from "@/lib/actions/event.actions";
 import { getNumberOfOrdersByEvent } from "@/lib/actions/order.actions";
 import { SearchParamProps } from "@/types";
@@ -26,11 +27,14 @@ const EventDetails = async ({
 
   const orders = await getNumberOfOrdersByEvent(id);
 
-  const soldOut = event.noLimit ? false : (orders ?? 0) >= event.limit;
+  // const relatedEvents = await getRelatedEventsByCategory({
+  //   categoryId: event.category._id,
+  //   eventId: event._id,
+  //   page: searchParams.page as string,
+  // });
 
-  const relatedEvents = await getRelatedEventsByCategory({
-    categoryId: event.category._id,
-    eventId: event._id,
+  const relatedEvents = await getEventsByOrganizer({
+    organizerId: event.category._id,
     page: searchParams.page as string,
   });
 
@@ -75,7 +79,7 @@ const EventDetails = async ({
             </div>
 
             {/* checkout button  */}
-            {userId !== event.organizer._id && !attending && !soldOut && (
+            {userId !== event.organizer._id && !attending && (
               <CheckoutButton event={event} />
             )}
 

@@ -148,8 +148,8 @@ export async function getAllEvents({
 }
 
 // GET EVENTS BY ORGANIZER
-export async function getEventsByUser({
-  userId,
+export async function getEventsByOrganizer({
+  organizerId,
   limit = 6,
   page,
 }: GetEventsByUserParams) {
