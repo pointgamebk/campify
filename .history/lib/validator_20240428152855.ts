@@ -17,7 +17,6 @@ export const eventFormSchema = z.object({
   price: z.string(),
   isFree: z.boolean(),
   limit: z.string(),
-  noLimit: z.boolean(),
 });
 
 export const profileFormSchema = z.object({

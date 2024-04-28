@@ -153,24 +153,6 @@ export async function getOrdersByEvent({
   }
 }
 
-// GET NUMBER OF ORDERS BY EVENT
-export async function getNumberOfOrdersByEvent(eventId: string) {
-  try {
-    await connectToDatabase();
-
-    if (!eventId) throw new Error("Event ID is required");
-    const eventObjectId = new ObjectId(eventId);
-
-    const orders = await Order.countDocuments({
-      event: eventObjectId,
-    });
-
-    return orders;
-  } catch (error) {
-    handleError(error);
-  }
-}
-
 // GET ORDERS BY USER
 export async function getOrdersByUser({
   userId,

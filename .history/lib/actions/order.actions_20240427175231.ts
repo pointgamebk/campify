@@ -18,17 +18,11 @@ import User from "../database/models/user.model";
 import { revalidatePath } from "next/cache";
 
 const populateOrder = (query: any) => {
-  return query
-    .populate({
-      path: "instructor",
-      model: User,
-      select: "_id stripeAccountId firstName lastName",
-    })
-    .populate({
-      path: "event",
-      model: Event,
-      select: "_id endDateTime",
-    });
+  return query.populate({
+    path: "instructor",
+    model: User,
+    select: "_id stripeAccountId firstName lastName",
+  });
 };
 
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
@@ -153,24 +147,6 @@ export async function getOrdersByEvent({
   }
 }
 
-// GET NUMBER OF ORDERS BY EVENT
-export async function getNumberOfOrdersByEvent(eventId: string) {
-  try {
-    await connectToDatabase();
-
-    if (!eventId) throw new Error("Event ID is required");
-    const eventObjectId = new ObjectId(eventId);
-
-    const orders = await Order.countDocuments({
-      event: eventObjectId,
-    });
-
-    return orders;
-  } catch (error) {
-    handleError(error);
-  }
-}
-
 // GET ORDERS BY USER
 export async function getOrdersByUser({
   userId,
@@ -213,17 +189,37 @@ export async function getOrdersByUser({
 
 // GET PENDING ORDERS
 export const getPendingOrders = async () => {
-  try {
-    await connectToDatabase();
+  const currentDate = new Date();
+  const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
+  const conditions = {
+    $and: [
+      { startDateTime: { $gte: pastDay } },
+      { status: "pending" }, // Additional condition for status
+    ],
+  };
 
+  try {
     const orders = await populateOrder(
-      Order.find({ status: "pending" }).sort({ createdAt: "desc" })
+      Order.find(conditions).sort({ createdAt: "desc" })
     );
 
     return JSON.parse(JSON.stringify(orders));
   } catch (error) {
     handleError(error);
   }
+  // const currentDate = new Date();
+  // const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
+  // const conditions = {
+  //   $and: [{ startDateTime: { $gte: pastDay } }],
+  // };
+  // try {
+  //   const orders = await populateOrder(
+  //     Order.find({ status: "pending" }).sort({ createdAt: "desc" })
+  //   );
+  //   return JSON.parse(JSON.stringify(orders));
+  // } catch (error) {
+  //   handleError(error);
+  // }
 };
 
 // CREATE TRANSFER OF FUNDS TO INSTRUCTOR STRIPE ACCOUNT

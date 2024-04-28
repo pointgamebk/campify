@@ -34,6 +34,7 @@ export type IOrderItem = {
   };
   event: {
     _id: string;
+    title: string;
     endDateTime: Date;
   };
 };

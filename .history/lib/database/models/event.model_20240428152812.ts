@@ -11,8 +11,7 @@ export interface IEvent extends Document {
   endDateTime: Date;
   price: number;
   isFree: boolean;
-  limit: number;
-  noLimit: boolean;
+  limit?: number;
   category: { _id: string; name: string };
   organizer: { _id: string; firstName: string; lastName: string };
   attendees: { _id: string }[];
@@ -29,7 +28,6 @@ const EventSchema = new Schema({
   price: { type: Number },
   isFree: { type: Boolean, default: false },
   limit: { type: Number },
-  noLimit: { type: Boolean, default: false },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   organizer: { type: Schema.Types.ObjectId, ref: "User" },
   attendees: [{ type: Schema.Types.ObjectId, ref: "User" }],

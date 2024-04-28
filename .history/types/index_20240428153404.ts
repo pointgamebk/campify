@@ -47,7 +47,6 @@ export type CreateEventParams = {
     price: number;
     isFree: boolean;
     limit: number;
-    noLimit: boolean;
   };
   path: string;
 };
@@ -66,7 +65,6 @@ export type UpdateEventParams = {
     price: number;
     isFree: boolean;
     limit: number;
-    noLimit: boolean;
   };
   path: string;
 };

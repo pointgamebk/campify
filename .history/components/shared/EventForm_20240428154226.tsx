@@ -389,7 +389,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                                 htmlFor="noLimit"
                                 className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                               >
-                                No Limit
+                                Unlimited Entry
                               </label>
                               <Checkbox
                                 onCheckedChange={field.onChange}

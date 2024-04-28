@@ -59,7 +59,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     defaultValues: {
       ...initialValues,
       price: initialValues.price.toString(),
-      limit: initialValues.limit.toString(),
+      limit: initialValues.limit?.toString(),
     },
   });
 
@@ -377,31 +377,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       type="number"
                       {...field}
                       className="input-field"
-                    />
-                    <FormField
-                      control={form.control}
-                      name="noLimit"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <div className="flex items-center">
-                              <label
-                                htmlFor="noLimit"
-                                className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                              >
-                                No Limit
-                              </label>
-                              <Checkbox
-                                onCheckedChange={field.onChange}
-                                checked={field.value}
-                                id="noLimit"
-                                className="mr-2 h-5 w-5 border-2 border-green"
-                              />
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
                     />
                   </div>
                 </FormControl>

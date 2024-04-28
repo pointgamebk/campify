@@ -24,15 +24,15 @@ const EventDetails = async ({
 
   const attending = event.attendees.some((a: string) => a === userId);
 
-  const orders = await getNumberOfOrdersByEvent(id);
-
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,
     page: searchParams.page as string,
   });
 
-  console.log("orders", orders);
+  const orders = await getNumberOfOrdersByEvent(id);
+
+  console.log(orders);
 
   return (
     <>
@@ -112,7 +112,7 @@ const EventDetails = async ({
                 {event.description}
               </p>
               <p className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">
-                {event.limit}
+                {event.url}
               </p>
             </div>
           </div>
