@@ -109,14 +109,9 @@ const EventDetails = async ({
               <p className="p-medium-16 lg:p-regular-18 text-tan">
                 {event.description}
               </p>
-              {!event.noLimit && (
-                <p className="p-bold-20 text-green">
-                  Spots remaining:{" "}
-                  <span className="text-tan">
-                    {orders ? event.limit - orders : event.limit}
-                  </span>
-                </p>
-              )}
+              <p className="p-medium-16 lg:p-regular-18 truncate text-green">
+                Spots remaining: <span className="text-tan">{event.limit}</span>
+              </p>
             </div>
           </div>
         </div>
