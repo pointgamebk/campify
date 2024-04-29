@@ -38,8 +38,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
 
   const instructor = await User.findById(order.instructor);
 
-  const buyer = await User.findById(order.buyer);
-
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -56,7 +54,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       ],
       payment_intent_data: {
         capture_method: "automatic_async",
-        receipt_email: buyer.email,
         metadata: {
           account: instructor.stripeAccountId,
         },

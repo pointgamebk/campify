@@ -28,6 +28,11 @@ const populateOrder = (query: any) => {
       path: "event",
       model: Event,
       select: "_id endDateTime",
+    })
+    .populate({
+      path: "buyer",
+      model: User,
+      select: "_id email",
     });
 };
 
@@ -56,7 +61,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       ],
       payment_intent_data: {
         capture_method: "automatic_async",
-        receipt_email: buyer.email,
         metadata: {
           account: instructor.stripeAccountId,
         },

@@ -28,6 +28,11 @@ const populateOrder = (query: any) => {
       path: "event",
       model: Event,
       select: "_id endDateTime",
+    })
+    .populate({
+      path: "buyer",
+      model: User,
+      select: "_id email",
     });
 };
 
@@ -37,8 +42,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
   const price = order.isFree ? 0 : order.price * 100;
 
   const instructor = await User.findById(order.instructor);
-
-  const buyer = await User.findById(order.buyer);
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -56,7 +59,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       ],
       payment_intent_data: {
         capture_method: "automatic_async",
-        receipt_email: buyer.email,
         metadata: {
           account: instructor.stripeAccountId,
         },
