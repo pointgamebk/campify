@@ -31,7 +31,7 @@ export const TransferConfirmation = ({
   let [isPending, startTransition] = useTransition();
 
   const transfer = {
-    amount: Number((amount * 100).toFixed(0)),
+    amount: (amount * 100).toFixed(0),
     destination,
     transfer_group,
     path: pathname,

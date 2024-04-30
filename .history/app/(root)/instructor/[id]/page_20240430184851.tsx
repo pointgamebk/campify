@@ -19,11 +19,11 @@ const InstructorDetails = async ({
     page: eventsPage,
   });
 
-  // Filter events that have already ended
+  // Pending orders for events that have already ended
   const currentDate = new Date();
   const filteredEvents = organizedEvents?.data.filter((event: IEvent) => {
     const eventEndDateTime = new Date(event.endDateTime);
-    return eventEndDateTime > currentDate;
+    return eventEndDateTime < currentDate;
   });
 
   return (

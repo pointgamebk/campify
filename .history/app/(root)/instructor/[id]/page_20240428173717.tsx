@@ -3,7 +3,6 @@ import { getUserById } from "@/lib/actions/user.actions";
 import { getEventsByOrganizer } from "@/lib/actions/event.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
-import { IEvent } from "@/lib/database/models/event.model";
 
 const InstructorDetails = async ({
   params: { id },
@@ -17,13 +16,6 @@ const InstructorDetails = async ({
   const organizedEvents = await getEventsByOrganizer({
     organizerId: instructorId,
     page: eventsPage,
-  });
-
-  // Filter events that have already ended
-  const currentDate = new Date();
-  const filteredEvents = organizedEvents?.data.filter((event: IEvent) => {
-    const eventEndDateTime = new Date(event.endDateTime);
-    return eventEndDateTime > currentDate;
   });
 
   return (
@@ -74,7 +66,7 @@ const InstructorDetails = async ({
         <h2 className="h2-bold text-tan">Upcoming Camps</h2>
 
         <Collection
-          data={filteredEvents}
+          data={organizedEvents?.data}
           emptyTitle="No events created yet"
           emptyStateSubtext="Go create some now!"
           collectionType="Events_Organized"
