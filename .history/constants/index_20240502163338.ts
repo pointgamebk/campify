@@ -43,7 +43,7 @@ export const deleteStripeAccountDefaultValues = {
 };
 
 // in percentage
-export const processingFee = 0.08;
+export const processingPercentage = 0.08;
 
 // in cents
 export const stripeFee = 0.3;

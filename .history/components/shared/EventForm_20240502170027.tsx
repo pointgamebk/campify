@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -65,6 +65,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
+    console.log(values);
     let uploadedImageUrl = values.imageUrl;
 
     if (files.length > 0) {
@@ -359,6 +360,16 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
           <FormField
             control={form.control}
             name="limit"
+            rules={{
+              required: {
+                value: !noLimit, // Require value if noLimit is false
+                message: "Please enter a limit",
+              },
+              min: {
+                value: 1, // Optional: Set minimum limit
+                message: "Limit must be greater than 0",
+              },
+            }}
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>

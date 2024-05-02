@@ -24,7 +24,7 @@ export const eventDefaultValues = {
   price: "",
   isFree: false,
   limit: "",
-  noLimit: false,
+  noLimit: true,
 };
 
 export const placesDefaultValues = {
