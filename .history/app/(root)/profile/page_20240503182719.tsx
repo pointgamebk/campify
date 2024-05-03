@@ -11,11 +11,12 @@ import Link from "next/link";
 const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   const { sessionClaims } = auth();
 
-  // Session User ID
+  //Session user id
   const userId = sessionClaims?.userId as string;
 
   const user = await getUserById(userId);
 
+  //const ordersPage = Number(searchParams?.ordersPage) || 1;
   const page = Number(searchParams?.page) || 1;
 
   const orders = await getOrdersByUser({ userId, page });
