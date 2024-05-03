@@ -126,7 +126,7 @@ const Legal = async () => {
               processed payment and relates to the cost of processing payments
               from patrons, including recurring billing, recovering declined
               payments, and fighting fraud. Currently, the payment processing
-              fee is 2.9% of the total price of the offering, plus $0.30 per
+              fee is 2.9% of the total price of the offering, plus $0.30 per per
               successful charge for domestic cards.
             </li>
           </ul>

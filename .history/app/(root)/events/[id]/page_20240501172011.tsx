@@ -22,8 +22,6 @@ const EventDetails = async ({
   const userId = sessionClaims?.userId as string;
   const event = await getEventById(id);
 
-  const page = Number(searchParams?.page) || 1;
-
   const attending = event.attendees.some((a: string) => a === userId);
 
   const orders = await getNumberOfOrdersByEvent(id);
@@ -33,7 +31,7 @@ const EventDetails = async ({
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,
-    page,
+    page: searchParams.page as string,
   });
 
   return (
@@ -136,7 +134,7 @@ const EventDetails = async ({
           emptyStateSubtext="Come back later"
           collectionType="All_Events"
           limit={3}
-          page={page}
+          page={searchParams.page as string}
           totalPages={relatedEvents?.totalPages}
         />
       </section>

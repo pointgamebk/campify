@@ -81,13 +81,13 @@ const Legal = async () => {
             resolution of payments disputes, though, for purchases made through
             certain platforms (like the App Store), the associated platforms may
             handle these payments issues. We try to provide timely access to the
-            funds you've earned on Campify, usually within 48 hours after the
-            camp or event has ended. Purchases made on certain platforms (like
-            the App Store) and different levels and types of Campify service may
-            have different timelines associated with funds becoming accessible
-            to you and/or may require that reserves of funds are withheld from
-            becoming accessible to you. You may, however, occasionally
-            experience further delays in accessing these funds.
+            funds you've earned on Campify. Purchases made on certain platforms
+            (like the App Store) and different levels and types of Campify
+            service may have different timelines associated with funds becoming
+            accessible to you and/or may require that reserves of funds are
+            withheld from becoming accessible to you. You can learn more here.
+            You may, however, occasionally experience further delays in
+            accessing these funds.
           </p>
           <p className="text-white">
             We may also block or withhold access to these funds for violations
@@ -118,7 +118,7 @@ const Legal = async () => {
               The platform fee, which may include a flat fee and/or is
               calculated as a percentage of successfully processed payments.
               Currently, the platform fee is 5.1% of the total price of the
-              purchase.
+              offering.
             </li>
             <li>
               The payment processing fee, which is calculated as a percentage of
@@ -127,7 +127,6 @@ const Legal = async () => {
               from patrons, including recurring billing, recovering declined
               payments, and fighting fraud. Currently, the payment processing
               fee is 2.9% of the total price of the offering, plus $0.30 per
-              successful charge for domestic cards.
             </li>
           </ul>
 
@@ -143,14 +142,17 @@ const Legal = async () => {
             Forms 1099-K, we treat all instructor earnings as earned for the
             sales of goods or services. You are responsible for reporting any
             income, withholding, or other earnings-based taxes which may be due
-            as a result of money you've earned on Campify.
+            as a result of money you've earned on Campify. You can learn more in
+            our Tax Help Center.
           </p>
 
           <h5 className="h5-bold text-white">Restrictions</h5>
 
           <p className="text-white">
-            We don't allow camps or events that violate our terms or policies. A
-            high level summary of those rules is that we don't allow:
+            We don't allow camps or events that violate our terms or policies.
+            You can learn more by visiting our Community Guidelines and Benefit
+            Guidelines. A high level summary of those rules is that we don't
+            allow:
           </p>
 
           <ul className="list-disc ml-4 text-white">
@@ -176,27 +178,27 @@ const Legal = async () => {
         </div>
 
         <div className="flex flex-col gap-6 md:pr-40">
-          <h3 className="h3-bold text-white">Being a Trainee or Attendee</h3>
+          <h3 className="h3-bold text-white">Being a Trainee</h3>
 
           <p className="text-white italic">
-            To summarize: A trainee or attendee is someone who makes a purchase
-            on Campify, which provides exclusive training, access and assistance
-            from accomplished athletes. Through a camp or event on Campify,
-            trainees may receive training and directly interact with instructors
-            using tools supplied by us, and, through Campify, have the
-            opportunity to engage with a community of trainees and instructors.
+            To summarize: A trainee is someone who makes a purchase on Campify,
+            which provides exclusive training and assistance from accomplished
+            athletes. Through a camp or event on Campify, trainees may receive
+            training and directly interact with instructors using tools supplied
+            by us, and, through Campify, have the opportunity to engage with a
+            community of trainees and instructors.
           </p>
 
           <p className="text-white">
-            To become a trainee or attendee, simply purchase or freely obtain a
-            ticket on Campify. Subject to these terms and full payment of all
-            applicable charges, to the extent a ticket includes access to one or
-            more of an instructor's camps or events, you receive a
-            non-exclusive, non-transferable, non-sublicensable, revocable,
-            limited license to access and attend those camps or events for your
-            own private, personal, non-promotional, non-commercial use. Camps or
-            events you gain access to in this manner will generally continue to
-            be available to you, but may become unavailable at any time as
+            To become a trainee, simply purchase or freely obtain a ticket on
+            Campify. Subject to these terms and full payment of all applicable
+            charges, to the extent a ticket includes access to one or more of an
+            instructor's camps or events, you receive a non-exclusive,
+            non-transferable, non-sublicensable, revocable, limited license to
+            access and attend those camps or events for your own private,
+            personal, non-promotional, non-commercial use. Camps or events you
+            gain access to in this manner will generally continue to be
+            available to you, but may become unavailable at any time as
             described below.
           </p>
 
@@ -222,13 +224,12 @@ const Legal = async () => {
 
           <p className="text-white">
             <span className="p-bold-16">Refunds.</span> Our policy is not to
-            provide refunds after the camp or event has ended, including if you
-            lose access to camps and/or events as described above, though we may
-            allow for some exceptions where refunds are granted at our sole
-            discretion. If you made a purchase on certain platforms (like the
-            App Store), then Campify may not be able to address any associated
-            refund requests, and you may need to contact those platforms
-            directly.
+            provide refunds, including if you lose access to camps and/or events
+            as described above, though we may allow for some exceptions where
+            refunds are granted at our sole discretion. If you made a purchase
+            on certain platforms (like the App Store), then Campify may not be
+            able to address any associated refund requests, and you may need to
+            contact those platforms directly. You can learn more here.
           </p>
         </div>
       </div>

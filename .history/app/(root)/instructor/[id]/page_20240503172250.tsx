@@ -1,8 +1,9 @@
 import Collection from "@/components/shared/Collection";
 import { getUserById } from "@/lib/actions/user.actions";
-import { getFutureEventsByOrganizer } from "@/lib/actions/event.actions";
+import { getEventsByOrganizer } from "@/lib/actions/event.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
+import { IEvent } from "@/lib/database/models/event.model";
 
 const InstructorDetails = async ({
   params: { id },
@@ -11,12 +12,21 @@ const InstructorDetails = async ({
   const instructorId = id;
   const instructor = await getUserById(instructorId);
 
+  // const eventsPage = Number(searchParams?.eventsPage) || 1;
   const page = Number(searchParams?.page) || 1;
 
-  const relatedEvents = await getFutureEventsByOrganizer({
+  const relatedEvents = await getEventsByOrganizer({
     organizerId: instructorId,
+    // page: eventsPage,
     page,
   });
+
+  // Filter events that have already ended
+  // const currentDate = new Date();
+  // const filteredEvents = organizedEvents?.data.filter((event: IEvent) => {
+  //   const eventEndDateTime = new Date(event.endDateTime);
+  //   return eventEndDateTime > currentDate;
+  // });
 
   return (
     <>
@@ -71,7 +81,9 @@ const InstructorDetails = async ({
           emptyStateSubtext="Go create some now!"
           collectionType="Events_Organized"
           limit={3}
+          // page={eventsPage}
           page={page}
+          urlParamName="eventsPage"
           totalPages={relatedEvents?.totalPages}
         />
       </section>

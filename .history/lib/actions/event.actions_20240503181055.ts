@@ -152,7 +152,7 @@ export async function getAllEvents({
 }
 
 // GET ALL EVENTS BY ORGANIZER
-export async function getAllEventsByOrganizer({
+export async function getEventsByOrganizer({
   organizerId,
   limit = 3,
   page = 1,
@@ -197,9 +197,10 @@ export async function getFutureEventsByOrganizer({
     };
 
     const skipAmount = (Number(page) - 1) * limit;
+    // const skipAmount = ((page as number) - 1) * limit;
 
     const eventsQuery = Event.find(conditions)
-      .sort({ startDateTime: "asc" })
+      .sort({ startDateTime: "desc" })
       .skip(skipAmount)
       .limit(limit);
 
@@ -225,20 +226,13 @@ export async function getRelatedEventsByCategory({
   try {
     await connectToDatabase();
 
-    const currentDate = new Date();
-    const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
-
     const skipAmount = (Number(page) - 1) * limit;
     const conditions = {
-      $and: [
-        { category: categoryId },
-        { _id: { $ne: eventId } },
-        { startDateTime: { $gte: pastDay } },
-      ],
+      $and: [{ category: categoryId }, { _id: { $ne: eventId } }],
     };
 
     const eventsQuery = Event.find(conditions)
-      .sort({ startDateTime: "asc" })
+      .sort({ createdAt: "desc" })
       .skip(skipAmount)
       .limit(limit);
 

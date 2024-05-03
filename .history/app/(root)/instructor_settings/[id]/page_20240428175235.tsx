@@ -1,6 +1,6 @@
 import ConnectButton from "@/components/shared/ConnectButton";
 import { getUserById } from "@/lib/actions/user.actions";
-import { getAllEventsByOrganizer } from "@/lib/actions/event.actions";
+import { getEventsByOrganizer } from "@/lib/actions/event.actions";
 import { IEvent } from "@/lib/database/models/event.model";
 import Link from "next/link";
 import { formatDateTime } from "@/lib/utils";
@@ -14,7 +14,7 @@ const InstructorSettings = async ({
   params: { id },
 }: InstructorSettingsProps) => {
   const user = await getUserById(id);
-  const events = await getAllEventsByOrganizer({ organizerId: id, page: 1 });
+  const events = await getEventsByOrganizer({ organizerId: id, page: 1 });
 
   return (
     <>

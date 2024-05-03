@@ -81,13 +81,13 @@ const Legal = async () => {
             resolution of payments disputes, though, for purchases made through
             certain platforms (like the App Store), the associated platforms may
             handle these payments issues. We try to provide timely access to the
-            funds you've earned on Campify, usually within 48 hours after the
-            camp or event has ended. Purchases made on certain platforms (like
-            the App Store) and different levels and types of Campify service may
-            have different timelines associated with funds becoming accessible
-            to you and/or may require that reserves of funds are withheld from
-            becoming accessible to you. You may, however, occasionally
-            experience further delays in accessing these funds.
+            funds you've earned on Campify. Purchases made on certain platforms
+            (like the App Store) and different levels and types of Campify
+            service may have different timelines associated with funds becoming
+            accessible to you and/or may require that reserves of funds are
+            withheld from becoming accessible to you. You can learn more here.
+            You may, however, occasionally experience further delays in
+            accessing these funds.
           </p>
           <p className="text-white">
             We may also block or withhold access to these funds for violations
@@ -126,7 +126,7 @@ const Legal = async () => {
               processed payment and relates to the cost of processing payments
               from patrons, including recurring billing, recovering declined
               payments, and fighting fraud. Currently, the payment processing
-              fee is 2.9% of the total price of the offering, plus $0.30 per
+              fee is 2.9% of the total price of the offering, plus $0.30 per per
               successful charge for domestic cards.
             </li>
           </ul>
@@ -228,7 +228,7 @@ const Legal = async () => {
             discretion. If you made a purchase on certain platforms (like the
             App Store), then Campify may not be able to address any associated
             refund requests, and you may need to contact those platforms
-            directly.
+            directly. You can learn more here.
           </p>
         </div>
       </div>

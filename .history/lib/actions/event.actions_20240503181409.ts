@@ -152,7 +152,7 @@ export async function getAllEvents({
 }
 
 // GET ALL EVENTS BY ORGANIZER
-export async function getAllEventsByOrganizer({
+export async function getEventsByOrganizer({
   organizerId,
   limit = 3,
   page = 1,

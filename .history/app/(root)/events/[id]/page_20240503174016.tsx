@@ -36,6 +36,8 @@ const EventDetails = async ({
     page,
   });
 
+  console.log(relatedEvents?.data);
+
   return (
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
