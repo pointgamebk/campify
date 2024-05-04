@@ -1,18 +1,21 @@
 import ConnectButton from "@/components/shared/ConnectButton";
 import { getUserById } from "@/lib/actions/user.actions";
 import { getAllEventsByOrganizer } from "@/lib/actions/event.actions";
+import { IEvent } from "@/lib/database/models/event.model";
 import Link from "next/link";
+import { formatDateTime } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import Collection from "@/components/shared/Collection";
-import { SearchParamProps } from "@/types";
+import Pagination from "@/components/shared/Pagination";
+
+type InstructorSettingsProps = {
+  params: { id: string };
+};
 
 const InstructorSettings = async ({
   params: { id },
-  searchParams,
-}: SearchParamProps) => {
-  const page = Number(searchParams?.page) || 1;
+}: InstructorSettingsProps) => {
   const user = await getUserById(id);
-  const events = await getAllEventsByOrganizer({ organizerId: id, page });
+  const events = await getAllEventsByOrganizer({ organizerId: id, page: 1 });
 
   return (
     <>
@@ -57,15 +60,52 @@ const InstructorSettings = async ({
 
       {user.profileCompleted && (
         <section className="wrapper overflow-x-auto text-tan">
-          <Collection
-            data={events?.data}
-            emptyTitle="No events created yet"
-            emptyStateSubtext="Go create some now!"
-            collectionType="Events_Organized"
-            limit={3}
-            page={page}
-            totalPages={events?.totalPages}
-          />
+          <table className="w-full border-collapse border-t">
+            <thead>
+              <tr className="p-medium-14 border-b text-grey-500">
+                <th className="min-w-[200px] flex-1 py-3 pr-4 text-left text-tan">
+                  Camp Title
+                </th>
+                <th className="min-w-[150px] py-3 text-left text-tan">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {events && events.data.length === 0 ? (
+                <tr className="border-b">
+                  <td colSpan={5} className="py-4 text-center text-gray-500">
+                    No camps yet.
+                  </td>
+                </tr>
+              ) : (
+                <>
+                  {events &&
+                    events.data.map((row: IEvent) => (
+                      <tr
+                        key={row._id}
+                        className="p-regular-14 lg:p-regular-16 border-b "
+                        style={{ boxSizing: "border-box" }}
+                      >
+                        <td className="min-w-[200px] flex-1 py-4 pr-4 text-green">
+                          <Link href={`/orders?eventId=${row._id}`}>
+                            {row.title}
+                          </Link>
+                        </td>
+                        <td className="min-w-[100px] py-4">
+                          {formatDateTime(row.startDateTime).dateOnly}
+                        </td>
+                      </tr>
+                    ))}
+                </>
+              )}
+            </tbody>
+          </table>
+          {events && events.totalPages > 1 && (
+            <Pagination
+              urlParamName="page"
+              page={events.page}
+              totalPages={events.totalPages}
+            />
+          )}
         </section>
       )}
     </>
