@@ -285,7 +285,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       End Date:
                     </p>
                     <DatePicker
-                      selected={field.value}
+                      // selected={field.value}
+                      selected={startDateTime}
                       onChange={(date: Date) => field.onChange(date)}
                       showTimeSelect
                       timeInputLabel="Time:"

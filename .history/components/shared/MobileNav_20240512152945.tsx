@@ -30,7 +30,7 @@ const MobileNav = () => {
             width={128}
             height={38}
           /> */}
-          <h3 className="text-tan h3-medium">campify</h3>
+          <h3 className="text-tan">campify</h3>
           <Separator className="border border-gray-50" />
           <NavItems />
         </SheetContent>

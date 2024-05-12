@@ -258,7 +258,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       wrapperClassName="datePicker"
-                      minDate={new Date()}
+                      minDate={new Date()} // Optionally, you can set a minDate for the startDateTime
                     />
                   </div>
                 </FormControl>
