@@ -27,7 +27,7 @@ const InstructorDetails = async ({
               src={instructor.profilePhoto}
               alt="hero image"
               width={500}
-              height={500}
+              height={250}
               className="h-full min-h-[200px] object-cover object-center rounded-3xl"
             />
           </div>

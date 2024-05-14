@@ -20,12 +20,12 @@ const InstructorSettings = async ({
   const user = await getUserById(id);
   const events = await getAllEventsByOrganizer({ organizerId: id, page });
 
-  const isAuthorized = userId === id;
+  const isInstructor = userId === id;
 
   return (
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
-        {isAuthorized ? (
+        {isInstructor ? (
           <div className="wrapper grid grid-cols-1 gap-5">
             <h3 className="h3-bold text-tan">Instructor Dashboard</h3>
             <p className="text-tan">
@@ -51,13 +51,11 @@ const InstructorSettings = async ({
             </div>
           </div>
         ) : (
-          <div className="wrapper grid grid-cols-1 gap-5">
-            <h3 className="h3-bold text-tan">Invalid Access</h3>
-          </div>
+          <h1>Invalid Access</h1>
         )}
       </section>
 
-      {isAuthorized && user.profileCompleted && (
+      {isInstructor && user.profileCompleted && (
         <section className=" bg-slate bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
           <h3 className="wrapper h3-bold text-center text-tan sm:text-left ">
             Camp Details
@@ -74,7 +72,7 @@ const InstructorSettings = async ({
         </section>
       )}
 
-      {isAuthorized && user.profileCompleted && (
+      {user.profileCompleted && (
         <section className="wrapper overflow-x-auto text-tan">
           <Collection
             data={events?.data}

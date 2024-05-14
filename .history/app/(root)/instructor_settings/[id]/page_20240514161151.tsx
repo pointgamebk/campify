@@ -11,53 +11,40 @@ const InstructorSettings = async ({
   params: { id },
   searchParams,
 }: SearchParamProps) => {
-  const { sessionClaims } = auth();
-
-  // Session user ID
-  const userId = sessionClaims?.userId as string;
-
   const page = Number(searchParams?.page) || 1;
   const user = await getUserById(id);
   const events = await getAllEventsByOrganizer({ organizerId: id, page });
 
-  const isAuthorized = userId === id;
-
   return (
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
-        {isAuthorized ? (
-          <div className="wrapper grid grid-cols-1 gap-5">
-            <h3 className="h3-bold text-tan">Instructor Dashboard</h3>
-            <p className="text-tan">
-              Stripe Account: {user.stripeAccountId ? "Linked" : "Not Linked"}
-            </p>
-            <p className="text-tan">
-              Transfers enabled: {user.chargesEnabled ? "Yes" : "No"}
-            </p>
-            {user.chargesEnabled === false ? <ConnectButton /> : null}
-            {user.profileCompleted && (
-              <div className="text-green p-semibold-20">
-                <Link href={`/instructor/${id}/`}>My Instructor Profile</Link>
-              </div>
-            )}
-            <div className="text-green p-medium-18">
-              {user.chargesEnabled && (
-                <Link href={`/instructor/${id}/update`}>
-                  {user.profileCompleted
-                    ? "Update Profile"
-                    : "Complete Profile to Host Camps"}
-                </Link>
-              )}
+        <div className="wrapper grid grid-cols-1 gap-5">
+          <h3 className="h3-bold text-tan">Instructor Dashboard</h3>
+          <p className="text-tan">
+            Stripe Account: {user.stripeAccountId ? "Linked" : "Not Linked"}
+          </p>
+          <p className="text-tan">
+            Transfers enabled: {user.chargesEnabled ? "Yes" : "No"}
+          </p>
+          {user.chargesEnabled === false ? <ConnectButton /> : null}
+          {user.profileCompleted && (
+            <div className="text-green p-semibold-20">
+              <Link href={`/instructor/${id}/`}>My Instructor Profile</Link>
             </div>
+          )}
+          <div className="text-green p-medium-18">
+            {user.chargesEnabled && (
+              <Link href={`/instructor/${id}/update`}>
+                {user.profileCompleted
+                  ? "Update Profile"
+                  : "Complete Profile to Host Camps"}
+              </Link>
+            )}
           </div>
-        ) : (
-          <div className="wrapper grid grid-cols-1 gap-5">
-            <h3 className="h3-bold text-tan">Invalid Access</h3>
-          </div>
-        )}
+        </div>
       </section>
 
-      {isAuthorized && user.profileCompleted && (
+      {user.profileCompleted && (
         <section className=" bg-slate bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
           <h3 className="wrapper h3-bold text-center text-tan sm:text-left ">
             Camp Details
@@ -74,7 +61,7 @@ const InstructorSettings = async ({
         </section>
       )}
 
-      {isAuthorized && user.profileCompleted && (
+      {user.profileCompleted && (
         <section className="wrapper overflow-x-auto text-tan">
           <Collection
             data={events?.data}
