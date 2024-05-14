@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +38,8 @@ type EventFormProps = {
 
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
+
+  const [startDateTime, setStartDateTime] = useState(new Date());
 
   const initialValues =
     event && type === "Update"
@@ -75,10 +77,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     }
 
     if (type === "Create") {
-      if (values.startDateTime >= values.endDateTime) {
-        alert("The events's end date/time must be after its start date/time.");
-        return;
-      }
       try {
         const newEvent = await createEvent({
           event: {

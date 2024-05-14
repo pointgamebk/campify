@@ -1,20 +1,26 @@
 import Collection from "@/components/shared/Collection";
+import { auth } from "@clerk/nextjs";
 import { getUserById } from "@/lib/actions/user.actions";
 import { getFutureEventsByOrganizer } from "@/lib/actions/event.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
 
 const InstructorDetails = async ({
-  params: { id },
+  //params: { id },
   searchParams,
 }: SearchParamProps) => {
-  const instructorId = id;
-  const instructor = await getUserById(instructorId);
+  const { sessionClaims } = auth();
+  //const instructorId = id;
+  // Session User ID
+  const userId = sessionClaims?.userId as string;
+
+  //const instructor = await getUserById(instructorId);
+  const instructor = await getUserById(userId);
 
   const page = Number(searchParams?.page) || 1;
 
   const relatedEvents = await getFutureEventsByOrganizer({
-    organizerId: instructorId,
+    organizerId: userId,
     page,
   });
 
@@ -38,7 +44,7 @@ const InstructorDetails = async ({
                 {instructor.firstName} {instructor.lastName}
               </h2>
 
-              {instructor.profileSchool.lenght > 0 && (
+              {instructor.profileSchool.length > 0 && (
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <div className="flex gap-3">
                     <p className="p-medium-16 rounded-full bg-white/10 px-4 py-2.5 text-tan">
@@ -55,7 +61,7 @@ const InstructorDetails = async ({
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <p className="p-medium-18 ml-2 mt-2 sm:mt-0 text-green">
+                <p className="p-medium-20 ml-2 mt-2 sm:mt-0 text-green">
                   {instructor.profileContact}
                 </p>
               </div>
@@ -69,8 +75,8 @@ const InstructorDetails = async ({
 
         <Collection
           data={relatedEvents?.data}
-          emptyTitle="No events created yet"
-          emptyStateSubtext="Go create some now!"
+          emptyTitle="No camps created yet"
+          emptyStateSubtext="Visit How To Campify for help to get started"
           collectionType="Events_Organized"
           limit={3}
           page={page}

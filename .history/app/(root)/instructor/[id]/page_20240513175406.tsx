@@ -38,7 +38,7 @@ const InstructorDetails = async ({
                 {instructor.firstName} {instructor.lastName}
               </h2>
 
-              {instructor.profileSchool.lenght > 0 && (
+              {instructor.profileSchhol !== "" && (
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <div className="flex gap-3">
                     <p className="p-medium-16 rounded-full bg-white/10 px-4 py-2.5 text-tan">

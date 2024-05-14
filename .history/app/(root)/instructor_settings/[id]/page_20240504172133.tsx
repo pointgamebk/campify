@@ -26,12 +26,7 @@ const InstructorSettings = async ({
             Transfers enabled: {user.chargesEnabled ? "Yes" : "No"}
           </p>
           {user.chargesEnabled === false ? <ConnectButton /> : null}
-          {user.profileCompleted && (
-            <div className="text-green p-semibold-20">
-              <Link href={`/instructor/${id}/`}>My Instructor Profile</Link>
-            </div>
-          )}
-          <div className="text-green p-medium-18">
+          <div className="text-green">
             {user.chargesEnabled && (
               <Link href={`/instructor/${id}/update`}>
                 {user.profileCompleted
@@ -64,8 +59,8 @@ const InstructorSettings = async ({
         <section className="wrapper overflow-x-auto text-tan">
           <Collection
             data={events?.data}
-            emptyTitle="No camps created yet"
-            emptyStateSubtext="Visit How To Campify for help to get started"
+            emptyTitle="No events created yet"
+            emptyStateSubtext="Go create some now!"
             collectionType="Events_Organized"
             limit={3}
             page={page}

@@ -75,10 +75,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     }
 
     if (type === "Create") {
-      if (values.startDateTime >= values.endDateTime) {
-        alert("The events's end date/time must be after its start date/time.");
-        return;
-      }
       try {
         const newEvent = await createEvent({
           event: {

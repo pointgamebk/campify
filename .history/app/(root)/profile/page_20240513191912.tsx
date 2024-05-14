@@ -30,7 +30,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
       <section className=" bg-dotted-pattern bg-cover bg-center py-5">
         <div className="wrapper flex items-center justify-center sm:justify-between">
           <Button asChild size="lg" className="button hidden  sm:flex">
-            <Link href={`/instructor_settings/${userId}`}>
+            <Link href={"/instructor_settings/"}>
               {user.stripeAccountId
                 ? "Instructor Dashboard"
                 : "Become an Instructor"}

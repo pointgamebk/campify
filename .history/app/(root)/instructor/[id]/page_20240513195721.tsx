@@ -3,6 +3,7 @@ import { getUserById } from "@/lib/actions/user.actions";
 import { getFutureEventsByOrganizer } from "@/lib/actions/event.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
+import { IEvent } from "@/lib/database/models/event.model";
 
 const InstructorDetails = async ({
   params: { id },
@@ -12,6 +13,11 @@ const InstructorDetails = async ({
   const instructor = await getUserById(instructorId);
 
   const page = Number(searchParams?.page) || 1;
+
+  // const relatedEvents = await getEventsByOrganizer({
+  //   organizerId: instructorId,
+  //   page,
+  // });
 
   const relatedEvents = await getFutureEventsByOrganizer({
     organizerId: instructorId,

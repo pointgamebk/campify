@@ -3,6 +3,7 @@ import { getUserById } from "@/lib/actions/user.actions";
 import { getFutureEventsByOrganizer } from "@/lib/actions/event.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
+import { IEvent } from "@/lib/database/models/event.model";
 
 const InstructorDetails = async ({
   params: { id },
@@ -13,10 +14,22 @@ const InstructorDetails = async ({
 
   const page = Number(searchParams?.page) || 1;
 
+  // const relatedEvents = await getEventsByOrganizer({
+  //   organizerId: instructorId,
+  //   page,
+  // });
+
   const relatedEvents = await getFutureEventsByOrganizer({
     organizerId: instructorId,
     page,
   });
+
+  // Filter events that have already ended
+  // const currentDate = new Date();
+  // const filteredEvents = relatedEvents?.data.filter((event: IEvent) => {
+  //   const eventEndDateTime = new Date(event.endDateTime);
+  //   return eventEndDateTime > currentDate;
+  // });
 
   return (
     <>
@@ -38,15 +51,13 @@ const InstructorDetails = async ({
                 {instructor.firstName} {instructor.lastName}
               </h2>
 
-              {instructor.profileSchool.lenght > 0 && (
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <div className="flex gap-3">
-                    <p className="p-medium-16 rounded-full bg-white/10 px-4 py-2.5 text-tan">
-                      {instructor.profileSchool}
-                    </p>
-                  </div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="flex gap-3">
+                  <p className="p-medium-16 rounded-full bg-white/10 px-4 py-2.5 text-tan">
+                    {instructor.profileSchool}
+                  </p>
                 </div>
-              )}
+              </div>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <p className="p-medium-18 ml-2 mt-2 sm:mt-0 text-tan">
