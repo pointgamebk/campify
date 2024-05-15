@@ -39,10 +39,6 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
     const organizer = await User.findById(userId);
     if (!organizer) throw new Error("Organizer not found");
 
-    if (event.price === 0) {
-      event.isFree = true;
-    }
-
     if (event.limit === 0 && !event.noLimit) {
       event.noLimit = true;
     }

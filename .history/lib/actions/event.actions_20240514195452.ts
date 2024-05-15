@@ -13,7 +13,7 @@ import {
   UpdateEventParams,
   DeleteEventParams,
   GetAllEventsParams,
-  GetEventsByUserParams,
+  GetEventsByOrganizerParams,
   GetRelatedEventsByCategoryParams,
 } from "@/types";
 
@@ -38,6 +38,14 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
 
     const organizer = await User.findById(userId);
     if (!organizer) throw new Error("Organizer not found");
+
+    if (event.price === 0) {
+      event.isFree = true;
+    }
+
+    if (event.limit === 0 && !event.noLimit) {
+      event.noLimit = true;
+    }
 
     const newEvent = await Event.create({
       ...event,
@@ -147,20 +155,55 @@ export async function getAllEvents({
   }
 }
 
-// GET EVENTS BY ORGANIZER
-export async function getEventsByUser({
-  userId,
-  limit = 6,
-  page,
-}: GetEventsByUserParams) {
+// GET ALL EVENTS BY ORGANIZER
+export async function getAllEventsByOrganizer({
+  organizerId,
+  limit = 3,
+  page = 1,
+}: GetEventsByOrganizerParams) {
   try {
     await connectToDatabase();
 
-    const conditions = { organizer: userId };
-    const skipAmount = (page - 1) * limit;
+    const conditions = { organizer: organizerId };
+    const skipAmount = (Number(page) - 1) * limit;
 
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "desc" })
+      .sort({ startDateTime: "desc" })
+      .skip(skipAmount)
+      .limit(limit);
+
+    const events = await populateEvent(eventsQuery);
+    const eventsCount = await Event.countDocuments(conditions);
+
+    return {
+      data: JSON.parse(JSON.stringify(events)),
+      totalPages: Math.ceil(eventsCount / limit),
+    };
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+// GET ALL UPCOMING EVENTS BY ORGANIZER
+export async function getFutureEventsByOrganizer({
+  organizerId,
+  limit = 3,
+  page = 1,
+}: GetEventsByOrganizerParams) {
+  try {
+    await connectToDatabase();
+
+    const currentDate = new Date();
+    const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
+
+    const conditions = {
+      $and: [{ organizer: organizerId }, { startDateTime: { $gte: pastDay } }],
+    };
+
+    const skipAmount = (Number(page) - 1) * limit;
+
+    const eventsQuery = Event.find(conditions)
+      .sort({ startDateTime: "asc" })
       .skip(skipAmount)
       .limit(limit);
 
@@ -186,13 +229,20 @@ export async function getRelatedEventsByCategory({
   try {
     await connectToDatabase();
 
+    const currentDate = new Date();
+    const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
+
     const skipAmount = (Number(page) - 1) * limit;
     const conditions = {
-      $and: [{ category: categoryId }, { _id: { $ne: eventId } }],
+      $and: [
+        { category: categoryId },
+        { _id: { $ne: eventId } },
+        { startDateTime: { $gte: pastDay } },
+      ],
     };
 
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "desc" })
+      .sort({ startDateTime: "asc" })
       .skip(skipAmount)
       .limit(limit);
 

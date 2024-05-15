@@ -1,5 +1,4 @@
 import { IEvent } from "@/lib/database/models/event.model";
-import { formatDateTime } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +27,7 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
       />
 
       {isEventCreator && !hidePrice && (
-        <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl  p-3 shadow-sm transition-all">
+        <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl  p-3 shadow-sm transition-all bg-white">
           <Link href={`/events/${event._id}/update`}>
             <Image
               src="/assets/icons/edit.svg"
@@ -45,18 +44,15 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
       <div className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4 bg-white">
         {!hidePrice && (
           <div className="flex gap-2 bg-white">
-            <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60 ">
+            <span className="p-semibold-14 w-min rounded-full px-4 py-1 text-slate ">
               {event.isFree ? "FREE" : `$${event.price}`}
             </span>
-            <p className="p-semibold-14  rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
+            <p className="p-semibold-14  rounded-full bg-grey-500/20 px-4 py-1 text-slate line-clamp-1">
               {event.category.name}
             </p>
           </div>
         )}
 
-        {/* <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
-          {formatDateTime(event.startDateTime).dateTime}
-        </p> */}
         <CardLocaleConverter event={event} />
 
         <p className="p-medium-16 p-medium-18 text-grey-500">

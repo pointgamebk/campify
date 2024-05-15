@@ -6,6 +6,7 @@ import {
   CreateOrderParams,
   GetOrdersByEventParams,
   GetOrdersByUserParams,
+  CreateTransferParams,
 } from "@/types";
 import { redirect } from "next/navigation";
 import { handleError } from "../utils";
@@ -14,15 +15,30 @@ import Order from "../database/models/order.model";
 import Event from "../database/models/event.model";
 import { ObjectId } from "mongodb";
 import User from "../database/models/user.model";
+import { revalidatePath } from "next/cache";
+
+const populateOrder = (query: any) => {
+  return query
+    .populate({
+      path: "instructor",
+      model: User,
+      select: "_id stripeAccountId firstName lastName",
+    })
+    .populate({
+      path: "event",
+      model: Event,
+      select: "_id endDateTime",
+    });
+};
 
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-  const price = order.isFree ? 0 : Number(order.price) * 100;
+  const price = order.isFree ? 0 : order.price * 100;
 
-  const instructor = await User.findById(order.instructorId);
+  const instructor = await User.findById(order.instructor);
 
-  const event = await Event.findById(order.eventId);
+  const buyer = await User.findById(order.buyer);
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -39,23 +55,22 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
         },
       ],
       payment_intent_data: {
-        application_fee_amount: price * 0.05,
-        transfer_data: {
-          destination: instructor.stripeAccountId,
+        capture_method: "automatic_async",
+        receipt_email: buyer.email,
+        metadata: {
+          account: instructor.stripeAccountId,
         },
       },
       metadata: {
-        eventId: order.eventId,
-        buyerId: order.buyerId,
-        instructorId: order.instructorId,
+        event: order.event,
+        buyer: order.buyer,
+        instructor: order.instructor,
+        account: instructor.stripeAccountId,
       },
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
       cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
     });
-
-    event.attendees.push(order.buyerId);
-    await event.save();
 
     redirect(session.url!);
   } catch (error) {
@@ -69,8 +84,8 @@ export const createOrder = async (order: CreateOrderParams) => {
 
     const newOrder = await Order.create({
       ...order,
-      event: order.eventId,
-      buyer: order.buyerId,
+      event: order.event,
+      buyer: order.buyer,
     });
 
     return JSON.parse(JSON.stringify(newOrder));
@@ -141,11 +156,29 @@ export async function getOrdersByEvent({
   }
 }
 
+// GET NUMBER OF ORDERS BY EVENT
+export async function getNumberOfOrdersByEvent(eventId: string) {
+  try {
+    await connectToDatabase();
+
+    if (!eventId) throw new Error("Event ID is required");
+    const eventObjectId = new ObjectId(eventId);
+
+    const orders = await Order.countDocuments({
+      event: eventObjectId,
+    });
+
+    return orders;
+  } catch (error) {
+    handleError(error);
+  }
+}
+
 // GET ORDERS BY USER
 export async function getOrdersByUser({
   userId,
   limit = 3,
-  page,
+  page = 1,
 }: GetOrdersByUserParams) {
   try {
     await connectToDatabase();
@@ -161,6 +194,7 @@ export async function getOrdersByUser({
       .populate({
         path: "event",
         model: Event,
+        select: "_id endDateTime",
         populate: {
           path: "organizer",
           model: User,
@@ -180,3 +214,65 @@ export async function getOrdersByUser({
     handleError(error);
   }
 }
+
+// GET PENDING ORDERS
+export const getPendingOrders = async () => {
+  try {
+    await connectToDatabase();
+
+    const orders = await populateOrder(
+      Order.find({ status: "pending" }).sort({ createdAt: "desc" })
+    );
+
+    return JSON.parse(JSON.stringify(orders));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// CREATE TRANSFER OF FUNDS TO INSTRUCTOR STRIPE ACCOUNT
+export const createTransfer = async (transfer: CreateTransferParams) => {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+  try {
+    const newTransfer = await stripe.transfers.create({
+      amount: transfer.amount,
+      currency: "usd",
+      destination: transfer.destination,
+      transfer_group: transfer.transfer_group,
+    });
+
+    if (!newTransfer) throw new Error("Transfer failed");
+
+    const order = await Order.findOneAndUpdate(
+      { _id: transfer.transfer_group },
+      { status: "transferred" }
+    );
+
+    revalidatePath(transfer.path);
+
+    return JSON.parse(JSON.stringify(newTransfer));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// CREATE TOPUP OF STRIPE ACCOUNT
+export const createTopUp = async () => {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+  try {
+    const topup = await stripe.topups.create({
+      amount: 5000,
+      currency: "usd",
+      description: "Testing top-up",
+      statement_descriptor: "Top-up",
+    });
+
+    if (!topup) throw new Error("Top-up failed");
+
+    return JSON.parse(JSON.stringify(topup));
+  } catch (error) {
+    handleError(error);
+  }
+};

@@ -1,10 +1,10 @@
 import { IEvent } from "@/lib/database/models/event.model";
-import { formatDateTime } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { Separator } from "../ui/separator";
+import CardLocaleConverter from "./CardLocaleConverter";
 
 type CardProps = {
   event: IEvent;
@@ -47,15 +47,13 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
             <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60 ">
               {event.isFree ? "FREE" : `$${event.price}`}
             </span>
-            <p className="p-semibold-14  rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
+            <p className="p-semibold-14  rounded-full bg-grey-500/20 px-4 py-1 text-slate line-clamp-1">
               {event.category.name}
             </p>
           </div>
         )}
 
-        <p className="p-medium-16 p-medium-18 text-grey-500 bg-white">
-          {formatDateTime(event.startDateTime).dateTime}
-        </p>
+        <CardLocaleConverter event={event} />
 
         <p className="p-medium-16 p-medium-18 text-grey-500">
           {event.location}

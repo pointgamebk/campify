@@ -128,12 +128,12 @@ const EventDetails = async ({
 
       {/* EVENTS with the same category */}
       <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
-        <h2 className="h2-bold text-tan">Related Camps</h2>
+        <h2 className="h2-bold text-tan">Related Events</h2>
 
         <Collection
           data={relatedEvents?.data}
-          emptyTitle="No Related Camps Found"
-          emptyStateSubtext="Please check again later"
+          emptyTitle="No Events Found"
+          emptyStateSubtext="Come back later"
           collectionType="All_Events"
           limit={3}
           page={page}
