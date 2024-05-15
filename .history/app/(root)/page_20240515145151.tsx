@@ -7,9 +7,6 @@ import { SearchParamProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-// ClientCard changes
-import { auth } from "@clerk/nextjs";
-
 export default async function Home({ searchParams }: SearchParamProps) {
   const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || "";
@@ -64,7 +61,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
         <Collection
           data={events?.data}
-          emptyTitle="No Events Found"
+          emptyTitle="No Camps Found"
           emptyStateSubtext="Check again later"
           collectionType="All_Events"
           limit={6}

@@ -4,17 +4,19 @@ export interface IEvent extends Document {
   _id: string;
   title: string;
   description?: string;
-  location?: string;
+  location: string;
   createdAt: Date;
   imageUrl: string;
   startDateTime: Date;
   endDateTime: Date;
-  price: string;
+  price: number;
   isFree: boolean;
-  url?: string;
+  limit: number;
+  noLimit: boolean;
   category: { _id: string; name: string };
   organizer: { _id: string; firstName: string; lastName: string };
   attendees: { _id: string }[];
+  canceled: boolean;
 }
 
 const EventSchema = new Schema({
@@ -25,12 +27,14 @@ const EventSchema = new Schema({
   imageUrl: { type: String, required: true },
   startDateTime: { type: Date, default: Date.now },
   endDateTime: { type: Date, default: Date.now },
-  price: { type: String },
+  price: { type: Number },
   isFree: { type: Boolean, default: false },
-  url: { type: String },
+  limit: { type: Number },
+  noLimit: { type: Boolean, default: false },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   organizer: { type: Schema.Types.ObjectId, ref: "User" },
   attendees: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  canceled: { type: Boolean, default: false },
 });
 
 const Event = models.Event || model("Event", EventSchema);
