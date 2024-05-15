@@ -113,6 +113,9 @@ export async function deleteEvent({ eventId, path }: DeleteEventParams) {
       const deletedEvent = await Event.findByIdAndDelete(eventId);
       if (deletedEvent) revalidatePath(path);
     }
+
+    // const deletedEvent = await Event.findByIdAndDelete(eventId);
+    // if (deletedEvent) revalidatePath(path);
   } catch (error) {
     handleError(error);
   }
@@ -142,7 +145,6 @@ export async function getAllEvents({
         locationCondition,
         categoryCondition ? { category: categoryCondition._id } : {},
         { startDateTime: { $gte: pastDay } },
-        { canceled: false },
       ],
     };
 
@@ -206,11 +208,7 @@ export async function getFutureEventsByOrganizer({
     const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
 
     const conditions = {
-      $and: [
-        { organizer: organizerId },
-        { startDateTime: { $gte: pastDay } },
-        { canceled: false },
-      ],
+      $and: [{ organizer: organizerId }, { startDateTime: { $gte: pastDay } }],
     };
 
     const skipAmount = (Number(page) - 1) * limit;

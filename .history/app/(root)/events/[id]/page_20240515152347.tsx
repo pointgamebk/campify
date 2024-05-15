@@ -81,58 +81,51 @@ const EventDetails = async ({
             </div>
 
             {/* checkout button  */}
-            {userId !== event.organizer._id &&
-              !attending &&
-              !soldOut &&
-              !event.canceled && <CheckoutButton event={event} />}
-
-            {!event.canceled && (
-              <div className="flex flex-col gap-5">
-                <div className="flex gap-2 md:gap-3">
-                  <Image
-                    src="/assets/icons/calendar.svg"
-                    alt="calendar"
-                    width={32}
-                    height={32}
-                  />
-                  <div
-                    className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center text-tan"
-                    style={{ width: "50%" }}
-                  >
-                    <EventPageLocale event={event} />
-                  </div>
-                </div>
-
-                <div className="p-regular-20 flex items-center gap-3 text-tan">
-                  <Image
-                    src="/assets/icons/location.svg"
-                    alt="location"
-                    width={32}
-                    height={32}
-                  />
-                  <p className="p-medium-16 lg:p-regular-20">
-                    {event.location}
-                  </p>
-                </div>
-              </div>
+            {userId !== event.organizer._id && !attending && !soldOut && (
+              <CheckoutButton event={event} />
             )}
 
-            {!event.canceled && (
-              <div className="flex flex-col gap-2">
-                <p className="p-bold-20 text-green">What To Expect:</p>
-                <p className="p-medium-16 lg:p-regular-18 text-tan">
-                  {event.description}
+            <div className="flex flex-col gap-5">
+              <div className="flex gap-2 md:gap-3">
+                <Image
+                  src="/assets/icons/calendar.svg"
+                  alt="calendar"
+                  width={32}
+                  height={32}
+                />
+                <div
+                  className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center text-tan"
+                  style={{ width: "50%" }}
+                >
+                  <EventPageLocale event={event} />
+                </div>
+              </div>
+
+              <div className="p-regular-20 flex items-center gap-3 text-tan">
+                <Image
+                  src="/assets/icons/location.svg"
+                  alt="location"
+                  width={32}
+                  height={32}
+                />
+                <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <p className="p-bold-20 text-green">What You'll Learn:</p>
+              <p className="p-medium-16 lg:p-regular-18 text-tan">
+                {event.description}
+              </p>
+              {!event.noLimit && (
+                <p className="p-bold-20 text-green">
+                  Spots remaining:{" "}
+                  <span className="text-tan">
+                    {orders ? event.limit - orders : event.limit}
+                  </span>
                 </p>
-                {!event.noLimit && (
-                  <p className="p-bold-20 text-green">
-                    Spots remaining:{" "}
-                    <span className="text-tan">
-                      {orders ? event.limit - orders : event.limit}
-                    </span>
-                  </p>
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </section>

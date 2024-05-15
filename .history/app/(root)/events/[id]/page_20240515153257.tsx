@@ -119,7 +119,7 @@ const EventDetails = async ({
 
             {!event.canceled && (
               <div className="flex flex-col gap-2">
-                <p className="p-bold-20 text-green">What To Expect:</p>
+                <p className="p-bold-20 text-green">What You'll Learn:</p>
                 <p className="p-medium-16 lg:p-regular-18 text-tan">
                   {event.description}
                 </p>

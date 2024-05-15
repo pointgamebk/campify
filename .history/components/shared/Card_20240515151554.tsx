@@ -53,19 +53,17 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
           </div>
         )}
 
-        {!event.canceled && <CardLocaleConverter event={event} />}
+        <CardLocaleConverter event={event} />
 
-        {!event.canceled && (
-          <p className="p-medium-16 p-medium-18 text-grey-500">
-            {event.location}
-          </p>
-        )}
+        <p className="p-medium-16 p-medium-18 text-grey-500">
+          {event.location}
+        </p>
 
         <Separator className="border border-black" />
 
         <Link href={`/events/${event._id}`}>
           {event.canceled ? (
-            <p className="p-bold-16 md:p-bold-20 line-clamp-2 flex-1 text-red bg-white">
+            <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black bg-white">
               EVENT CANCELED
             </p>
           ) : (
