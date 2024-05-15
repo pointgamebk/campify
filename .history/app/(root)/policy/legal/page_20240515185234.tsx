@@ -300,25 +300,25 @@ const Legal = async () => {
             greater.
           </p>
           <p className="text-white">
-            <span className="p-bold-16">Warranty Disclaimer.</span> Our Platform
-            is provided to you “as is” and on an “as available” basis. To the
-            full extent permitted by applicable law, we disclaim all warranties
-            and conditions of any kind, including but not limited to statutory
-            warranties, and the implied warranties of merchantability, fitness
-            for a particular purpose, and non-infringement. We also disclaim any
-            warranties regarding (a) the reliability, timeliness, accuracy, and
-            performance of our Platform, (b) any information, advice, services,
-            or goods obtained through or advertised on our Platform or by us, as
-            well as for any information or advice received through any links to
-            other websites or resources provided through our Platform, (c) the
-            results that may be obtained from the Platform, and (d) the
-            correction of any errors in the Platform, (e) any material or data
-            obtained through the use of our Platform, and (f) dealings with or
-            as the result of the presence of marketing partners or other third
-            parties on or located through our Platform. You may have additional
-            rights under the law of the country in which you are based. You
-            agree that the duration of such additional rights will be limited to
-            the full extent permitted by such law.
+            Warranty Disclaimer. Our Platform is provided to you “as is” and on
+            an “as available” basis. To the full extent permitted by applicable
+            law, we disclaim all warranties and conditions of any kind,
+            including but not limited to statutory warranties, and the implied
+            warranties of merchantability, fitness for a particular purpose, and
+            non-infringement. We also disclaim any warranties regarding (a) the
+            reliability, timeliness, accuracy, and performance of our Platform,
+            (b) any information, advice, services, or goods obtained through or
+            advertised on our Platform or by us, as well as for any information
+            or advice received through any links to other websites or resources
+            provided through our Platform, (c) the results that may be obtained
+            from the Platform, and (d) the correction of any errors in the
+            Platform, (e) any material or data obtained through the use of our
+            Platform, and (f) dealings with or as the result of the presence of
+            marketing partners or other third parties on or located through our
+            Platform. You may have additional rights under the law of the
+            country in which you are based. You agree that the duration of such
+            additional rights will be limited to the full extent permitted by
+            such law.
           </p>
           <p className="text-white">
             <span className="p-bold-16">Limitation of Liability.</span> To the

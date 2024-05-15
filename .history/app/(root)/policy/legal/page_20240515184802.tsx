@@ -293,59 +293,9 @@ const Legal = async () => {
             Warranty Disclaimer and Limitation of Liability
           </h3>
           <p className="text-white italic">
-            To summarize: Our Platform is provided to you “as is” and we make no
-            warranties of any kind with respect to our Platform. Our liability
-            in connection with the Platform is limited to the fees you paid to
-            us in the 12 months preceding the claim or $100, whichever is
-            greater.
-          </p>
-          <p className="text-white">
-            <span className="p-bold-16">Warranty Disclaimer.</span> Our Platform
-            is provided to you “as is” and on an “as available” basis. To the
-            full extent permitted by applicable law, we disclaim all warranties
-            and conditions of any kind, including but not limited to statutory
-            warranties, and the implied warranties of merchantability, fitness
-            for a particular purpose, and non-infringement. We also disclaim any
-            warranties regarding (a) the reliability, timeliness, accuracy, and
-            performance of our Platform, (b) any information, advice, services,
-            or goods obtained through or advertised on our Platform or by us, as
-            well as for any information or advice received through any links to
-            other websites or resources provided through our Platform, (c) the
-            results that may be obtained from the Platform, and (d) the
-            correction of any errors in the Platform, (e) any material or data
-            obtained through the use of our Platform, and (f) dealings with or
-            as the result of the presence of marketing partners or other third
-            parties on or located through our Platform. You may have additional
-            rights under the law of the country in which you are based. You
-            agree that the duration of such additional rights will be limited to
-            the full extent permitted by such law.
-          </p>
-          <p className="text-white">
-            <span className="p-bold-16">Limitation of Liability.</span> To the
-            full extent permitted by applicable law, you agree that in no event
-            shall any Campify Parties be liable for any direct, indirect,
-            incidental, special, or consequential damages, including but not
-            limited to, damages for loss of profits, goodwill, use, data, or
-            other intangible losses (even if any Campify Parties have been
-            advised of the possibility of such damages) arising out of or in
-            connection with (a) our Platform or this Agreement or the inability
-            to use our Platform (however arising, including our negligence), (b)
-            statements or conduct of or transactions with any member or third
-            party on the Platform, (c) your use of our Platform or
-            transportation to or from Campify events, attendance at Campify
-            events, participation in or exclusion from Campify camps or events
-            and the actions of you or others at Campify events, or (d) any other
-            matter relating to the Platform. Our liability to you or any third
-            parties in any circumstance is limited to the greater of $100 or the
-            amount of fees, if any, you paid to us in the 12 months prior to the
-            action that may give rise to liability. The limitations set forth
-            above in this Section 8 will not limit or exclude liability for our
-            gross negligence, fraud, or intentional, malicious, or reckless
-            misconduct. Some laws do not allow the limitation or exclusion of
-            liability, so these limits may not apply to you. If you are a member
-            based in the EU, you have legal remedies if we cause you loss by our
-            breach or non-performance of our legal obligations, or by our
-            negligence, and these terms do not affect those statutory remedies.
+            To summarize: To the full extent permitted by applicable law, you
+            agree to reimburse us if we get sued in connection with your use of
+            our Platform.
           </p>
         </div>
       </div>

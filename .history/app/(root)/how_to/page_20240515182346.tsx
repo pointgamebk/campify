@@ -131,16 +131,16 @@ const HowTo = async () => {
                 purchases will be listed, along with their name and purchase
                 date.
               </li>
-              <li className="p-regular-18">
+              <li>
                 To edit information related to a posted camp or event, click the
                 'Edit' icon in the upper right corner of the camp card.
               </li>
-              <li className="p-regular-18">
+              <li>
                 To delete a camp or event, click the 'Delete' icon in the upper
                 right corner of the camp card. Please note that any camp or
                 event that has tickets purchased (i.e attendees) cannot be
                 deleted for accounting purposes. In this case, the event will be
-                canceled and tickets will no longer able to be obtained.
+                canceled and no longer able to be purchased or joined.
               </li>
             </ul>
 
