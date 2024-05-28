@@ -97,7 +97,7 @@ const EventDetails = async ({
                   />
                   <div
                     className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center text-tan"
-                    style={{ width: "75%" }}
+                    style={{ width: "50%" }}
                   >
                     <EventPageLocale event={event} />
                   </div>
