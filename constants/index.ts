@@ -47,3 +47,5 @@ export const processingFee = 0.08;
 
 // in cents
 export const stripeFee = 0.3;
+
+export const instructorIds = [];

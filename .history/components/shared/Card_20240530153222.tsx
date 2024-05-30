@@ -65,7 +65,7 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
 
         {!event.canceled && (
           <p className="p-medium-16 p-medium-18 text-grey-500">
-            {truncateCountry(event.location)}
+            {event.location}
           </p>
         )}
 

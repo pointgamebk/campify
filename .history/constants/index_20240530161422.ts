@@ -24,6 +24,7 @@ export const eventDefaultValues = {
   price: "",
   isFree: false,
   limit: "",
+  noLimit: false,
 };
 
 export const placesDefaultValues = {
@@ -40,3 +41,11 @@ export const profileDefaultValues = {
 export const deleteStripeAccountDefaultValues = {
   accountId: "",
 };
+
+// in percentage
+export const processingFee = 0.08;
+
+// in cents
+export const stripeFee = 0.3;
+
+export const instructorIds = [];
