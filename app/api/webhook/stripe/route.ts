@@ -45,6 +45,7 @@ export async function POST(request: Request) {
 
   // UPDATE STRIPE ACCOUNT SETTINGS
   if (eventType === "account.updated") {
+    console.log(event);
     try {
       const { id, charges_enabled } = event.data.object;
 
