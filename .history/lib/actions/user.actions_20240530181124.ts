@@ -120,6 +120,13 @@ export async function createStripeAccount(userId: string) {
         last_name: user.lastName,
         email: user.email,
       },
+      settings: {
+        payouts: {
+          schedule: {
+            interval: "manual",
+          },
+        },
+      },
     });
 
     await User.findOneAndUpdate(
@@ -130,8 +137,8 @@ export async function createStripeAccount(userId: string) {
 
     const link = await stripe.accountLinks.create({
       account: account.id,
-      refresh_url: "http://localhost:3000/",
-      return_url: "http://localhost:3000/",
+      refresh_url: "https://campify.app/",
+      return_url: "https://campify.app/",
       type: "account_onboarding",
     });
 
@@ -141,11 +148,19 @@ export async function createStripeAccount(userId: string) {
   }
 }
 
-//Delete Connect accounts addded with test keys
+//Delete Connect accounts added with TEST KEYS
 export async function deleteStripeAccount(accountId: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-  const deleted = await stripe.accounts.del(accountId);
+  try {
+    const deleted = await stripe.accounts.del(accountId);
+
+    console.log("Deleted account: ", deleted);
+
+    return deleted.deleted;
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 export async function updateProfile(
@@ -171,6 +186,20 @@ export async function updateProfile(
 
     if (!updatedProfile) throw new Error("User update failed");
     return JSON.parse(JSON.stringify(updatedProfile));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function checkIsAdmin() {
+  try {
+    await connectToDatabase();
+
+    const admin = await User.findOne({ username: "bigdog" });
+
+    if (!admin) throw new Error("Admin not found");
+
+    return JSON.parse(JSON.stringify(admin._id));
   } catch (error) {
     handleError(error);
   }

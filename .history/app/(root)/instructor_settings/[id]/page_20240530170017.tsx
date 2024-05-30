@@ -25,6 +25,8 @@ const InstructorSettings = async ({
 
   const isAuthInstructor = authorizedIds.includes(userId);
 
+  console.log(isAuthInstructor);
+
   return (
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">

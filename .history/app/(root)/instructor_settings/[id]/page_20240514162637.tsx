@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import Collection from "@/components/shared/Collection";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs";
-import { authorizedIds } from "@/constants";
 
 const InstructorSettings = async ({
   params: { id },
@@ -23,8 +22,6 @@ const InstructorSettings = async ({
 
   const isAuthorized = userId === id;
 
-  const isAuthInstructor = authorizedIds.includes(userId);
-
   return (
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
@@ -37,9 +34,7 @@ const InstructorSettings = async ({
             <p className="text-tan">
               Transfers enabled: {user.chargesEnabled ? "Yes" : "No"}
             </p>
-            {isAuthInstructor && user.chargesEnabled === false ? (
-              <ConnectButton />
-            ) : null}
+            {user.chargesEnabled === false ? <ConnectButton /> : null}
             {user.profileCompleted && (
               <div className="text-green p-semibold-20">
                 <Link href={`/instructor/${id}/`}>My Instructor Profile</Link>

@@ -137,8 +137,8 @@ export async function createStripeAccount(userId: string) {
 
     const link = await stripe.accountLinks.create({
       account: account.id,
-      refresh_url: "https://webhooktesting.vercel.app/",
-      return_url: "https://webhooktesting.vercel.app/",
+      refresh_url: "https://campify.app/",
+      return_url: "https://campify.app/",
       type: "account_onboarding",
     });
 

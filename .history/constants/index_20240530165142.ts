@@ -48,7 +48,4 @@ export const processingFee = 0.08;
 // in cents
 export const stripeFee = 0.3;
 
-export const authorizedIds = [
-  "6658e5f785a7f68a96637284",
-  "6658e66585a7f68a9663728a",
-];
+export const instructorIds = ["6658e5f785a7f68a96637284", ""];
