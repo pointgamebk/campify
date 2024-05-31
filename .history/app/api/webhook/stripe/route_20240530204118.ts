@@ -6,7 +6,6 @@ import User from "@/lib/database/models/user.model";
 import Event from "@/lib/database/models/event.model";
 
 export async function POST(request: Request) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const body = await request.text();
 
   const sig = request.headers.get("stripe-signature") as string;
