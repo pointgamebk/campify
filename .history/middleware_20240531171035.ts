@@ -38,9 +38,9 @@ export const config = {
 
 // Add this to log incoming requests
 export function middleware(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  next: NextHandler
+  req: Request,
+  res: Response,
+  next: NextFunction
 ): void {
   console.log(`Incoming request to: ${req.url}`);
   next();
