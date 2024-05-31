@@ -1,5 +1,4 @@
 import { authMiddleware } from "@clerk/nextjs";
-import { Request, Response, NextFunction } from "express";
 
 // export default authMiddleware({
 //   publicRoutes: [
@@ -36,11 +35,7 @@ export const config = {
 };
 
 // Add this to log incoming requests
-export function middleware(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void {
+export function middleware(req, res, next) {
   console.log(`Incoming request to: ${req.url}`);
   next();
 }
