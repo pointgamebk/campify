@@ -44,7 +44,7 @@ export async function POST(request: Request) {
   }
 
   // UPDATE STRIPE ACCOUNT SETTINGS
-  if (eventType === "account.updated" && event.data.object.charges_enabled) {
+  if (eventType === "account.updated") {
     // console.log(event.data.object.id, event.data.object.charges_enabled);
     // try {
     //   const { id, charges_enabled } = event.data.object;
@@ -61,21 +61,14 @@ export async function POST(request: Request) {
     // return NextResponse.json({ message: "OK" });
     console.log(event.data.object.id, event.data.object.charges_enabled);
 
-    // if (event.data.object.charges_enabled) {
-    //   const user = await User.findOne({
-    //     stripeAccountId: event.data.object.id,
-    //   });
-    //   if (user) {
-    //     user.chargesEnabled = event.data.object.charges_enabled;
-    //     await user.save();
-    //   }
-    // }
-    const user = await User.findOne({
-      stripeAccountId: event.data.object.id,
-    });
-    if (user) {
-      user.chargesEnabled = event.data.object.charges_enabled;
-      await user.save();
+    if (event.data.object.charges_enabled) {
+      const user = await User.findOne({
+        stripeAccountId: event.data.object.id,
+      });
+      if (user) {
+        user.chargesEnabled = event.data.object.charges_enabled;
+        await user.save();
+      }
     }
   }
 
