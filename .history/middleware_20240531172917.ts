@@ -1,4 +1,6 @@
 import { authMiddleware } from "@clerk/nextjs";
+import { NextApiRequest, NextApiResponse } from "next";
+import { NextHandler } from "next-connect";
 
 export default authMiddleware({
   publicRoutes: ["/", "/how_to", "/policy/legal", "/events/:id"],
