@@ -9,8 +9,6 @@ export const maxDuration = 20; // This function can run for a maximum of 5 secon
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  await connectToDatabase();
-
   const body = await request.text();
 
   const sig = request.headers.get("stripe-signature") as string;

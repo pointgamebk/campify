@@ -3,14 +3,11 @@ import { NextResponse } from "next/server";
 import { createOrder } from "@/lib/actions/order.actions";
 import User from "@/lib/database/models/user.model";
 import Event from "@/lib/database/models/event.model";
-import { connectToDatabase } from "@/lib/database";
 
 export const maxDuration = 20; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  await connectToDatabase();
-
   const body = await request.text();
 
   const sig = request.headers.get("stripe-signature") as string;

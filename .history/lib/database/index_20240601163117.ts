@@ -1,0 +1,62 @@
+// import mongoose from "mongoose";
+
+// const MONGODB_URI = process.env.MONGODB_URI;
+
+// let cached = (global as any).mongoose || { conn: null, promise: null };
+
+// export const connectToDatabase = async () => {
+//   if (cached.conn) return cached.conn;
+
+//   if (!MONGODB_URI) throw new Error("MONGODB_URI is missing");
+
+//   cached.promise =
+//     cached.promise ||
+//     mongoose.connect(MONGODB_URI, {
+//       dbName: "campify",
+//       bufferCommands: false,
+//       serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+//       socketTimeoutMS: 45000, // Increase socket timeout to 45 seconds
+//     });
+
+//   cached.conn = await cached.promise;
+
+//   return cached.conn;
+// };
+
+import mongoose from "mongoose";
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI is missing");
+}
+
+let cached = (global as any).mongoose;
+
+if (!cached) {
+  cached = (global as any).mongoose = { conn: null, promise: null };
+}
+
+export const connectToDatabase = async () => {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    const options = {
+      dbName: "campify",
+      bufferCommands: false,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000, // 30 seconds
+      socketTimeoutMS: 45000, // 45 seconds
+    };
+
+    cached.promise = mongoose.connect(MONGODB_URI, options).then((mongoose) => {
+      return mongoose;
+    });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+};
