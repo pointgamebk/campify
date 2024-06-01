@@ -24,7 +24,7 @@ export const eventDefaultValues = {
   price: "",
   isFree: false,
   limit: "",
-  noLimit: true,
+  noLimit: false,
 };
 
 export const placesDefaultValues = {
@@ -47,3 +47,10 @@ export const processingFee = 0.08;
 
 // in cents
 export const stripeFee = 0.3;
+
+export const authorizedIds = [
+  "6658e5f785a7f68a96637284",
+  "665a2ce39eddcbd50032845a",
+  "665a5a40b96cc363c9bcb652",
+  "665b9e78582a51f9844a3ddf",
+];
