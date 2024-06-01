@@ -27,8 +27,6 @@ export async function POST(request: Request) {
 
   // CREATE ORDER
   if (eventType === "checkout.session.completed") {
-    await connectToDatabase();
-
     const { id, amount_total, metadata } = event.data.object;
 
     const order = {
