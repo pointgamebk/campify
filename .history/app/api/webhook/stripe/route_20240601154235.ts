@@ -52,11 +52,8 @@ export async function POST(request: Request) {
 
     await User.findOneAndUpdate(
       { stripeAccountId: event.data.object.id },
-      { chargesEnabled: event.data.object.charges_enabled },
-      { includeResultMetadata: true }
+      { chargesEnabled: true }
     );
-
-    return NextResponse.json({ message: "OK" });
   }
 
   return new Response("", { status: 200 });

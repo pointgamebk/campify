@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
     await User.findOneAndUpdate(
       { stripeAccountId: event.data.object.id },
-      { chargesEnabled: event.data.object.charges_enabled },
+      { chargesEnabled: true },
       { includeResultMetadata: true }
     );
 
