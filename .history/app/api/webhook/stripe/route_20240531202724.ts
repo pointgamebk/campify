@@ -44,7 +44,7 @@ export async function POST(request: Request) {
   }
 
   // UPDATE STRIPE ACCOUNT SETTINGS
-  if (eventType === "account.updated" && event.data.object.charges_enabled) {
+  if (eventType === "account.updated") {
     console.log(event.data.object.id, event.data.object.charges_enabled);
 
     const user = await User.findOne({
