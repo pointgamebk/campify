@@ -4,8 +4,9 @@ export default authMiddleware({
   publicRoutes: ["/", "/how_to", "/policy/legal", "/events/:id"],
   ignoredRoutes: [
     "/api/webhook/clerk",
-    "/api/webhook/stripe-checkouts",
-    "/api/webhook/stripe-accounts",
+    "/api/webhook/stripe",
+    "/api/webhook/stripe-checkout",
+    "/api/webhook/stripe-account",
     "/api/uploadthing",
   ],
 });
