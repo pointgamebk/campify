@@ -24,7 +24,7 @@ export const profileFormSchema = z.object({
   profileDescription: z
     .string()
     .min(3, "Description must be at least 3 characters")
-    .max(400, "Description must be less than 400 characters"),
+    .max(800, "Description must be less than 400 characters"),
   profilePhoto: z
     .string()
     .min(3, "Value must be at least 3 characters")
