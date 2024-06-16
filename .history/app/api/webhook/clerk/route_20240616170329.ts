@@ -9,7 +9,6 @@ import {
 } from "@/lib/actions/user.actions";
 import { clerkClient } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/lib/database";
 import User from "@/lib/database/models/user.model";
 
 export async function POST(req: Request) {
@@ -90,7 +89,6 @@ export async function POST(req: Request) {
 
   if (eventType === "user.updated") {
     const { id, image_url, first_name, last_name, username } = evt.data;
-    await connectToDatabase();
 
     //const _user = await getUserById(id!);
     const _user = await User.findOne({ clerkId: id });
@@ -106,12 +104,9 @@ export async function POST(req: Request) {
       profileDescription: _user.profileDescription,
     };
 
-    const clerkId = id;
+    const path = `/instructor/${id}`;
 
-    const path = "/";
-
-    //const updatedUser = await updateUser(id, user, path);
-    const updatedUser = await updateUser(clerkId, user, path);
+    const updatedUser = await updateUser(id, user, path);
 
     return NextResponse.json({ message: "OK", user: updatedUser });
   }

@@ -12,7 +12,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   const { sessionClaims } = auth();
 
   // Session User ID
-  const userId = sessionClaims?.userId as string;
+  const userId = (await sessionClaims?.userId) as string;
 
   const user = await getUserById(userId);
 

@@ -35,6 +35,8 @@ export async function getUserById(userId: string) {
   try {
     await connectToDatabase();
 
+    if (!userId) redirect("/");
+
     const user = await User.findById(userId);
 
     if (!user) throw new Error("User not found");

@@ -11,18 +11,18 @@ import Link from "next/link";
 const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   const { sessionClaims } = auth();
 
-  //Session user id
-  const userId = sessionClaims?.userId as string;
+  // Session User ID
+  const userId = (await sessionClaims?.userId) as string;
 
   const user = await getUserById(userId);
 
-  const ordersPage = Number(searchParams?.ordersPage) || 1;
+  const page = Number(searchParams?.page) || 1;
 
-  const orders = await getOrdersByUser({ userId, page: ordersPage });
+  const orders = await getOrdersByUser({ userId, page });
 
   const orderedEvents = orders?.data?.map((order: IOrder) => order.event) || [];
 
-  const isAdmin = (await checkIsAdmin()) === user._id;
+  const isAdmin = (await checkIsAdmin()) === userId;
 
   return (
     <>
@@ -59,19 +59,20 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
         <Collection
           data={orderedEvents}
           emptyTitle="No camps joined yet"
-          emptyStateSubtext="No worries - plenty of exciting games to check out!"
+          emptyStateSubtext="No worries - plenty of exciting camps to check out!"
           collectionType="My_Tickets"
           limit={3}
-          page={ordersPage}
-          urlParamName="joinsPage"
+          page={page}
           totalPages={orders?.totalPages}
         />
 
-        <div className="max-w-[200px] mt-5">
-          <Button asChild size="lg" className="button hidden sm:flex">
-            <Link href={`admin/${userId}`}>Admin</Link>
-          </Button>
-        </div>
+        {isAdmin && (
+          <div className="max-w-[200px] mt-5">
+            <Button asChild size="lg" className="button hidden sm:flex">
+              <Link href={`/admin`}>Admin</Link>
+            </Button>
+          </div>
+        )}
       </section>
     </>
   );

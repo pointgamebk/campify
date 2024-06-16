@@ -106,12 +106,9 @@ export async function POST(req: Request) {
       profileDescription: _user.profileDescription,
     };
 
-    const clerkId = id;
-
     const path = "/";
 
-    //const updatedUser = await updateUser(id, user, path);
-    const updatedUser = await updateUser(clerkId, user, path);
+    const updatedUser = await updateUser(id, user, path);
 
     return NextResponse.json({ message: "OK", user: updatedUser });
   }
