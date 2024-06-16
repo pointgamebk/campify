@@ -40,11 +40,11 @@ const InstructorSettings = async ({
             {isAuthInstructor && user.chargesEnabled === false ? (
               <div>
                 <ConnectButton />
-                <div className="mt-5 text-tan p-regular-14 max-w-[500px]">
-                  *** If Stripe Account status shows "Linked", please allow up
-                  to 24 hours for Transfers Enabled status to update. If
-                  Transfers Enabled status has not updated after that time,
-                  contact support.
+                <div className="mt-5 text-tan">
+                  If Stripe Account status shows "Linked", please allow up to 24
+                  hours for Transfers Enabled status to update. If Transfer
+                  Enabled status has not updated after that time, contact
+                  support.
                 </div>
               </div>
             ) : null}
