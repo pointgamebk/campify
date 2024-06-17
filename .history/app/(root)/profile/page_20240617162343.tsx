@@ -1,20 +1,20 @@
 import Collection from "@/components/shared/Collection";
 import { Button } from "@/components/ui/button";
 import { getOrdersByUser } from "@/lib/actions/order.actions";
-import { getUserByClerkId } from "@/lib/actions/user.actions";
+import { getUserById } from "@/lib/actions/user.actions";
 import { checkIsAdmin } from "@/lib/actions/user.actions";
 import { IOrder } from "@/lib/database/models/order.model";
 import { SearchParamProps } from "@/types";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 
 const ProfilePage = async ({ searchParams }: SearchParamProps) => {
+  const { sessionClaims } = auth();
+
   // Session User ID
-  const authUser = await currentUser();
+  const userId = (await sessionClaims?.userId) as string;
 
-  const user = await getUserByClerkId(authUser?.id || "");
-
-  const userId = user._id as string;
+  const user = await getUserById(userId);
 
   const page = Number(searchParams?.page) || 1;
 

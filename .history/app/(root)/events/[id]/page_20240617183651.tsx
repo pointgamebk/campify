@@ -6,6 +6,7 @@ import {
 } from "@/lib/actions/event.actions";
 import { getNumberOfOrdersByEvent } from "@/lib/actions/order.actions";
 import { SearchParamProps } from "@/types";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";

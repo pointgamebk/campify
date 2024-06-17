@@ -6,6 +6,7 @@ import {
 } from "@/lib/actions/event.actions";
 import { getNumberOfOrdersByEvent } from "@/lib/actions/order.actions";
 import { SearchParamProps } from "@/types";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
@@ -17,10 +18,10 @@ const EventDetails = async ({
   params: { id },
   searchParams,
 }: SearchParamProps) => {
-  const authUser = await currentUser();
-  const user = await getUserByClerkId(authUser?.id || "");
-  const userId = user._id as string;
+  const { sessionClaims } = auth();
 
+  //Session user id
+  const userId = sessionClaims?.userId as string;
   const event = await getEventById(id);
 
   const page = Number(searchParams?.page) || 1;
@@ -85,9 +86,7 @@ const EventDetails = async ({
             {userId !== event.organizer._id &&
               !attending &&
               !soldOut &&
-              !event.canceled && (
-                <CheckoutButton event={event} userId={userId} />
-              )}
+              !event.canceled && <CheckoutButton event={event} />}
 
             {!event.canceled && (
               <div className="flex flex-col gap-5">

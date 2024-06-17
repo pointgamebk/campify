@@ -4,7 +4,12 @@ import { Button } from "../ui/button";
 import NavItems from "./NavItems";
 import MobileNav from "./MobileNav";
 
+import { auth } from "@clerk/nextjs";
+
 const Header = () => {
+  const { sessionClaims } = auth();
+  const userId = sessionClaims?.userId as string;
+
   return (
     <header className="w-full border-b">
       <div className="wrapper flex items-center justify-between">
@@ -14,14 +19,14 @@ const Header = () => {
 
         <SignedIn>
           <nav className="md:flex-between hidden w-full max-w-xs">
-            <NavItems />
+            <NavItems id={userId} />
           </nav>
         </SignedIn>
 
         <div className="flex w-32 justify-end gap-3">
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
-            <MobileNav />
+            <MobileNav id={userId} />
           </SignedIn>
           <SignedOut>
             <Button asChild className="rounded-full" size="lg">

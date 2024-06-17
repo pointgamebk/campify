@@ -1,10 +1,11 @@
 import ConnectButton from "@/components/shared/ConnectButton";
-import { getUserByClerkId } from "@/lib/actions/user.actions";
+import { getUserById, getUserByClerkId } from "@/lib/actions/user.actions";
 import { getAllEventsByOrganizer } from "@/lib/actions/event.actions";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Collection from "@/components/shared/Collection";
 import { SearchParamProps } from "@/types";
+import { auth } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { authorizedIds } from "@/constants";
 
@@ -12,12 +13,18 @@ const InstructorSettings = async ({
   params: { id },
   searchParams,
 }: SearchParamProps) => {
+  //const { sessionClaims } = auth();
+
   // Session user ID
+  //const userId = sessionClaims?.userId as string;
+
   const clerkUser = await currentUser();
   const user = await getUserByClerkId(clerkUser?.id || "");
+
   const userId = user._id as string;
 
   const page = Number(searchParams?.page) || 1;
+  //const user = await getUserById(id);
   const events = await getAllEventsByOrganizer({ organizerId: id, page });
 
   const isAuthorized = userId === id;
