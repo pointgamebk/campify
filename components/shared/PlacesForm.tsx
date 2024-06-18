@@ -58,11 +58,6 @@ const PlacesForm = () => {
     console.log(values);
   }
 
-  //   const onSelectAddress = (address: string) => {
-  //     console.log({ address });
-  //     setValue("location", address);
-  //   };
-
   return (
     <Form {...form}>
       <form

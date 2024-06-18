@@ -42,7 +42,7 @@ import { cn } from "@/lib/utils";
 import { placesFormSchema } from "@/lib/validator";
 import { placesDefaultValues } from "@/constants";
 
-import SearchBox from "./PlaceSearchBox";
+import SearchBox from "./SearchBox";
 
 const libraries: Libraries = ["places"];
 
@@ -57,11 +57,6 @@ const PlacesForm = () => {
   async function onSubmit(values: z.infer<typeof placesFormSchema>) {
     console.log(values);
   }
-
-  //   const onSelectAddress = (address: string) => {
-  //     console.log({ address });
-  //     setValue("location", address);
-  //   };
 
   return (
     <Form {...form}>
