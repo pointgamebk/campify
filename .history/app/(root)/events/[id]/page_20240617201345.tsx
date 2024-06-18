@@ -19,7 +19,7 @@ const EventDetails = async ({
 }: SearchParamProps) => {
   const authUser = await currentUser();
   const user = await getUserByClerkId(
-    authUser?.id || "user_2i1tP38nH8bo2Bpq1qk58qBCyO5"
+    authUser?.id || "666603ee38aebf1477b8cfa3"
   );
   const userId = user._id as string;
 
