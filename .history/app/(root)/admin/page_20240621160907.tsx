@@ -4,7 +4,7 @@ import { TopUpButton } from "@/components/shared/TopUpButton";
 import { checkIsAdmin } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
 import { IOrderItem } from "@/lib/database/models/order.model";
-import { processingPercentage, stripeFee } from "@/constants";
+import { processingFee, stripeFee } from "@/constants";
 
 const AdminPage = async () => {
   const { sessionClaims } = auth();
@@ -37,7 +37,7 @@ const AdminPage = async () => {
         </section>
       )}
 
-      {isAdmin && (
+      {/* {isAdmin && (
         <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
           <h3 className="wrapper h3-bold text-center sm:text-left text-tan">
             Top Up
@@ -47,7 +47,7 @@ const AdminPage = async () => {
             <TopUpButton />
           </div>
         </section>
-      )}
+      )} */}
 
       {isAdmin && (
         <section className=" bg-dotted-pattern bg-cover bg-center py-5 px-10 md:py-10">
@@ -95,7 +95,7 @@ const AdminPage = async () => {
                         <td className="min-w-[250px] py-4 text-green">
                           {(
                             row.totalAmount -
-                            row.totalAmount * processingPercentage -
+                            row.totalAmount * processingFee -
                             stripeFee
                           ).toFixed(2)}
                         </td>
@@ -105,7 +105,9 @@ const AdminPage = async () => {
                         <td className="min-w-[250px] py-4 text-green">
                           <TransferConfirmation
                             amount={
-                              row.totalAmount - row.totalAmount * 0.08 - 0.3
+                              row.totalAmount -
+                              row.totalAmount * processingFee -
+                              stripeFee
                             }
                             destination={row.instructor.stripeAccountId}
                             transfer_group={row._id}
