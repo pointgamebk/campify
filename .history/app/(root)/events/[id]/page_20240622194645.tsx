@@ -31,6 +31,7 @@ const EventDetails = async ({
 
   //const orders = await getNumberOfOrdersByEvent(id);
 
+  // const soldOut = event.noLimit ? false : (orders ?? 0) >= event.limit;
   const soldOut = event.noLimit
     ? false
     : (event.attendees.length ?? 0) >= event.limit;
@@ -133,6 +134,9 @@ const EventDetails = async ({
                 {!event.noLimit && (
                   <p className="p-bold-20 text-green">
                     Spots remaining:{" "}
+                    {/* <span className="text-tan">
+                      {orders ? event.limit - orders : event.limit}
+                    </span> */}
                     <span className="text-tan">
                       {event.attendees
                         ? event.limit - event.attendees.length

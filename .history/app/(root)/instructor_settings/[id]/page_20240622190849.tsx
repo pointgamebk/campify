@@ -39,7 +39,7 @@ const InstructorSettings = async ({
             {isAuthInstructor && user.chargesEnabled === false ? (
               <div>
                 <ConnectButton />
-                <div className="mt-5 text-tan p-medium-16 max-w-[500px]">
+                <div className="mt-5 text-tan p-medium-14 max-w-[500px]">
                   Only press/click the "Connect Stripe" button once. It may take
                   a few seconds to process.
                 </div>

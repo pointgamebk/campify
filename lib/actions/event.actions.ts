@@ -270,3 +270,19 @@ export async function getRelatedEventsByCategory({
     handleError(error);
   }
 }
+
+export async function getCanceledEvents() {
+  try {
+    await connectToDatabase();
+
+    const conditions = {
+      $and: [{ canceled: true }],
+    };
+
+    const events = await populateEvent(Event.find(conditions));
+
+    return JSON.parse(JSON.stringify(events));
+  } catch (error) {
+    handleError(error);
+  }
+}

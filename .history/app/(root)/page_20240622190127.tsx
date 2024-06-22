@@ -61,7 +61,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
         <Collection
           data={events?.data}
-          emptyTitle="No Camps Found"
+          emptyTitle="No Camps In Your Area"
           emptyStateSubtext="Check again later"
           collectionType="All_Events"
           limit={6}

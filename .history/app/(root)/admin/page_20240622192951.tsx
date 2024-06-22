@@ -5,7 +5,6 @@ import { checkIsAdmin } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
 import { IOrderItem } from "@/lib/database/models/order.model";
 import { processingFee, stripeFee } from "@/constants";
-import { IEvent } from "@/lib/database/models/event.model";
 import { getCanceledEvents } from "@/lib/actions/event.actions";
 
 const AdminPage = async () => {
@@ -22,8 +21,6 @@ const AdminPage = async () => {
     const orderEndDateTime = new Date(order.event.endDateTime);
     return orderEndDateTime < currentDate;
   });
-
-  const canceledEvents = await getCanceledEvents();
 
   return (
     <>
@@ -136,9 +133,9 @@ const AdminPage = async () => {
             <thead>
               <tr className="p-medium-14 border-b text-grey-500">
                 <th className="min-w-[100px] flex-1 py-3 pr-4 text-left text-grey-400">
-                  ID
+                  Instructor
                 </th>
-                {/* <th className="min-w-[75px] flex-1 py-3 pr-4 text-left text-grey-400">
+                <th className="min-w-[75px] flex-1 py-3 pr-4 text-left text-grey-400">
                   Amount
                 </th>
                 <th className="min-w-[75px] flex-1 py-3 pr-4 text-left text-grey-400">
@@ -146,27 +143,49 @@ const AdminPage = async () => {
                 </th>
                 <th className="min-w-[75px] flex-1 py-3 pr-4 text-left text-grey-400">
                   Complete Transfer
-                </th> */}
+                </th>
               </tr>
             </thead>
             <tbody>
-              {canceledEvents && canceledEvents.length === 0 ? (
+              {filteredOrders && filteredOrders.length === 0 ? (
                 <tr className="border-b">
                   <td colSpan={5} className="py-4 text-center text-gray-500">
-                    No canceled events found.
+                    No pending orders found.
                   </td>
                 </tr>
               ) : (
                 <>
-                  {canceledEvents &&
-                    canceledEvents.map((row: IEvent) => (
+                  {filteredOrders &&
+                    filteredOrders.map((row: IOrderItem) => (
                       <tr
                         key={row._id}
                         className="p-regular-14 lg:p-regular-16 border-b "
                         style={{ boxSizing: "border-box" }}
                       >
                         <td className="min-w-[250px] py-4 text-green">
-                          {row._id}
+                          {row.instructor.firstName.charAt(0)}.{" "}
+                          {row.instructor.lastName}
+                        </td>
+                        <td className="min-w-[250px] py-4 text-green">
+                          {(
+                            row.totalAmount -
+                            row.totalAmount * processingFee -
+                            stripeFee
+                          ).toFixed(2)}
+                        </td>
+                        <td className="min-w-[250px] py-4 text-green">
+                          {row.instructor.stripeAccountId}
+                        </td>
+                        <td className="min-w-[250px] py-4 text-green">
+                          <TransferConfirmation
+                            amount={
+                              row.totalAmount -
+                              row.totalAmount * processingFee -
+                              stripeFee
+                            }
+                            destination={row.instructor.stripeAccountId}
+                            transfer_group={row._id}
+                          />
                         </td>
                       </tr>
                     ))}

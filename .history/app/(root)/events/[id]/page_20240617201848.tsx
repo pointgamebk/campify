@@ -29,11 +29,9 @@ const EventDetails = async ({
 
   const attending = event.attendees.some((a: string) => a === userId);
 
-  //const orders = await getNumberOfOrdersByEvent(id);
+  const orders = await getNumberOfOrdersByEvent(id);
 
-  const soldOut = event.noLimit
-    ? false
-    : (event.attendees.length ?? 0) >= event.limit;
+  const soldOut = event.noLimit ? false : (orders ?? 0) >= event.limit;
 
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
@@ -134,9 +132,7 @@ const EventDetails = async ({
                   <p className="p-bold-20 text-green">
                     Spots remaining:{" "}
                     <span className="text-tan">
-                      {event.attendees
-                        ? event.limit - event.attendees.length
-                        : event.limit}
+                      {orders ? event.limit - orders : event.limit}
                     </span>
                   </p>
                 )}

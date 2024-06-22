@@ -39,6 +39,10 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
     const organizer = await User.findById(userId);
     if (!organizer) throw new Error("Organizer not found");
 
+    if (event.price === 0) {
+      event.isFree = true;
+    }
+
     if (event.limit === 0 && !event.noLimit) {
       event.noLimit = true;
     }
@@ -99,8 +103,16 @@ export async function deleteEvent({ eventId, path }: DeleteEventParams) {
   try {
     await connectToDatabase();
 
-    const deletedEvent = await Event.findByIdAndDelete(eventId);
-    if (deletedEvent) revalidatePath(path);
+    const event = await Event.findById(eventId);
+    if (!event) throw new Error("Event not found");
+
+    if (event.attendees.length > 0) {
+      await Event.findByIdAndUpdate(eventId, { canceled: true });
+      revalidatePath(path);
+    } else {
+      const deletedEvent = await Event.findByIdAndDelete(eventId);
+      if (deletedEvent) revalidatePath(path);
+    }
   } catch (error) {
     handleError(error);
   }
@@ -130,12 +142,13 @@ export async function getAllEvents({
         locationCondition,
         categoryCondition ? { category: categoryCondition._id } : {},
         { startDateTime: { $gte: pastDay } },
+        { canceled: false },
       ],
     };
 
     const skipAmount = (Number(page) - 1) * limit;
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "asc" })
+      .sort({ startDateTime: "asc" })
       .skip(skipAmount)
       .limit(limit);
 
@@ -152,7 +165,7 @@ export async function getAllEvents({
 }
 
 // GET ALL EVENTS BY ORGANIZER
-export async function getEventsByOrganizer({
+export async function getAllEventsByOrganizer({
   organizerId,
   limit = 3,
   page = 1,
@@ -164,7 +177,7 @@ export async function getEventsByOrganizer({
     const skipAmount = (Number(page) - 1) * limit;
 
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "desc" })
+      .sort({ startDateTime: "desc" })
       .skip(skipAmount)
       .limit(limit);
 
@@ -180,7 +193,7 @@ export async function getEventsByOrganizer({
   }
 }
 
-// GET ALL EVENTS BY ORGANIZER
+// GET ALL UPCOMING EVENTS BY ORGANIZER
 export async function getFutureEventsByOrganizer({
   organizerId,
   limit = 3,
@@ -193,11 +206,14 @@ export async function getFutureEventsByOrganizer({
     const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
 
     const conditions = {
-      $and: [{ organizer: organizerId }, { startDateTime: { $gte: pastDay } }],
+      $and: [
+        { organizer: organizerId },
+        { startDateTime: { $gte: pastDay } },
+        { canceled: false },
+      ],
     };
 
     const skipAmount = (Number(page) - 1) * limit;
-    // const skipAmount = ((page as number) - 1) * limit;
 
     const eventsQuery = Event.find(conditions)
       .sort({ startDateTime: "asc" })
@@ -226,13 +242,20 @@ export async function getRelatedEventsByCategory({
   try {
     await connectToDatabase();
 
+    const currentDate = new Date();
+    const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
+
     const skipAmount = (Number(page) - 1) * limit;
     const conditions = {
-      $and: [{ category: categoryId }, { _id: { $ne: eventId } }],
+      $and: [
+        { category: categoryId },
+        { _id: { $ne: eventId } },
+        { startDateTime: { $gte: pastDay } },
+      ],
     };
 
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: "desc" })
+      .sort({ startDateTime: "asc" })
       .skip(skipAmount)
       .limit(limit);
 
@@ -243,6 +266,22 @@ export async function getRelatedEventsByCategory({
       data: JSON.parse(JSON.stringify(events)),
       totalPages: Math.ceil(eventsCount / limit),
     };
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function getCanceledEvents() {
+  try {
+    await connectToDatabase();
+
+    const conditions = {
+      $and: [{ canceled: true }],
+    };
+
+    const events = await populateEvent(Event.find(conditions));
+
+    return JSON.parse(JSON.stringify(events));
   } catch (error) {
     handleError(error);
   }
