@@ -1,7 +1,6 @@
 import ConnectButton from "@/components/shared/ConnectButton";
 import { getUserByClerkId } from "@/lib/actions/user.actions";
 import { getAllEventsByOrganizer } from "@/lib/actions/event.actions";
-import { getInstructorBalances } from "@/lib/actions/order.actions";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Collection from "@/components/shared/Collection";
@@ -24,10 +23,6 @@ const InstructorSettings = async ({
   const isAuthorized = userId === id;
 
   const isAuthInstructor = authorizedIds.includes(userId);
-
-  const balances = await getInstructorBalances(id);
-
-  console.log(balances);
 
   return (
     <>
@@ -57,21 +52,14 @@ const InstructorSettings = async ({
               </div>
             ) : null}
             {user.profileCompleted && (
-              <div>
-                <div className="text-tan p-semibold-20">
-                  Pending Balance: {balances?.pendingBalance}
-                </div>
-                <div className="text-tan p-semibold-20">
-                  Transferable Balance: {balances?.availableBalance}
-                </div>
-              </div>
+              <div className="text-tan p-semibold-20">Pending Balance:</div>
             )}
             {user.profileCompleted && (
-              <div className="text-green p-semibold-20 underline">
+              <div className="text-green p-semibold-20">
                 <Link href={`/instructor/${id}/`}>My Instructor Profile</Link>
               </div>
             )}
-            <div className="text-green p-medium-18 underline">
+            <div className="text-green p-medium-18">
               {user.chargesEnabled && (
                 <Link href={`/instructor/${id}/update`}>
                   {user.profileCompleted

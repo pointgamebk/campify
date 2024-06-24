@@ -67,11 +67,11 @@ const InstructorSettings = async ({
               </div>
             )}
             {user.profileCompleted && (
-              <div className="text-green p-semibold-20 underline">
+              <div className="text-green p-semibold-20">
                 <Link href={`/instructor/${id}/`}>My Instructor Profile</Link>
               </div>
             )}
-            <div className="text-green p-medium-18 underline">
+            <div className="text-green p-medium-18">
               {user.chargesEnabled && (
                 <Link href={`/instructor/${id}/update`}>
                   {user.profileCompleted

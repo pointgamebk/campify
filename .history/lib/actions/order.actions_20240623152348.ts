@@ -17,7 +17,6 @@ import Event from "../database/models/event.model";
 import { ObjectId } from "mongodb";
 import User from "../database/models/user.model";
 import { revalidatePath } from "next/cache";
-import { processingFee, stripeFee } from "@/constants";
 
 const populateOrder = (query: any) => {
   return query
@@ -30,11 +29,6 @@ const populateOrder = (query: any) => {
       path: "event",
       model: Event,
       select: "_id endDateTime",
-    })
-    .populate({
-      path: "buyer",
-      model: User,
-      select: "_id firstName lastName",
     });
 };
 
@@ -112,6 +106,7 @@ export async function getOrdersByEvent({
   try {
     await connectToDatabase();
 
+    if (!eventId) throw new Error("Event ID is required");
     const eventObjectId = new ObjectId(eventId);
 
     const orders = await Order.aggregate([
@@ -145,11 +140,7 @@ export async function getOrdersByEvent({
           eventTitle: "$event.title",
           eventId: "$event._id",
           buyer: {
-            $concat: [
-              "$buyer.firstName",
-              " ",
-              { $ifNull: ["$buyer.lastName", ""] },
-            ],
+            $concat: ["$buyer.firstName", " ", "$buyer.lastName"],
           },
         },
       },
@@ -242,14 +233,13 @@ export const getPendingOrders = async () => {
   }
 };
 
-// GET BALANCES BY INSTRUCTOR
-export async function getInstructorBalances(instructorId: string) {
+// GET PENDING BALANCE BY INSTRUCTOR
+export async function getPendingBalance(instructorId: string) {
   try {
     await connectToDatabase();
 
     if (!instructorId) throw new Error("Instructor ID is required");
 
-    // All pending orders by instructor
     const getPendingOrdersByInstructor = async (
       instructorId: string
     ): Promise<any> => {
@@ -263,55 +253,26 @@ export async function getInstructorBalances(instructorId: string) {
       return orders;
     };
 
-    // All pending orders by instructor (with event end date populated)
     const pendingOrders = await getPendingOrdersByInstructor(instructorId);
 
-    // Pending orders for events that HAVE NOT ended
-    const pendingBalanceOrders = pendingOrders.filter((order: IOrderItem) => {
-      const currentDate = new Date();
-      const orderEndDateTime = new Date(order.event.endDateTime);
-      return orderEndDateTime > currentDate;
-    });
-    const pendingBalanceOrdersCount = pendingBalanceOrders.length;
-
-    // Pending orders for events that HAVE already ended
-    const availableBalanceOrders = pendingOrders.filter((order: IOrderItem) => {
-      const currentDate = new Date();
+    const filteredOrders = pendingOrders.filter((order: IOrderItem) => {
       const orderEndDateTime = new Date(order.event.endDateTime);
       return orderEndDateTime < currentDate;
     });
-    const availableBalanceOrdersCount = availableBalanceOrders.length;
 
-    // Pending balance BEFORE application fees
-    const _pendingBalance = pendingBalanceOrders.reduce(
-      (acc: number, order: IOrderItem) => acc + order.totalAmount,
-      0
-    );
+    // const currentDate = new Date();
+    // const pastDay = new Date(currentDate.getTime() - 13 * 60 * 60 * 1000);
 
-    // Pending balance AFTER application fees
-    const pendingBalance = (
-      _pendingBalance -
-      pendingBalanceOrdersCount * stripeFee -
-      _pendingBalance * processingFee
-    ).toFixed(2);
+    // const conditions = {
+    //   $and: [{ startDateTime: { $gte: pastDay } }, { status: "pending" }],
+    // };
 
-    // Available balance BEFORE application fees
-    const _availableBalance = availableBalanceOrders.reduce(
-      (acc: number, order: IOrderItem) => acc + order.totalAmount,
-      0
-    );
+    // if (!instructorId) throw new Error("Instructor ID is required");
+    // //const eventObjectId = new ObjectId(eventId);
 
-    // Available balance AFTER application fees
-    const availableBalance = (
-      _availableBalance -
-      availableBalanceOrdersCount * stripeFee -
-      _availableBalance * processingFee
-    ).toFixed(2);
+    // const orders = await Order.find({ instructor: instructorId });
 
-    return {
-      pendingBalance,
-      availableBalance,
-    };
+    // return orders;
   } catch (error) {
     handleError(error);
   }

@@ -112,6 +112,20 @@ export async function getOrdersByEvent({
   try {
     await connectToDatabase();
 
+    // if (!eventId) throw new Error("Event ID is required");
+
+    // const buyerCondition = searchString
+    //   ? { buyer: { $regex: searchString, $options: "i" } }
+    //   : {};
+
+    // const conditions = {
+    //   $and: [buyerCondition, { event: eventId }],
+    // };
+
+    // const ordersQuery = Order.find(conditions).sort({ createdAt: "desc" });
+
+    // const orders = await populateOrder(ordersQuery);
+
     const eventObjectId = new ObjectId(eventId);
 
     const orders = await Order.aggregate([
@@ -163,6 +177,52 @@ export async function getOrdersByEvent({
       },
     ]);
 
+    // const orders = await Order.aggregate([
+    //   {
+    //     $lookup: {
+    //       from: "users",
+    //       localField: "buyer",
+    //       foreignField: "_id",
+    //       as: "buyer",
+    //     },
+    //   },
+    //   {
+    //     $unwind: "$buyer",
+    //   },
+    //   {
+    //     $lookup: {
+    //       from: "events",
+    //       localField: "event",
+    //       foreignField: "_id",
+    //       as: "event",
+    //     },
+    //   },
+    //   {
+    //     $unwind: "$event",
+    //   },
+    //   {
+    //     $project: {
+    //       _id: 1,
+    //       totalAmount: 1,
+    //       createdAt: 1,
+    //       eventTitle: "$event.title",
+    //       eventId: "$event._id",
+    //       buyer: {
+    //         $concat: ["$buyer.firstName", " ", "$buyer.lastName"],
+    //       },
+    //     },
+    //   },
+    //   {
+    //     $match: {
+    //       $and: [
+    //         { eventId: eventObjectId },
+    //         { buyer: { $regex: RegExp(searchString, "i") } },
+    //       ],
+    //     },
+    //   },
+    // ]);
+
+    // return JSON.parse(JSON.stringify(orders));
     return JSON.parse(JSON.stringify(orders));
   } catch (error) {
     handleError(error);
@@ -266,7 +326,7 @@ export async function getInstructorBalances(instructorId: string) {
     // All pending orders by instructor (with event end date populated)
     const pendingOrders = await getPendingOrdersByInstructor(instructorId);
 
-    // Pending orders for events that HAVE NOT ended
+    // Pending orders for events that have not ended
     const pendingBalanceOrders = pendingOrders.filter((order: IOrderItem) => {
       const currentDate = new Date();
       const orderEndDateTime = new Date(order.event.endDateTime);
@@ -274,7 +334,7 @@ export async function getInstructorBalances(instructorId: string) {
     });
     const pendingBalanceOrdersCount = pendingBalanceOrders.length;
 
-    // Pending orders for events that HAVE already ended
+    // Pending orders for events that have already ended
     const availableBalanceOrders = pendingOrders.filter((order: IOrderItem) => {
       const currentDate = new Date();
       const orderEndDateTime = new Date(order.event.endDateTime);

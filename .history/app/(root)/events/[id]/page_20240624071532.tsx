@@ -4,6 +4,7 @@ import {
   getEventById,
   getRelatedEventsByCategory,
 } from "@/lib/actions/event.actions";
+import { getNumberOfOrdersByEvent } from "@/lib/actions/order.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,6 +28,8 @@ const EventDetails = async ({
   const page = Number(searchParams?.page) || 1;
 
   const attending = event.attendees.some((a: string) => a === userId);
+
+  //const orders = await getNumberOfOrdersByEvent(id);
 
   const soldOut = event.noLimit
     ? false

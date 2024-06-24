@@ -266,7 +266,7 @@ export async function getInstructorBalances(instructorId: string) {
     // All pending orders by instructor (with event end date populated)
     const pendingOrders = await getPendingOrdersByInstructor(instructorId);
 
-    // Pending orders for events that HAVE NOT ended
+    // Pending orders for events that have not ended
     const pendingBalanceOrders = pendingOrders.filter((order: IOrderItem) => {
       const currentDate = new Date();
       const orderEndDateTime = new Date(order.event.endDateTime);
@@ -274,7 +274,7 @@ export async function getInstructorBalances(instructorId: string) {
     });
     const pendingBalanceOrdersCount = pendingBalanceOrders.length;
 
-    // Pending orders for events that HAVE already ended
+    // Pending orders for events that have already ended
     const availableBalanceOrders = pendingOrders.filter((order: IOrderItem) => {
       const currentDate = new Date();
       const orderEndDateTime = new Date(order.event.endDateTime);

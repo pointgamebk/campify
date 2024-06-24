@@ -20,14 +20,20 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
         </h3>
       </section>
 
-      <section className="wrapper mt-8">
+      {/* <section className="wrapper mt-8">
         <Search placeholder="Search buyer name..." />
-      </section>
+      </section> */}
 
       <section className="wrapper overflow-x-auto text-tan">
         <table className="w-full border-collapse border-t">
           <thead>
             <tr className="p-medium-14 border-b text-grey-500">
+              <th className="min-w-[250px] py-3 text-left text-tan">
+                Order ID
+              </th>
+              {/* <th className="min-w-[200px] flex-1 py-3 pr-4 text-left text-tan">
+                Event Title
+              </th> */}
               <th className="min-w-[150px] py-3 text-left text-tan">Buyer</th>
               <th className="min-w-[100px] py-3 text-left text-tan">
                 Order Date
@@ -51,6 +57,12 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
                       className="p-regular-14 lg:p-regular-16 border-b "
                       style={{ boxSizing: "border-box" }}
                     >
+                      <td className="min-w-[250px] py-4 text-green">
+                        {row._id}
+                      </td>
+                      {/* <td className="min-w-[200px] flex-1 py-4 pr-4">
+                        {row.eventTitle}
+                      </td> */}
                       <td className="min-w-[150px] py-4">{row.buyer}</td>
                       <td className="min-w-[100px] py-4">
                         {formatDateTime(row.createdAt).dateOnly}
