@@ -27,6 +27,8 @@ const InstructorSettings = async ({
 
   const balances = await getInstructorBalances(id);
 
+  console.log(balances);
+
   return (
     <>
       <section className="flex justify-center bg-slate bg-dotted-pattern bg-contain">
