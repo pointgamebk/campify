@@ -44,9 +44,7 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
         </Button>
       </form>
     );
-  } catch (error) {
-    console.error("Error with checkout", error);
-  }
+  } catch (error) {}
 
   // const onCheckout = async () => {
   //   const order = {

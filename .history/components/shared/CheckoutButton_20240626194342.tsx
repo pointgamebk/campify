@@ -40,9 +40,7 @@ const CheckoutButton = async ({
         )}
       </div>
     );
-  } catch (error) {
-    console.error("Error with checkout button", error);
-  }
+  } catch (error) {}
   // return (
   //   <div className="flex items-center gap-3">
   //     {hasEventFinished ? (
