@@ -1,5 +1,5 @@
 import { IEvent } from "@/lib/database/models/event.model";
-//import { useEffect } from "react";
+import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { loadStripe } from "@stripe/stripe-js";
 import { checkoutOrder } from "@/lib/actions/order.actions";

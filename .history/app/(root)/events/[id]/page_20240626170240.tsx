@@ -1,3 +1,5 @@
+
+
 import CheckoutButton from "@/components/shared/CheckoutButton";
 import Collection from "@/components/shared/Collection";
 import {
@@ -82,6 +84,7 @@ const EventDetails = async ({
               </div>
             </div>
 
+            {/* checkout button  */}
             {userId !== event.organizer._id &&
               !attending &&
               !soldOut &&
@@ -142,6 +145,7 @@ const EventDetails = async ({
         </div>
       </section>
 
+      {/* EVENTS with the same category */}
       <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
         <h2 className="h2-bold text-tan">Related Camps</h2>
 
