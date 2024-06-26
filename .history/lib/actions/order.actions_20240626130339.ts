@@ -109,7 +109,7 @@ export const sendOrderNotificationEmail = async (
       secure: false,
       auth: {
         user: "campifyapp@gmail.com",
-        pass: "campCamillus1!",
+        pass: "javaPython1!",
       },
     });
 

@@ -108,8 +108,8 @@ export const sendOrderNotificationEmail = async (
       port: 587,
       secure: false,
       auth: {
-        user: "campifyapp@gmail.com",
-        pass: "campCamillus1!",
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
