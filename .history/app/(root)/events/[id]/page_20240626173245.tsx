@@ -82,16 +82,12 @@ const EventDetails = async ({
               </div>
             </div>
 
-            {/* {userId !== event.organizer._id &&
+            {userId !== event.organizer._id &&
               !attending &&
               !soldOut &&
               !event.canceled && (
                 <CheckoutButton event={event} userId={userId} />
-              )} */}
-
-            {!attending && !soldOut && !event.canceled && (
-              <CheckoutButton event={event} userId={userId} />
-            )}
+              )}
 
             {!event.canceled && (
               <div className="flex flex-col gap-5">
