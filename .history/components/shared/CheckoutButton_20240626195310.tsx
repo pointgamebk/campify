@@ -32,10 +32,7 @@ const CheckoutButton = async ({
             </SignedOut>
 
             <SignedIn>
-              {/* <Checkout event={event} userId={userId} /> */}
-              <Button asChild className="button rounded-full" size="lg">
-                <Link href="/sign-in">Get Tickets</Link>
-              </Button>
+              <Checkout event={event} userId={userId} />
             </SignedIn>
           </>
         )}
