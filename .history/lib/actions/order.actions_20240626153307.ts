@@ -18,6 +18,7 @@ import { ObjectId } from "mongodb";
 import User from "../database/models/user.model";
 import { revalidatePath } from "next/cache";
 import { processingFee, stripeFee } from "@/constants";
+import mailgun from "mailgun-js";
 
 const populateOrder = (query: any) => {
   return query
@@ -88,6 +89,57 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
     throw error;
   }
 };
+
+// SEND ORDER CONFIRMATION EMAIL TO INSTRUCTOR
+// export const sendOrderNotificationEmail = async (
+//   name: string,
+//   email: string,
+//   product: string
+// ) => {
+//   try {
+//     const html = `
+//       <h1>Hello ${name},</h1>
+//       <p>You've received an order for ${product}.</p>
+//       <p>Thanks,</p>
+//       <p>Team Campify</p>
+//     `;
+//     const transporter = nodemailer.createTransport({
+//       host: "smtp.gmail.com",
+//       port: 465,
+//       secure: true,
+//       auth: {
+//         user: "campifyapp@gmail.com",
+//         pass: "campCamillus1!",
+//       },
+//     });
+
+//     const info = await transporter.sendMail({
+//       from: `Campify <${process.env.SMTP_USER}>`,
+//       to: email,
+//       subject: `Order Notification - ${product}`,
+//       html: html,
+//     });
+
+//     console.log("Email sent: " + info.messageId);
+
+//     // const mailOptions = {
+//     //   from: process.env.SMTP_USER,
+//     //   to: email,
+//     //   subject: `Order Notification - ${product}`,
+//     //   text: `Hello ${name},\n\nYou've received an order for ${product}.\n\nBest,\n\nTeam Campify`,
+//     // };
+
+//     // transporter.sendMail(mailOptions, (error, info) => {
+//     //   if (error) {
+//     //     throw error;
+//     //   } else {
+//     //     console.log("Email sent: " + info.response);
+//     //   }
+//     // });
+//   } catch (error) {
+//     handleError(error);
+//   }
+// };
 
 export const createOrder = async (order: CreateOrderParams) => {
   try {
