@@ -421,31 +421,3 @@ export const createTopUp = async () => {
     handleError(error);
   }
 };
-
-export const sendOrderNotification = async (
-  sellerEmail: string,
-  orderDetails: any
-) => {
-  const data = {
-    from: "no-reply@campify.app",
-    to: sellerEmail,
-    subject: "New Order Notification",
-    text: `You have received a new order. Details: ${JSON.stringify(
-      orderDetails
-    )}`,
-    html: `<p>You have received a new order. Details:</p><pre>${JSON.stringify(
-      orderDetails,
-      null,
-      2
-    )}</pre>`,
-  };
-
-  try {
-    const response = await mg.messages().send(data);
-    console.log("Email sent successfully:", response);
-    return response;
-  } catch (error) {
-    console.error("Error sending email:", error);
-    throw error;
-  }
-};

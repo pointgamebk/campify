@@ -4,7 +4,6 @@ import { createOrder } from "@/lib/actions/order.actions";
 import Event from "@/lib/database/models/event.model";
 import User from "@/lib/database/models/user.model";
 import { connectToDatabase } from "@/lib/database";
-import { sendOrderNotification } from "@/lib/actions/order.actions";
 
 export const maxDuration = 20;
 export const dynamic = "force-dynamic";
@@ -47,11 +46,6 @@ export async function POST(request: Request) {
     const camp = await Event.findById(order.event);
     camp.attendees.push(order.buyer);
     await camp.save();
-
-    // Send email notification
-    const instructor = await User.findById(order.instructor);
-
-    await sendOrderNotification(instructor.email, camp.title);
 
     return NextResponse.json({ message: "OK", order: newOrder });
   }

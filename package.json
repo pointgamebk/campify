@@ -28,11 +28,11 @@
     "clsx": "^2.1.0",
     "cmdk": "^0.2.0",
     "lucide-react": "^0.311.0",
+    "mailgun-js": "^0.22.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.0",
     "next": "14.0.4",
     "next-connect": "^1.0.0",
-    "nodemailer": "^6.9.14",
     "query-string": "^8.1.0",
     "raw-body": "^2.5.2",
     "react": "^18",
@@ -50,8 +50,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/mailgun-js": "^0.22.18",
     "@types/node": "^20",
-    "@types/nodemailer": "^6.4.15",
     "@types/react": "^18",
     "@types/react-datepicker": "^4.19.5",
     "@types/react-dom": "^18",

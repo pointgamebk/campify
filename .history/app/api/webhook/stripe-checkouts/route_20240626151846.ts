@@ -51,7 +51,12 @@ export async function POST(request: Request) {
     // Send email notification
     const instructor = await User.findById(order.instructor);
 
-    await sendOrderNotification(instructor.email, camp.title);
+    await sendOrderNotification(
+      order.buyer,
+      instructor.email,
+      camp.title,
+      order.totalAmount
+    );
 
     return NextResponse.json({ message: "OK", order: newOrder });
   }
