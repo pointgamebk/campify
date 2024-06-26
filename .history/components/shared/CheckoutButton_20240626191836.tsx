@@ -4,7 +4,6 @@ import { IEvent } from "@/lib/database/models/event.model";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import React from "react";
 import Checkout from "./Checkout";
 
 const CheckoutButton = async ({

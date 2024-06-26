@@ -16,11 +16,12 @@ const EventDetails = async ({
   params: { id },
   searchParams,
 }: SearchParamProps) => {
+  const authUser = await currentUser();
+  const user = await getUserByClerkId(
+    authUser?.id || "user_2i4XYyrgQ1Xo9IvjuydCOGCLmZ6"
+  );
+
   try {
-    const authUser = await currentUser();
-    const user = await getUserByClerkId(
-      authUser?.id || "user_2i4XYyrgQ1Xo9IvjuydCOGCLmZ6"
-    );
     const userId = user._id as string;
 
     const event = await getEventById(id);
@@ -158,14 +159,7 @@ const EventDetails = async ({
         </section>
       </>
     );
-  } catch (error) {
-    console.error("Error fetching event details:", error);
-  }
-
-  // const authUser = await currentUser();
-  // const user = await getUserByClerkId(
-  //   authUser?.id || "user_2i4XYyrgQ1Xo9IvjuydCOGCLmZ6"
-  // );
+  } catch (error) {}
   // const userId = user._id as string;
 
   // const event = await getEventById(id);
