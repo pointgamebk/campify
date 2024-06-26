@@ -386,7 +386,7 @@ export const sendOrderNotificationEmail = async (
     const mailOptions = {
       from: process.env.SMTP_USER,
       to: email,
-      subject: `Order Notification - ${product}`,
+      subject: `Order Confirmation - ${product}`,
       text: `Hello ${name},\n\nYou've received an order for ${product}.\n\nBest,\n\nTeam Campify`,
     };
 

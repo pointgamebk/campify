@@ -2,10 +2,9 @@ import stripe from "stripe";
 import { NextResponse } from "next/server";
 import {
   createOrder,
-  sendOrderNotificationEmail,
+  sendOrderConfirmationEmail,
 } from "@/lib/actions/order.actions";
 import Event from "@/lib/database/models/event.model";
-import User from "@/lib/database/models/user.model";
 import { connectToDatabase } from "@/lib/database";
 
 export const maxDuration = 20;
@@ -45,19 +44,9 @@ export async function POST(request: Request) {
 
     const newOrder = await createOrder(order);
 
-    // Update camp attendees list
     const camp = await Event.findById(order.event);
     camp.attendees.push(order.buyer);
     await camp.save();
-
-    // Send order notification email to instructor
-    const instructor = await User.findById(order.instructor);
-
-    await sendOrderNotificationEmail(
-      instructor.firstName,
-      instructor.email,
-      camp.title
-    );
 
     return NextResponse.json({ message: "OK", order: newOrder });
   }

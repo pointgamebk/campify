@@ -18,7 +18,6 @@ import { ObjectId } from "mongodb";
 import User from "../database/models/user.model";
 import { revalidatePath } from "next/cache";
 import { processingFee, stripeFee } from "@/constants";
-import nodemailer from "nodemailer";
 
 const populateOrder = (query: any) => {
   return query
@@ -76,7 +75,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
         buyer: order.buyer,
         instructor: order.instructor,
         account: instructor.stripeAccountId,
-        product: order.eventTitle,
       },
       mode: "payment",
       automatic_tax: { enabled: true },
@@ -366,38 +364,4 @@ export const createTopUp = async () => {
   }
 };
 
-// SEND ORDER CONFIRMATION EMAIL TO INSTRUCTOR
-export const sendOrderNotificationEmail = async (
-  name: string,
-  email: string,
-  product: string
-) => {
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.SMTP_USER,
-      to: email,
-      subject: `Order Notification - ${product}`,
-      text: `Hello ${name},\n\nYou've received an order for ${product}.\n\nBest,\n\nTeam Campify`,
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        throw error;
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
-  } catch (error) {
-    handleError(error);
-  }
-};
+export const sendOrderConfirmationEmail = async (order: any) => {};

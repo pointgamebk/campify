@@ -2,7 +2,7 @@ import stripe from "stripe";
 import { NextResponse } from "next/server";
 import {
   createOrder,
-  sendOrderNotificationEmail,
+  sendOrderConfirmationEmail,
 } from "@/lib/actions/order.actions";
 import Event from "@/lib/database/models/event.model";
 import User from "@/lib/database/models/user.model";
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
     // Send order notification email to instructor
     const instructor = await User.findById(order.instructor);
 
-    await sendOrderNotificationEmail(
+    await sendOrderConfirmationEmail(
       instructor.firstName,
       instructor.email,
       camp.title
