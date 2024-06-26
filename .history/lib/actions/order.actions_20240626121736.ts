@@ -373,12 +373,6 @@ export const sendOrderNotificationEmail = async (
   product: string
 ) => {
   try {
-    const html = `
-      <h1>Hello ${name},</h1>
-      <p>You've received an order for ${product}.</p>
-      <p>Thanks,</p>
-      <p>Team Campify</p>
-    `;
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       // port: Number(process.env.SMTP_PORT),
@@ -390,29 +384,20 @@ export const sendOrderNotificationEmail = async (
       },
     });
 
-    const info = await transporter.sendMail({
-      from: `Campify <${process.env.SMTP_USER}>`,
+    const mailOptions = {
+      from: process.env.SMTP_USER,
       to: email,
       subject: `Order Notification - ${product}`,
-      html: html,
+      text: `Hello ${name},\n\nYou've received an order for ${product}.\n\nBest,\n\nTeam Campify`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        throw error;
+      } else {
+        console.log("Email sent: " + info.response);
+      }
     });
-
-    console.log("Email sent: " + info.messageId);
-
-    // const mailOptions = {
-    //   from: process.env.SMTP_USER,
-    //   to: email,
-    //   subject: `Order Notification - ${product}`,
-    //   text: `Hello ${name},\n\nYou've received an order for ${product}.\n\nBest,\n\nTeam Campify`,
-    // };
-
-    // transporter.sendMail(mailOptions, (error, info) => {
-    //   if (error) {
-    //     throw error;
-    //   } else {
-    //     console.log("Email sent: " + info.response);
-    //   }
-    // });
   } catch (error) {
     handleError(error);
   }

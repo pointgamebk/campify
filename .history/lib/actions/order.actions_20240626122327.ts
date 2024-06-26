@@ -391,13 +391,10 @@ export const sendOrderNotificationEmail = async (
     });
 
     const info = await transporter.sendMail({
-      from: `Campify <${process.env.SMTP_USER}>`,
+      from: process.env.SMTP_USER,
       to: email,
       subject: `Order Notification - ${product}`,
-      html: html,
     });
-
-    console.log("Email sent: " + info.messageId);
 
     // const mailOptions = {
     //   from: process.env.SMTP_USER,

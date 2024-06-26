@@ -397,8 +397,6 @@ export const sendOrderNotificationEmail = async (
       html: html,
     });
 
-    console.log("Email sent: " + info.messageId);
-
     // const mailOptions = {
     //   from: process.env.SMTP_USER,
     //   to: email,
