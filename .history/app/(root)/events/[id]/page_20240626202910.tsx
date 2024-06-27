@@ -24,7 +24,7 @@ const EventDetails = async ({
 
     // const userId = user._id as string;
 
-    const userId = "6672046485badd6719021dcf";
+    const userId = user._id as string;
 
     const event = await getEventById(id);
 

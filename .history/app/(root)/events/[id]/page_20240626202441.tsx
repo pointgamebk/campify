@@ -22,9 +22,7 @@ const EventDetails = async ({
       authUser?.id || "user_2i4XYyrgQ1Xo9IvjuydCOGCLmZ6"
     );
 
-    // const userId = user._id as string;
-
-    const userId = "6672046485badd6719021dcf";
+    const userId = user._id as string;
 
     const event = await getEventById(id);
 
