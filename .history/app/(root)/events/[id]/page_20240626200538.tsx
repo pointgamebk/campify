@@ -1,4 +1,4 @@
-"use server";
+"yse server";
 
 import CheckoutButton from "@/components/shared/CheckoutButton";
 import Collection from "@/components/shared/Collection";
