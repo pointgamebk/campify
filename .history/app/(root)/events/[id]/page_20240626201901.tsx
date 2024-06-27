@@ -17,11 +17,12 @@ const EventDetails = async ({
   searchParams,
 }: SearchParamProps) => {
   try {
-    const authUser = await currentUser();
-    const user = await getUserByClerkId(
-      authUser?.id || "user_2i4XYyrgQ1Xo9IvjuydCOGCLmZ6"
-    );
+    // const authUser = await currentUser();
+    // const user = await getUserByClerkId(
+    //   authUser?.id || "user_2i4XYyrgQ1Xo9IvjuydCOGCLmZ6"
+    // );
 
+    const user = await getUserByClerkId("user_2i4XYyrgQ1Xo9IvjuydCOGCLmZ6");
     const userId = user._id as string;
 
     const event = await getEventById(id);
@@ -90,8 +91,6 @@ const EventDetails = async ({
                 !event.canceled && (
                   <CheckoutButton event={event} userId={userId} />
                 )} */}
-
-              <CheckoutButton event={event} userId={userId} />
 
               {!event.canceled && (
                 <div className="flex flex-col gap-5">
