@@ -13,10 +13,9 @@ const mailgun = new Mailgun(FormData).client({
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const intro = body.intro || "You've received a new order";
-    const content =
-      body.content || "See more details in your Instructor Dashboard";
-    const outro = body.outro || "Thanks - Team Campify";
+    const intro = body.intro || "";
+    const content = body.content || "";
+    const outro = body.outro || "";
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -72,7 +71,7 @@ export async function POST(req: NextRequest) {
         to: body.to,
         from: "Campify <no-reply@campify.app>",
         subject: body.subject || "Order Notification",
-        text: `${intro}\n\n${content}\n\n${outro}`,
+        text: `${intro}\n\n${content}`,
         html: htmlContent,
       });
 

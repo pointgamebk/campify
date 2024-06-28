@@ -381,9 +381,8 @@ export const sendOrderNotificationEmail = async (
         name: name,
         to: email,
         subject: "Order Notification",
-        intro: `You've received a new order for ${product}`,
-        content: `See more details in your Instructor Dashboard`,
-        outro: "Thanks - Team Campify",
+        intro: `You've received a new order for ${product}.\n\n`,
+        content: `Thank you for using Campify!`,
       }),
     });
 

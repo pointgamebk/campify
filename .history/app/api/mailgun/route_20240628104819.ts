@@ -14,9 +14,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const intro = body.intro || "You've received a new order";
-    const content =
-      body.content || "See more details in your Instructor Dashboard";
-    const outro = body.outro || "Thanks - Team Campify";
+    const content = body.content || "";
+    const outro = body.outro || "";
 
     const htmlContent = `
       <!DOCTYPE html>

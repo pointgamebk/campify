@@ -13,10 +13,15 @@ const mailgun = new Mailgun(FormData).client({
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const intro = body.intro || "You've received a new order";
-    const content =
-      body.content || "See more details in your Instructor Dashboard";
-    const outro = body.outro || "Thanks - Team Campify";
+    const intro = body.intro || "";
+    const content = body.content || "";
+    const email = {
+      body: {
+        name: body.name || "Customer",
+        intro,
+        outro: content,
+      },
+    };
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -31,7 +36,6 @@ export async function POST(req: NextRequest) {
               background-color: #2A4849;
               padding: 20px;
               text-align: center;
-              color: #ECE2D0;
             }
             .email-body {
               padding: 20px;
@@ -55,8 +59,6 @@ export async function POST(req: NextRequest) {
               <p>Hi ${body.name},</p>
               <p>${intro}</p>
               <p>${content}</p>
-              <p>${outro}</p>
-              <a class="link" href="https://campify.app">Campify</a>
             </div>
             <div class="email-footer">
               <p>Thanks for using Campify!</p>
@@ -72,7 +74,9 @@ export async function POST(req: NextRequest) {
         to: body.to,
         from: "Campify <no-reply@campify.app>",
         subject: body.subject || "Order Notification",
-        text: `${intro}\n\n${content}\n\n${outro}`,
+        // text: content,
+        // html: content,
+        text: `${intro}\n\n${content}`,
         html: htmlContent,
       });
 

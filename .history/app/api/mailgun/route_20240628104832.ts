@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const intro = body.intro || "You've received a new order";
     const content =
       body.content || "See more details in your Instructor Dashboard";
-    const outro = body.outro || "Thanks - Team Campify";
+    const outro = body.outro || "";
 
     const htmlContent = `
       <!DOCTYPE html>
