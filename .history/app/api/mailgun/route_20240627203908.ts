@@ -6,13 +6,13 @@ import MailGen from "mailgen";
 const API_KEY = process.env.MAILGUN_API_KEY!;
 const DOMAIN = process.env.MAILGUN_DOMAIN!;
 
-// const mailgen = new MailGen({
-//   theme: "default", // Ensure "default" is a valid theme name supported by MailGen
-//   product: {
-//     name: "Campify",
-//     link: "https://campify.app",
-//   },
-// });
+const mailgen = new MailGen({
+  theme: "default", // Ensure "default" is a valid theme name supported by MailGen
+  product: {
+    name: "Campify",
+    link: "https://campify.app",
+  },
+});
 
 const mailgun = new Mailgun(FormData).client({
   username: "api",
@@ -38,8 +38,8 @@ export async function POST(req: NextRequest) {
         to: body.to,
         from: "Campify <no-reply@campify.app>",
         subject: body.subject || "Order Notification",
-        text: content,
-        html: content,
+        text: mailgen.generatePlaintext(email),
+        html: mailgen.generate(email),
       });
 
       return NextResponse.json({ success: true }, { status: 200 });
