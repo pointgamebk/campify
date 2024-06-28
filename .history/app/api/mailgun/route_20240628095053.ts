@@ -73,10 +73,8 @@ export async function POST(req: NextRequest) {
         to: body.to,
         from: "Campify <no-reply@campify.app>",
         subject: body.subject || "Order Notification",
-        // text: content,
-        // html: content,
-        text: `${intro}\n\n${content}`,
-        html: htmlContent,
+        text: content,
+        html: content,
       });
 
       return NextResponse.json({ success: true }, { status: 200 });
