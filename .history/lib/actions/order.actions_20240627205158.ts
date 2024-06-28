@@ -372,7 +372,7 @@ export const sendOrderNotificationEmail = async (
   product: string
 ) => {
   try {
-    const response = await fetch("https://campify.app/api/mailgun", {
+    const response = await fetch("https/::/api/mailgun", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
