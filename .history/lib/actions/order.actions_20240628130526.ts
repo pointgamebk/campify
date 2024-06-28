@@ -143,8 +143,7 @@ export const createOrder = async (order: CreateOrderParams) => {
 
     await _sendOrderNotificationEmail(
       instructor.firstName,
-      //instructor.email,
-      "havedo2019@dcbin.com",
+      instructor.email,
       event.title,
       newOrder._id
     );

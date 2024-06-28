@@ -120,7 +120,7 @@ export const createOrder = async (order: CreateOrderParams) => {
             name: name,
             to: email,
             subject: "Order Notification",
-            intro: `You've received a new order for ${product} - Order ID: ${id}`,
+            intro: `You've received a new order for ${product} - PO #${id}`,
             content: `See more details in your Instructor Dashboard`,
             outro: "Thanks - Team Campify",
           }),
@@ -143,8 +143,7 @@ export const createOrder = async (order: CreateOrderParams) => {
 
     await _sendOrderNotificationEmail(
       instructor.firstName,
-      //instructor.email,
-      "havedo2019@dcbin.com",
+      instructor.email,
       event.title,
       newOrder._id
     );
