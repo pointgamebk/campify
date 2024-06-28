@@ -78,24 +78,10 @@ export async function POST(req: NextRequest) {
     const intro = body.intro || "";
     const content = body.content || "";
     const email = {
-      //   body: {
-      //     name: body.name || "Customer",
-      //     intro,
-      //     outro: content,
-      //   },
       body: {
         name: body.name || "Customer",
-        intro: intro,
-        action: {
-          instructions: "To get started with Mailgen, please click here:",
-          button: {
-            color: "#22BC66", // Optional action button color
-            text: "Confirm your account",
-            link: "https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010",
-          },
-        },
-        outro:
-          "Need help, or have questions? Just reply to this email, we'd love to help.",
+        intro,
+        outro: content,
       },
     };
 
@@ -115,11 +101,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true }, { status: 200 });
     } catch (e) {
       console.error("Mailgun error:", e); // Log error details
-      return NextResponse.json({ success: false, error: e }, { status: 500 });
+      return NextResponse.json(
+        { success: false, error: e },
+        { status: 500 }
+      );
     }
   } catch (e) {
     console.error("Request handling error:", e); // Log error details
-    return NextResponse.json({ success: false, error: e }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: e },
+      { status: 500 }
+    );
   }
 }
 

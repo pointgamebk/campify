@@ -40,7 +40,7 @@ export const SendEmail = () => {
               startTransition(async () => {
                 await sendOrderNotificationEmail(
                   "Brian",
-                  "bkhjrny1@gmail.com",
+                  "bkhjrny3@gmail.com",
                   "Test Product"
                 );
               })
