@@ -99,55 +99,6 @@ export const createOrder = async (order: CreateOrderParams) => {
       buyer: order.buyer,
     });
 
-    if (!newOrder) throw new Error("Order creation failed");
-
-    const instructor = await User.findById(order.instructor);
-    const event = await Event.findById(order.event);
-
-    const _sendOrderNotificationEmail = async (
-      name: string,
-      email: string,
-      product: string,
-      id: string
-    ) => {
-      try {
-        const response = await fetch("https://campify.app/api/mailgun", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            to: email,
-            subject: "Order Notification",
-            intro: `You've received a new order for ${product} - PO #${id}`,
-            content: `See more details in your Instructor Dashboard`,
-            outro: "Thanks - Team Campify",
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Email sending failed.");
-        }
-
-        const data = await response.json();
-        if (data.success) {
-          console.log("Email sent successfully.");
-        } else {
-          throw new Error("Email sending failed: " + JSON.stringify(data));
-        }
-      } catch (error) {
-        console.error("Failed to send email:", error);
-      }
-    };
-
-    await _sendOrderNotificationEmail(
-      instructor.firstName,
-      instructor.email,
-      event.title,
-      newOrder._id
-    );
-
     return JSON.parse(JSON.stringify(newOrder));
   } catch (error) {
     handleError(error);
@@ -431,7 +382,7 @@ export const sendOrderNotificationEmail = async (
         name: name,
         to: email,
         subject: "Order Notification",
-        intro: `You've received a new order for ${product} - PO #${id}`,
+        intro: `You've received a new order for ${product}`,
         content: `See more details in your Instructor Dashboard`,
         outro: "Thanks - Team Campify",
       }),

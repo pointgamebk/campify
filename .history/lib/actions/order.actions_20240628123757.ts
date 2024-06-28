@@ -141,12 +141,14 @@ export const createOrder = async (order: CreateOrderParams) => {
       }
     };
 
-    await _sendOrderNotificationEmail(
+    const email = await _sendOrderNotificationEmail(
       instructor.firstName,
       instructor.email,
       event.title,
       newOrder._id
     );
+
+    console.log(email);
 
     return JSON.parse(JSON.stringify(newOrder));
   } catch (error) {
