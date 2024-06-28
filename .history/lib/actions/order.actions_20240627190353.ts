@@ -372,67 +372,33 @@ export const sendOrderNotificationEmail = async (
   product: string
 ) => {
   try {
-    const response = await fetch("/api/mailgun", {
+    const r = await fetch("/api/mailgun", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         name: name,
         to: email,
         subject: "Order Notification",
         intro: "You've received a new order!",
-        content: `Hi ${name},\n\nYou've received a new order for ${product}.\n\nThanks for using Campify!\n\n`,
+        content:
+          `Hi ${name},\n\n` +
+          `You've received a new order for ${product}.\n\n` +
+          `Thanks for using Campify!\n\n`,
       }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
-    if (!response.ok) {
-      throw new Error("Email sending failed.");
-    }
+    const res = await r.json();
 
-    const data = await response.json();
-    if (data.success) {
-      console.log("Email sent successfully.");
+    if (res.success) {
+      //alert("Email sent");
+      console.log("Email sent");
     } else {
-      throw new Error("Email sending failed: " + JSON.stringify(data));
+      throw new Error();
     }
-  } catch (error) {
-    console.error("Failed to send email:", error);
+  } catch (e) {
+    //alert("Email failed");
+    console.error("Email failed");
   }
 };
-// export const sendOrderNotificationEmail = async (
-//   name: string,
-//   email: string,
-//   product: string
-// ) => {
-//   try {
-//     const r = await fetch("/api/mailgun", {
-//       method: "POST",
-//       body: JSON.stringify({
-//         name: name,
-//         to: email,
-//         subject: "Order Notification",
-//         intro: "You've received a new order!",
-//         content:
-//           `Hi ${name},\n\n` +
-//           `You've received a new order for ${product}.\n\n` +
-//           `Thanks for using Campify!\n\n`,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     const res = await r.json();
-
-//     if (res.success) {
-//       //alert("Email sent");
-//       console.log("Email sent");
-//     } else {
-//       throw new Error();
-//     }
-//   } catch (e) {
-//     //alert("Email failed");
-//     console.error("Email failed");
-//   }
-// };

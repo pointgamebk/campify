@@ -7,7 +7,8 @@ import { IOrderItem } from "@/lib/database/models/order.model";
 import { processingFee, stripeFee } from "@/constants";
 import { IEvent } from "@/lib/database/models/event.model";
 import { getCanceledEvents } from "@/lib/actions/event.actions";
-import { SendEmail } from "@/components/shared/SendEmail";
+import { Button } from "@/components/ui/button";
+import { sendOrderNotificationEmail } from "@/lib/actions/order.actions";
 
 const AdminPage = async () => {
   const { sessionClaims } = auth();
@@ -180,7 +181,17 @@ const AdminPage = async () => {
 
       {isAdmin && (
         <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-          <SendEmail />
+          <button
+            onClick={() =>
+              sendOrderNotificationEmail(
+                "Brian",
+                "bkhjrny4@gmail.com",
+                "Test Product"
+              )
+            }
+          >
+            Send
+          </button>
         </section>
       )}
     </>

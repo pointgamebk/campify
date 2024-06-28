@@ -372,7 +372,7 @@ export const sendOrderNotificationEmail = async (
   product: string
 ) => {
   try {
-    const response = await fetch("/api/mailgun", {
+    const response = await fetch("http://localhost:3000/api/mailgun", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

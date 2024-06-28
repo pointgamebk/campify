@@ -372,32 +372,33 @@ export const sendOrderNotificationEmail = async (
   product: string
 ) => {
   try {
-    const response = await fetch("/api/mailgun", {
+    const r = await fetch("/api/mailgun", {
+      // Ensure this matches the actual route
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         name: name,
         to: email,
         subject: "Order Notification",
         intro: "You've received a new order!",
-        content: `Hi ${name},\n\nYou've received a new order for ${product}.\n\nThanks for using Campify!\n\n`,
+        content:
+          `Hi ${name},\n\n` +
+          `You've received a new order for ${product}.\n\n` +
+          `Thanks for using Campify!\n\n`,
       }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
-    if (!response.ok) {
-      throw new Error("Email sending failed.");
-    }
+    const res = await r.json();
 
-    const data = await response.json();
-    if (data.success) {
-      console.log("Email sent successfully.");
+    if (res.success) {
+      console.log("Email sent");
     } else {
-      throw new Error("Email sending failed: " + JSON.stringify(data));
+      throw new Error();
     }
-  } catch (error) {
-    console.error("Failed to send email:", error);
+  } catch (e) {
+    console.error("Email failed", e);
   }
 };
 // export const sendOrderNotificationEmail = async (

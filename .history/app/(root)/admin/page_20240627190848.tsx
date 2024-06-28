@@ -7,7 +7,7 @@ import { IOrderItem } from "@/lib/database/models/order.model";
 import { processingFee, stripeFee } from "@/constants";
 import { IEvent } from "@/lib/database/models/event.model";
 import { getCanceledEvents } from "@/lib/actions/event.actions";
-import { SendEmail } from "@/components/shared/SendEmail";
+import { Button } from "@/components/ui/button";
 
 const AdminPage = async () => {
   const { sessionClaims } = auth();
@@ -175,12 +175,6 @@ const AdminPage = async () => {
               )}
             </tbody>
           </table>
-        </section>
-      )}
-
-      {isAdmin && (
-        <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-          <SendEmail />
         </section>
       )}
     </>

@@ -179,9 +179,7 @@ const AdminPage = async () => {
       )}
 
       {isAdmin && (
-        <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-          <SendEmail />
-        </section>
+        <section className=" bg-dotted-pattern bg-cover bg-center py-5 md:py-10"></section>
       )}
     </>
   );
