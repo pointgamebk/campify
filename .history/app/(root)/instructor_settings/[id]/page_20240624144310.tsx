@@ -39,16 +39,6 @@ const InstructorSettings = async ({
             <p className="text-tan">
               Transfers enabled: {user.chargesEnabled ? "Yes" : "No"}
             </p>
-            {!isAuthInstructor && (
-              <div className="text-tan p-medium-16 max-w-[500px] italic">
-                To register as an athlete instructor, please send a short
-                description of your athletic background and any other relevant
-                training experience to campifyapp@gmail.com. Social media links
-                are also helpful. Be sure to include your Campify username in
-                your email. We will review your application and get back to you
-                as soon as possible.
-              </div>
-            )}
             {isAuthInstructor && user.chargesEnabled === false ? (
               <div>
                 <ConnectButton />

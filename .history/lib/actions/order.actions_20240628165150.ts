@@ -38,7 +38,6 @@ const populateOrder = (query: any) => {
     });
 };
 
-// CHECKOUT ORDER VIA STRIPE
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -90,7 +89,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
   }
 };
 
-// CREATE ORDER IN DATABASE AND SEND NOTIFICATION EMAIL TO INSTRUCTOR
 export const createOrder = async (order: CreateOrderParams) => {
   try {
     await connectToDatabase();
@@ -416,7 +414,7 @@ export const createTopUp = async () => {
   }
 };
 
-// SEND ORDER NOTIFICATION EMAIL TO INSTRUCTOR
+// SEND ORDER NOTIFICATION EMAIL
 export const sendOrderNotificationEmail = async (
   name: string,
   email: string,

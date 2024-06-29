@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
             </div>
             </div>
         </body>
-      </html>
+    </html>
     `;
 
     try {
