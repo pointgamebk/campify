@@ -43,12 +43,15 @@ export const deleteStripeAccountDefaultValues = {
 };
 
 // in percentage
-export const processingFee = 0.08;
+export const processingFee = 0.085;
 
 // in cents
 export const stripeFee = 0.3;
 
 export const authorizedIds = [
-  "6658e5f785a7f68a96637284",
-  "6658e66585a7f68a9663728a",
+  "6672105ec7752689e06a7176",
+  "667c78493a55ff6ee985e783",
+  "6680af4c31899b0cfb41b3d2",
+  "6680af7431899b0cfb41b3da",
+  "6680afb331899b0cfb41b3de",
 ];
