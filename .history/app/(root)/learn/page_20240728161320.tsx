@@ -15,7 +15,7 @@ const Learn = async () => {
             <li className="list-none">
               <a
                 href="#manage"
-                className="text-tan hover:text-green p-medium-20 underline"
+                className="text-tan hover:text-green p-medium-20"
               >
                 Manage
               </a>
@@ -23,7 +23,7 @@ const Learn = async () => {
             <li className="list-none">
               <a
                 href="#attend"
-                className="text-tan hover:text-green p-medium-20 underline"
+                className="text-tan hover:text-green p-medium-20"
               >
                 Attend
               </a>

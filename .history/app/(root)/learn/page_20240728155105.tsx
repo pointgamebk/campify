@@ -1,41 +1,7 @@
 const Learn = async () => {
   return (
     <>
-      <nav className="bg-slate-800 py-4">
-        <div className="container mx-auto flex justify-center">
-          <ul className="flex space-x-10 list-none">
-            <li className="list-none">
-              <a
-                href="#grow"
-                className="text-tan hover:text-green p-medium-20 underline"
-              >
-                Grow
-              </a>
-            </li>
-            <li className="list-none">
-              <a
-                href="#manage"
-                className="text-tan hover:text-green p-medium-20 underline"
-              >
-                Manage
-              </a>
-            </li>
-            <li className="list-none">
-              <a
-                href="#attend"
-                className="text-tan hover:text-green p-medium-20 underline"
-              >
-                Attend
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <section
-        className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10"
-        id="grow"
-      >
+      <section className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10">
         <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
           <div className="flex flex-col justify-center items-center gap-8 mx-auto">
             <h2 className="h2-bold text-tan text-center">
@@ -64,10 +30,7 @@ const Learn = async () => {
         </div>
       </section>
 
-      <section
-        className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10"
-        id="manage"
-      >
+      <section className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10">
         <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
           <div className="flex flex-col justify-center items-center gap-8 mx-auto">
             <h2 className="h2-bold text-tan text-center">
@@ -94,10 +57,7 @@ const Learn = async () => {
         </div>
       </section>
 
-      <section
-        className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10"
-        id="attend"
-      >
+      <section className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10">
         <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
           <div className="flex flex-col justify-center items-center gap-8 mx-auto">
             <h2 className="h2-bold text-tan text-center">

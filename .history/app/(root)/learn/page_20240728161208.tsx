@@ -5,26 +5,17 @@ const Learn = async () => {
         <div className="container mx-auto flex justify-center">
           <ul className="flex space-x-10 list-none">
             <li className="list-none">
-              <a
-                href="#grow"
-                className="text-tan hover:text-green p-medium-20 underline"
-              >
+              <a href="#grow" className="text-tan hover:text-green p-medium-20">
                 Grow
               </a>
             </li>
             <li className="list-none">
-              <a
-                href="#manage"
-                className="text-tan hover:text-green p-medium-20 underline"
-              >
+              <a href="#manage" className="text-tan hover:text-green text-lg">
                 Manage
               </a>
             </li>
             <li className="list-none">
-              <a
-                href="#attend"
-                className="text-tan hover:text-green p-medium-20 underline"
-              >
+              <a href="#attend" className="text-tan hover:text-green text-lg">
                 Attend
               </a>
             </li>
