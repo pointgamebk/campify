@@ -91,11 +91,7 @@ const Learn = async () => {
               controls
               className="border-2 border-tan rounded-xl"
             >
-              <source
-                src="https://utfs.io/f/51772612-7c3f-46bf-9536-26824023725f-p1ul7i.mp4
-"
-                type="video/mp4"
-              />
+              <source src="/assets/videos/CMPFY_V2.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -128,11 +124,7 @@ const Learn = async () => {
               controls
               className="border-2 border-tan rounded-xl"
             >
-              <source
-                src="https://utfs.io/f/5332055e-86a7-400e-817e-2c795be43388-p1ul7h.mp4
-"
-                type="video/mp4"
-              />
+              <source src="/assets/videos/CMPFY_V3.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
