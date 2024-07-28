@@ -69,6 +69,8 @@ const Learn = async () => {
         </div>
       </section>
 
+      <hr className="my-10 mx-auto w-3/4 border-t border-tan border-2" />
+
       <section
         className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10"
         id="manage"
@@ -103,6 +105,8 @@ const Learn = async () => {
           </div>
         </div>
       </section>
+
+      <hr className="my-10 mx-auto w-3/4 border-t border-tan border-2" />
 
       <section
         className="bg-slate bg-dotted-pattern bg-contain py-5 md:py-10"
