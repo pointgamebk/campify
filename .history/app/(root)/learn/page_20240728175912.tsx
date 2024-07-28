@@ -56,7 +56,6 @@ const Learn = async () => {
               height="800"
               controls
               className="border-2 border-tan rounded-xl"
-              poster="/assets/images/cmpfy_poster1.png"
             >
               <source
                 src="https://utfs.io/f/1ef5480d-650e-40b7-b54e-a4ea0d8e217a-p1ul7j.mp4
@@ -91,7 +90,6 @@ const Learn = async () => {
               height="800"
               controls
               className="border-2 border-tan rounded-xl"
-              poster="/assets/images/cmpfy_poster1.png"
             >
               <source
                 src="https://utfs.io/f/51772612-7c3f-46bf-9536-26824023725f-p1ul7i.mp4
@@ -129,7 +127,7 @@ const Learn = async () => {
               height="800"
               controls
               className="border-2 border-tan rounded-xl"
-              poster="/assets/images/cmpfy_poster2.png"
+              poster="/assets/images/cmpfy_poster1.png"
             >
               <source
                 src="https://utfs.io/f/5332055e-86a7-400e-817e-2c795be43388-p1ul7h.mp4
